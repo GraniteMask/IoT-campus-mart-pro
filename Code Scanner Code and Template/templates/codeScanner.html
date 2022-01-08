@@ -137,18 +137,18 @@
 <body>
     <div class="form">
     <div class="title" style="text-transform: uppercase;">Welcome IOT based Campus Mart and Delivery System</div>
-    <div class="subtitle">Fill up the following information to add a new product</div>
+    <div class="subtitle">Fill up the following information to successfully submit delivery information</div>
     <form action="/studentQR/" >
         <input type="submit" class="submit" value="Scan student's Unique QR code" />
     </form>
+    <p class="subtitle">Student QR Code: {{ studentQR }}</p>
     <form action="/BookBarcode/" >
-        <input type="submit" class="submit" value="Scan Book's Barcode" />
+        <input type="submit" class="submit" value="Scan Product's Barcode" />
     </form>
+    <p class="subtitle">Barcode: {{ bookBarcode }}</p>
     <form action="/Submit/" >
         <input type="submit" class="submit" value="Submit" />
     </form>
-    <p class="subtitle">Student QR Code: {{ studentQR }}</p>
-    <p class="subtitle">Barcode: {{ bookBarcode }}</p>
     <p style="color: greenyellow">{{ success }}</p>
     <p style="color: red">{{ warn }}</p>
     </div>
