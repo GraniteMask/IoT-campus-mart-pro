@@ -18,18 +18,24 @@ from pyzbar.pyzbar import decode
 app = Flask(__name__)
 
 app.secret_key="secretkey"
-app.config["MONGO_URI"] = "mongodb://localhost:27017/IotProject"
+app.config["MONGO_URI"] = "mongodb+srv://ratnadeep:N0M4fXXQhFW1tiNq@cluster0.ym3x4.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
+# app.config["MONGO_URI"] = "mongodb://localhost:27017/IotProject"
+# N0M4fXXQhFW1tiNq
 
 mongo = PyMongo(app)
 
 studentQR = "Not scanned yet"
 productBarcode = "Not scanned yet"
-warn = "Scan both QR code and Book Barcode"
+warn = "Scan both QR code and Product's Barcode"
 success = "Submitted successfully"
 
 @app.route('/')
 def index():
   return render_template('codeScanner.html', studentQR=studentQR, productBarcode=productBarcode)
+
+@app.route('/productInput')
+def productInputIndex():
+  return render_template('productInput.html', studentQR=studentQR, productBarcode=productBarcode)
 
 @app.route('/studentQR/')
 def codeScanner():
@@ -102,3 +108,7 @@ def submit():
 
 if __name__ == '__main__':
   app.run(debug=True)
+
+
+
+  #install 'pip install dnspython' extra for mongo atlas
