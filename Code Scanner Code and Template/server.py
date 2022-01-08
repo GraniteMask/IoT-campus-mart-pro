@@ -91,7 +91,7 @@ def submit():
   global studentQR 
   global productBarcode
   if studentQR !="Not scanned yet" and productBarcode != "Not scanned yet":
-    scanned = mongo.db.scanned.insert_one({"Student Id": studentQR, "Book Barcode": productBarcode})
+    scanned = mongo.db.scanned.insert_one({"StudentId": studentQR, "BookBarcode": productBarcode})
     studentQR="Not scanned yet"
     productBarcode="Not scanned yet"
     return render_template('codeScanner.html', productBarcode=productBarcode , studentQR=studentQR, success=success)
@@ -140,6 +140,7 @@ def productInputSubmit():
   manufacturingDate = request.form['manufacturingDate']
   if productInputBarcode != "Not scanned yet" and productName !='' and productPrice != '' and productCategory != '' and manufacturingDate != '':
     # return render_template('productInput.html', success=success)
+    scanned = mongo.db.products.insert_one({"productName": productName, "productBarcode": productInputBarcode, "manufacturingDate": manufacturingDate, "productCategory": productCategory, "productPrice": productPrice})
     return render_template('productInput.html', productName=productName, productBarcode=productBarcode, manufacturingDate=manufacturingDate, productCategory=productCategory, productPrice=productPrice, success=success)
   else:
     return render_template('productInput.html', error=error)
