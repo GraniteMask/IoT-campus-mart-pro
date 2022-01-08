@@ -169,24 +169,10 @@
         </div>
         <input type="submit" class="submit" value="Submit" />
     </form>
-    <!-- <p class="subtitle">Product Name Status: <em>{{ studentQR }}</em></p> -->
-    
     <!-- <form action="/Submit/" >
         <input type="submit" class="submit" value="Submit" />
     </form> -->
-    <p style="color: greenyellow">{{ success }}</p>
-
-    {% block content %}
-        {% if success %}
-            <div class="subtitle">Check your submitted details. If incorrect please enter them again. Thank you.</div>
-            <div class="subtitle"> Product Name: <em>{{ productName }}</em></div>
-            <div class="subtitle"> Product Price: <em>Rs.{{ productPrice }}</em></div>
-            <div class="subtitle"> Product Category: <em>{{ productCategory }}</em></div>
-            <div class="subtitle"> Manufacturing Date: <em>{{ manufacturingDate }}</em></div>
-        {% else %}
-            {{ super() }}
-        {% endif %}
-    {% endblock content %}
+    <p style="color: greenyellow">{{ success }}</p> 
     <p style="color: red">{{ error }}</p>
     </div>
 </body>
