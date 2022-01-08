@@ -23,13 +23,13 @@ app.config["MONGO_URI"] = "mongodb://localhost:27017/IotProject"
 mongo = PyMongo(app)
 
 studentQR = "Not scanned yet"
-bookBarcode = "Not scanned yet"
+productBarcode = "Not scanned yet"
 warn = "Scan both QR code and Book Barcode"
 success = "Submitted successfully"
 
 @app.route('/')
 def index():
-  return render_template('codeScanner.html', studentQR=studentQR, bookBarcode=bookBarcode)
+  return render_template('codeScanner.html', studentQR=studentQR, productBarcode=productBarcode)
 
 @app.route('/studentQR/')
 def codeScanner():
@@ -49,7 +49,7 @@ def codeScanner():
             cv.putText(frame,studentQR,(pts2[0],pts2[1]),cv.FONT_HERSHEY_COMPLEX_SMALL,0.9,(255,0,255),2)
             # scanned = mongo.db.scanned.insert_one({"scanned": studentQR})
             
-            return render_template('codeScanner.html', studentQR=studentQR, bookBarcode=bookBarcode)
+            return render_template('codeScanner.html', studentQR=studentQR, productBarcode=productBarcode)
             
         cv.imshow("Frame",frame)
         if cv.waitKey(1) & 0xFF == 27:  # Press Escape Key to close all windows
@@ -57,7 +57,7 @@ def codeScanner():
     cap.release()
     cv.destroyAllWindows()
 
-@app.route('/BookBarcode/')
+@app.route('/ProductBarcode/')
 def barcodeScanner():
     cap = cv.VideoCapture(0)
 
@@ -66,15 +66,15 @@ def barcodeScanner():
     
         for barcode in decode(frame):
             print(barcode.data.decode('utf-8'))
-            global bookBarcode
-            bookBarcode = barcode.data.decode('utf-8')
+            global productBarcode
+            productBarcode = barcode.data.decode('utf-8')
             pts = np.array([barcode.polygon],np.int32)
             pts = pts.reshape((1,-1,2))
             cv.polylines(frame,[pts],True,(0,255,0),3)
             pts2 = barcode.rect
-            cv.putText(frame,bookBarcode,(pts2[0],pts2[1]),cv.FONT_HERSHEY_COMPLEX_SMALL,0.9,(255,0,255),2)
+            cv.putText(frame,productBarcode,(pts2[0],pts2[1]),cv.FONT_HERSHEY_COMPLEX_SMALL,0.9,(255,0,255),2)
             
-            return render_template('codeScanner.html', bookBarcode=bookBarcode , studentQR=studentQR)
+            return render_template('codeScanner.html', productBarcode=productBarcode , studentQR=studentQR)
             
         cv.imshow("Frame",frame)
         if cv.waitKey(1) & 0xFF == 27:  # Press Escape Key to close all windows
@@ -85,14 +85,14 @@ def barcodeScanner():
 @app.route('/Submit/')
 def submit():
   global studentQR 
-  global bookBarcode
-  if studentQR !="Not scanned yet" and bookBarcode != "Not scanned yet":
-    scanned = mongo.db.scanned.insert_one({"Student Id": studentQR, "Book Barcode": bookBarcode})
+  global productBarcode
+  if studentQR !="Not scanned yet" and productBarcode != "Not scanned yet":
+    scanned = mongo.db.scanned.insert_one({"Student Id": studentQR, "Book Barcode": productBarcode})
     studentQR="Not scanned yet"
-    bookBarcode="Not scanned yet"
-    return render_template('codeScanner.html', bookBarcode=bookBarcode , studentQR=studentQR, success=success)
+    productBarcode="Not scanned yet"
+    return render_template('codeScanner.html', productBarcode=productBarcode , studentQR=studentQR, success=success)
   else:
-    return render_template('codeScanner.html', bookBarcode=bookBarcode , studentQR=studentQR, warn=warn)
+    return render_template('codeScanner.html', productBarcode=productBarcode , studentQR=studentQR, warn=warn)
 
 # @app.route('/records')
 # def record():
