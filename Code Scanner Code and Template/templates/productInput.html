@@ -153,14 +153,14 @@
         <div class="input-container ic1" style="margin-top: 20px;">
             <input id="productPrice" name="productPrice" class="input" type="text" placeholder=" " />
             <div class="cut"></div>
-            <label for="productPrice" class="placeholder">Product Price</label>
+            <label for="productPrice" class="placeholder">Product Price (in Rs.)</label>
         </div>
         <div for="productCategory" class="subtitle" style="margin-top: 20px;">Select Product Category:</div>
         <select name="productCategory" id="productCategory" class="submit" style="margin-top: 20px;">
             <option value="Stationary">Stationary</option>
             <option value="Biscuits">Biscuits</option>
-            <option value="softDrinks">Soft-Drinks</option>
-            <option value="iceCream">Ice-Cream</option>
+            <option value="Soft-Drinks">Soft-Drinks</option>
+            <option value="Ice-Cream">Ice-Cream</option>
         </select>
         <div class="input-container ic1" style="margin-top: 20px;">
             <input id="manufacturingDate" name="manufacturingDate" class="input" type="text" placeholder=" " />
@@ -174,10 +174,19 @@
     <!-- <form action="/Submit/" >
         <input type="submit" class="submit" value="Submit" />
     </form> -->
-    <p style="color: greenyellow">{{ productName }}</p>
-    <p style="color: greenyellow">{{ productPrice }}</p>
-    <p style="color: greenyellow">{{ productCategory }}</p>
-    <p style="color: greenyellow">{{ manufacturingDate }}</p>
+    <p style="color: greenyellow">{{ success }}</p>
+
+    {% block content %}
+        {% if success %}
+            <div class="subtitle">Check your submitted details. If incorrect please enter them again. Thank you.</div>
+            <div class="subtitle"> Product Name: <em>{{ productName }}</em></div>
+            <div class="subtitle"> Product Price: <em>Rs.{{ productPrice }}</em></div>
+            <div class="subtitle"> Product Category: <em>{{ productCategory }}</em></div>
+            <div class="subtitle"> Manufacturing Date: <em>{{ manufacturingDate }}</em></div>
+        {% else %}
+            {{ super() }}
+        {% endif %}
+    {% endblock content %}
     <p style="color: red">{{ error }}</p>
     </div>
 </body>
