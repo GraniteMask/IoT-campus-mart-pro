@@ -137,27 +137,47 @@
 <body>
     <div class="form">
     <div class="title" style="text-transform: uppercase;">Welcome to IOT based Campus Mart and Delivery System</div>
-    <div class="subtitle"><em>Fill up the following information to add a product in the database.</em></div>
+    <div class="subtitle"><em>Fill up the following information to add a new product in the database.</em></div>
 
-    <form action="/ProductBarcode/" >
+    <form action="/productInput/ProductBarcode/" >
         <input type="submit" class="submit" value="Scan Product's Barcode" />
     </form>
     <p class="subtitle">Barcode: <em>{{ productInputBarcode }}</em></p>
 
-    <form action="/studentQR/">
+    <form action="/productInput/submitInputProduct/" method="POST">
         <div class="input-container ic1">
-            <input id="productName" class="input" type="text" placeholder=" " />
+            <input id="productName" name="productName" class="input" type="text" placeholder=" " />
             <div class="cut"></div>
             <label for="productName" class="placeholder">Product Name</label>
         </div>
-        <!-- <input type="submit" class="submit" value="Submit Product Name" style="margin-top: 10px;"/> -->
+        <div class="input-container ic1" style="margin-top: 20px;">
+            <input id="productPrice" name="productPrice" class="input" type="text" placeholder=" " />
+            <div class="cut"></div>
+            <label for="productPrice" class="placeholder">Product Price</label>
+        </div>
+        <div for="productCategory" class="subtitle" style="margin-top: 20px;">Select Product Category:</div>
+        <select name="productCategory" id="productCategory" class="submit" style="margin-top: 20px;">
+            <option value="Stationary">Stationary</option>
+            <option value="Biscuits">Biscuits</option>
+            <option value="softDrinks">Soft-Drinks</option>
+            <option value="iceCream">Ice-Cream</option>
+        </select>
+        <div class="input-container ic1" style="margin-top: 20px;">
+            <input id="manufacturingDate" name="manufacturingDate" class="input" type="text" placeholder=" " />
+            <div class="cut"></div>
+            <label for="manufacturingDate" class="placeholder">manufacturing Date (DD/MM/YYYY)</label>
+        </div>
+        <input type="submit" class="submit" value="Submit" />
     </form>
     <!-- <p class="subtitle">Product Name Status: <em>{{ studentQR }}</em></p> -->
     
-    <form action="/Submit/" >
+    <!-- <form action="/Submit/" >
         <input type="submit" class="submit" value="Submit" />
-    </form>
-    <p style="color: greenyellow">{{ success }}</p>
+    </form> -->
+    <p style="color: greenyellow">{{ productName }}</p>
+    <p style="color: greenyellow">{{ productPrice }}</p>
+    <p style="color: greenyellow">{{ productCategory }}</p>
+    <p style="color: greenyellow">{{ manufacturingDate }}</p>
     <p style="color: red">{{ warn }}</p>
     </div>
 </body>

@@ -18,7 +18,6 @@ from pyzbar.pyzbar import decode
 app = Flask(__name__)
 
 app.secret_key="secretkey"
-app.config['SECRET_KEY'] = "secretkey"   # for forms 
 app.config["MONGO_URI"] = "mongodb+srv://ratnadeep:N0M4fXXQhFW1tiNq@cluster0.ym3x4.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
 # app.config["MONGO_URI"] = "mongodb://localhost:27017/IotProject"
 # N0M4fXXQhFW1tiNq
@@ -105,6 +104,14 @@ def submit():
 def productInputIndex():
   return render_template('productInput.html', studentQR=studentQR, productBarcode=productBarcode)
 
+@app.route('/productInput/submitInputProduct/', methods=['POST'])
+def productInputSubmit():
+  productName = request.form['productName']
+  productPrice = request.form['productPrice']
+  productCategory = request.form['productCategory']
+  manufacturingDate = request.form['manufacturingDate']
+  return render_template('productInput.html', productName=productName, productBarcode=productBarcode, manufacturingDate=manufacturingDate, productCategory=productCategory, productPrice=productPrice)
+
 # @app.route('/records')
 # def record():
 #   recordItem = mongo.db.scanned.find()
@@ -117,3 +124,4 @@ if __name__ == '__main__':
 
 
   #install 'pip install dnspython' extra for mongo atlas
+  
