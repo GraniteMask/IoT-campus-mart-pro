@@ -18,6 +18,7 @@ from pyzbar.pyzbar import decode
 app = Flask(__name__)
 
 app.secret_key="secretkey"
+app.config['SECRET_KEY'] = "secretkey"   # for forms 
 app.config["MONGO_URI"] = "mongodb+srv://ratnadeep:N0M4fXXQhFW1tiNq@cluster0.ym3x4.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
 # app.config["MONGO_URI"] = "mongodb://localhost:27017/IotProject"
 # N0M4fXXQhFW1tiNq
@@ -28,14 +29,11 @@ studentQR = "Not scanned yet"
 productBarcode = "Not scanned yet"
 warn = "Scan both QR code and Product's Barcode"
 success = "Submitted successfully"
+productInputBarcode = "Not scanned yet"
 
 @app.route('/')
 def index():
   return render_template('codeScanner.html', studentQR=studentQR, productBarcode=productBarcode)
-
-@app.route('/productInput')
-def productInputIndex():
-  return render_template('productInput.html', studentQR=studentQR, productBarcode=productBarcode)
 
 @app.route('/studentQR/')
 def codeScanner():
@@ -99,6 +97,13 @@ def submit():
     return render_template('codeScanner.html', productBarcode=productBarcode , studentQR=studentQR, success=success)
   else:
     return render_template('codeScanner.html', productBarcode=productBarcode , studentQR=studentQR, warn=warn)
+
+
+# For Product Input
+
+@app.route('/productInput')
+def productInputIndex():
+  return render_template('productInput.html', studentQR=studentQR, productBarcode=productBarcode)
 
 # @app.route('/records')
 # def record():
