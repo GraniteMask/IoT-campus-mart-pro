@@ -27,6 +27,7 @@ mongo = PyMongo(app)
 studentQR = "Not scanned yet"
 productBarcode = "Not scanned yet"
 warn = "Scan both QR code and Product's Barcode"
+error = "Please enter all the information"
 success = "Submitted successfully"
 productInputBarcode = "Not scanned yet"
 
@@ -102,15 +103,47 @@ def submit():
 
 @app.route('/productInput')
 def productInputIndex():
-  return render_template('productInput.html', studentQR=studentQR, productBarcode=productBarcode)
+  return render_template('productInput.html', productInputBarcode=productInputBarcode)
+  
+@app.route('/productInput/ProductBarcode/')
+def barcodeScannerInputProduct():
+    cap = cv.VideoCapture(0)
+
+    while True:
+        _,frame = cap.read()
+    
+        for barcode in decode(frame):
+            print(barcode.data.decode('utf-8'))
+            global productInputBarcode
+            productInputBarcode = barcode.data.decode('utf-8')
+            pts = np.array([barcode.polygon],np.int32)
+            pts = pts.reshape((1,-1,2))
+            cv.polylines(frame,[pts],True,(0,255,0),3)
+            pts2 = barcode.rect
+            cv.putText(frame,productInputBarcode,(pts2[0],pts2[1]),cv.FONT_HERSHEY_COMPLEX_SMALL,0.9,(255,0,255),2)
+            
+            return render_template('codeScanner.html', productInputBarcode=productInputBarcode )
+            
+        cv.imshow("Frame",frame)
+        if cv.waitKey(1) & 0xFF == 27:  # Press Escape Key to close all windows
+            break
+    cap.release()
+    cv.destroyAllWindows()
+
 
 @app.route('/productInput/submitInputProduct/', methods=['POST'])
 def productInputSubmit():
+  global productInputBarcode
   productName = request.form['productName']
   productPrice = request.form['productPrice']
   productCategory = request.form['productCategory']
   manufacturingDate = request.form['manufacturingDate']
-  return render_template('productInput.html', productName=productName, productBarcode=productBarcode, manufacturingDate=manufacturingDate, productCategory=productCategory, productPrice=productPrice)
+  if productInputBarcode != "Not scanned yet" and productName !='' and productPrice != '' and productCategory != '' and manufacturingDate != '':
+    return render_template('productInput.html', success=success)
+  else:
+    return render_template('productInput.html', error=error)
+
+  # return render_template('productInput.html', productName=productName, productBarcode=productBarcode, manufacturingDate=manufacturingDate, productCategory=productCategory, productPrice=productPrice)
 
 # @app.route('/records')
 # def record():
