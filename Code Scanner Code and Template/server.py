@@ -181,6 +181,7 @@ def add(oid):
           cv.putText(frame,productExistingInputBarcode,(pts2[0],pts2[1]),cv.FONT_HERSHEY_COMPLEX_SMALL,0.9,(255,0,255),2)
           mongo.db.products.find_one_and_update({'_id': ObjectId(oid)}, {'$push': {'productBarcode': productExistingInputBarcode}})
           # product.save(newBarcode)
+          cv.destroyAllWindows()
           return render_template('existingProduct.html', productExistingInputBarcode=productExistingInputBarcode, success=success, products=products, product=product)
           
       cv.imshow("Frame",frame)
