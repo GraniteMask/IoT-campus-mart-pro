@@ -55,7 +55,7 @@ def codeScanner():
             pts2 = barcode.rect
             cv.putText(frame,studentQR,(pts2[0],pts2[1]),cv.FONT_HERSHEY_COMPLEX_SMALL,0.9,(255,0,255),2)
             # scanned = mongo.db.scanned.insert_one({"scanned": studentQR})
-            
+            cv.destroyAllWindows()
             return render_template('codeScanner.html', studentQR=studentQR, productBarcode=productBarcode)
             
         cv.imshow("Frame",frame)
@@ -80,7 +80,7 @@ def barcodeScanner():
             cv.polylines(frame,[pts],True,(0,255,0),3)
             pts2 = barcode.rect
             cv.putText(frame,productBarcode,(pts2[0],pts2[1]),cv.FONT_HERSHEY_COMPLEX_SMALL,0.9,(255,0,255),2)
-            
+            cv.destroyAllWindows()
             return render_template('codeScanner.html', productBarcode=productBarcode , studentQR=studentQR)
             
         cv.imshow("Frame",frame)
@@ -124,7 +124,7 @@ def barcodeScannerInputProduct():
             cv.polylines(frame,[pts],True,(0,255,0),3)
             pts2 = barcode.rect
             cv.putText(frame,productInputBarcode,(pts2[0],pts2[1]),cv.FONT_HERSHEY_COMPLEX_SMALL,0.9,(255,0,255),2)
-            
+            cv.destroyAllWindows()
             return render_template('productInput.html', productInputBarcode=productInputBarcode )
             
         cv.imshow("Frame",frame)
