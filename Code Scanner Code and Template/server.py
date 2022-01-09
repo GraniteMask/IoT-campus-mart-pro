@@ -147,9 +147,19 @@ def submit():
 
 # For New Product Input
 
-@app.route('/productInput')
+@app.route('/productInput', methods=['GET', 'POST'])
 def productInputIndex():
-  return render_template('productInput.html', productInputBarcode=productInputBarcode)
+  if request.method == 'POST':
+    global passwordVerified
+    password = request.form['password']
+    if password == mainPassword :
+      passwordVerified = True
+      return render_template('productInput.html', passwordVerified=passwordVerified, productInputBarcode=productInputBarcode)
+    else:
+      return render_template('productInput.html', passwordVerified=passwordVerified, rejectAccess = 'Wrong Password')
+  elif request.method == 'GET':
+    return render_template('productInput.html', productInputBarcode=productInputBarcode, passwordVerified=passwordVerified)
+
   
 @app.route('/productInput/ProductBarcode/')
 def barcodeScannerInputProduct():
