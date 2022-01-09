@@ -30,6 +30,7 @@ warn = "Scan both QR code and Product's Barcode"
 error = "Please enter all the information"
 success = "Submitted successfully"
 productInputBarcode = "Not scanned yet"
+productAllBarcodes = []
 
 @app.route('/')
 def index():
@@ -134,13 +135,15 @@ def barcodeScannerInputProduct():
 @app.route('/productInput/submitInputProduct/', methods=['POST'])
 def productInputSubmit():
   global productInputBarcode
+  global productAllBarcodes
   productName = request.form['productName']
   productPrice = request.form['productPrice']
   productCategory = request.form['productCategory']
   manufacturingDate = request.form['manufacturingDate']
   if productInputBarcode != "Not scanned yet" and productName !='' and productPrice != '' and productCategory != '' and manufacturingDate != '':
+    productAllBarcodes.append(productInputBarcode)
     # return render_template('productInput.html', success=success)
-    scanned = mongo.db.products.insert_one({"productName": productName, "productBarcode": productInputBarcode, "manufacturingDate": manufacturingDate, "productCategory": productCategory, "productPrice": productPrice})
+    scanned = mongo.db.products.insert_one({"productName": productName, "productBarcode": productAllBarcodes, "manufacturingDate": manufacturingDate, "productCategory": productCategory, "productPrice": productPrice})
     return render_template('productInput.html', productName=productName, productBarcode=productBarcode, manufacturingDate=manufacturingDate, productCategory=productCategory, productPrice=productPrice, success=success)
   else:
     return render_template('productInput.html', error=error)
