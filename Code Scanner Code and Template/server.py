@@ -208,12 +208,24 @@ def productInputSubmit():
 
 # For Existing Product Barcode Input
 
-@app.route('/existingProduct')
+@app.route('/existingProduct', methods=['GET', 'POST'])
 def existingProductBarcodeInputIndex():
   products = mongo.db.products.find()
   # products = mongo.db.products.find({}, {'_id': 0, 'productName': 1})
-  print(products)
-  return render_template('existingProduct.html', products=products, productExistingInputBarcodePlaceholder=productExistingInputBarcodePlaceholder, product=product)
+  # print(products)
+  if request.method == 'POST':
+    global passwordVerified
+    password = request.form['password']
+    if password == mainPassword :
+      passwordVerified = True
+      return render_template('existingProduct.html', passwordVerified=passwordVerified, products=products, productExistingInputBarcodePlaceholder=productExistingInputBarcodePlaceholder, product=product)
+    else:
+      return render_template('existingProduct.html', passwordVerified=passwordVerified, rejectAccess = 'Wrong Password')
+  elif request.method == 'GET':
+    return render_template('existingProduct.html', products=products, productExistingInputBarcodePlaceholder=productExistingInputBarcodePlaceholder, product=product, passwordVerified=passwordVerified)
+
+
+  # return render_template('existingProduct.html', products=products, productExistingInputBarcodePlaceholder=productExistingInputBarcodePlaceholder, product=product)
 
 @app.route('/add/<oid>')
 def add(oid):

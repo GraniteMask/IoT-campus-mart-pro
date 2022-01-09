@@ -136,63 +136,44 @@
 </head>
 <body>
     <div class="form">
-    <div class="title" style="text-transform: uppercase;">Welcome to IOT based Campus Mart Delivery System & Analytics</div>
-    <div class="subtitle"><em>Choose the product to add more quantity.</em></div>
+    {% if passwordVerified %}
+        <div class="title" style="text-transform: uppercase;">Welcome to IOT based Campus Mart Delivery System & Analytics</div>
+        <div class="subtitle"><em>Choose the product to add more quantity.</em></div>
 
-    <!-- <form action="/productInput/ProductBarcode/" >
-        <input type="submit" class="submit" value="Scan Product's Barcode" />
-    </form>
-    <p class="subtitle">Barcode: <em>{{ productInputBarcode }}</em></p> -->
+        <!-- <form action="/productInput/ProductBarcode/" >
+            <input type="submit" class="submit" value="Scan Product's Barcode" />
+        </form>
+        <p class="subtitle">Barcode: <em>{{ productInputBarcode }}</em></p> -->
 
-    {% for product in products %}
-        <a href="{{ url_for('add', oid=product._id )}}" style="text-decoration: none; " class="submit">
-            <button class="submit" style="text-align: center;">{{ product.productName }}</button>          
-        </a> 
-    {% endfor %}
+        {% for product in products %}
+            <a href="{{ url_for('add', oid=product._id )}}" style="text-decoration: none; " class="submit">
+                <button class="submit" style="text-align: center;">{{ product.productName }}</button>          
+            </a> 
+        {% endfor %}
 
 
-    <div style="margin-top: 40px;">   
-        <div class="subtitle" ><em>{{product.productName}}</em></div>
-        {% if productExistingInputBarcodePlaceholder %}
-            <div class="subtitle">Barcode: <em>{{productExistingInputBarcodePlaceholder}}</em></div>
-        {% elif productExistingInputBarcode %}
-            <div class="subtitle">Barcode: <em>{{productExistingInputBarcode}}</em></div>
-        {% endif %}
-        <p style="color: greenyellow">{{ success }}</p>
-    </div> 
-
-    <!-- <div class="subtitle">{{products}}</div> -->
-
-    <!-- <form action="/productInput/submitInputProduct/" method="POST">
-        <div class="input-container ic1">
-            <input id="productName" name="productName" class="input" type="text" placeholder=" " />
-            <div class="cut"></div>
-            <label for="productName" class="placeholder">Product Name</label>
-        </div>
-        <div class="input-container ic1" style="margin-top: 20px;">
-            <input id="productPrice" name="productPrice" class="input" type="text" placeholder=" " />
-            <div class="cut"></div>
-            <label for="productPrice" class="placeholder">Product Price (in Rs.)</label>
-        </div>
-        <div for="productCategory" class="subtitle" style="margin-top: 20px;">Select Product Category:</div>
-        <select name="productCategory" id="productCategory" class="submit" style="margin-top: 20px;">
-            <option value="Stationary">Stationary</option>
-            <option value="Biscuits">Biscuits</option>
-            <option value="Soft-Drinks">Soft-Drinks</option>
-            <option value="Ice-Cream">Ice-Cream</option>
-        </select>
-        <div class="input-container ic1" style="margin-top: 20px;">
-            <input id="manufacturingDate" name="manufacturingDate" class="input" type="text" placeholder=" " />
-            <div class="cut"></div>
-            <label for="manufacturingDate" class="placeholder">Manufacturing Date (DD/MM/YYYY)</label>
-        </div>
-        <input type="submit" class="submit" value="Submit" />
-    </form> -->
-    <!-- <form action="/Submit/" >
-        <input type="submit" class="submit" value="Submit" />
-    </form> -->
-    <!-- <p style="color: greenyellow">{{ success }}</p> 
-    <p style="color: red">{{ error }}</p> -->
+        <div style="margin-top: 40px;">   
+            <div class="subtitle" ><em>{{product.productName}}</em></div>
+            {% if productExistingInputBarcodePlaceholder %}
+                <div class="subtitle">Barcode: <em>{{productExistingInputBarcodePlaceholder}}</em></div>
+            {% elif productExistingInputBarcode %}
+                <div class="subtitle">Barcode: <em>{{productExistingInputBarcode}}</em></div>
+            {% endif %}
+            <p style="color: greenyellow">{{ success }}</p>
+        </div> 
+    {% else %}
+        <div class="title" style="text-transform: uppercase;">Welcome to IOT based Campus Mart Delivery System & Analytics</div>
+        <div class="subtitle"><em>Please enter administrative password to continue to add more quantity for a product.</em></div>
+        <form action="/existingProduct" method="POST">
+            <div class="input-container ic1">
+                <input id="password" name="password" class="input" type="password" placeholder=" " />
+                <div class="cut"></div>
+                <label for="password" class="placeholder">Password</label>
+            </div>
+            <input type="submit" class="submit" value="Submit" />
+        </form>
+    {% endif %}
+    <p style="color: red">{{ rejectAccess }}</p>
     </div>
 </body>
 </html>
