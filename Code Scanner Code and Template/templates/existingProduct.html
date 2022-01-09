@@ -145,10 +145,16 @@
     <p class="subtitle">Barcode: <em>{{ productInputBarcode }}</em></p> -->
 
     {% for product in products %}
-        
-        <div class="subtitle">{{ product.productName }}</div>
-        
+    
+        <a href="{{ url_for('add', oid=product._id )}}" style="text-decoration: none; ">
+            <div class="submit" >{{ product.productName }}</div>          
+        </a> 
     {% endfor %}
+    <div style="margin-top: 40px;">   
+        <div class="subtitle" ><em>{{product.productName}}</em></div>
+        <div class="subtitle">Barcode: <em>{{productExistingInputBarcode}}</em></div>
+        <p style="color: greenyellow">{{ success }}</p>
+    </div> 
 
     <!-- <div class="subtitle">{{products}}</div> -->
 
@@ -180,8 +186,8 @@
     <!-- <form action="/Submit/" >
         <input type="submit" class="submit" value="Submit" />
     </form> -->
-    <p style="color: greenyellow">{{ success }}</p> 
-    <p style="color: red">{{ error }}</p>
+    <!-- <p style="color: greenyellow">{{ success }}</p> 
+    <p style="color: red">{{ error }}</p> -->
     </div>
 </body>
 </html>

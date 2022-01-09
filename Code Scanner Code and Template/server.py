@@ -30,6 +30,8 @@ warn = "Scan both QR code and Product's Barcode"
 error = "Please enter all the information"
 success = "Submitted successfully"
 productInputBarcode = "Not scanned yet"
+productExistingInputBarcode = "Not scanned yet"
+product="Select a product first"
 productAllBarcodes = []
 
 @app.route('/')
@@ -158,7 +160,35 @@ def existingProductBarcodeInputIndex():
   products = mongo.db.products.find()
   # products = mongo.db.products.find({}, {'_id': 0, 'productName': 1})
   print(products)
-  return render_template('existingProduct.html', products=products)
+  return render_template('existingProduct.html', products=products, productExistingInputBarcode=productExistingInputBarcode, product=product)
+
+@app.route('/add/<oid>')
+def add(oid):
+  product = mongo.db.products.find_one({'_id': ObjectId(oid)})
+  products = mongo.db.products.find()
+  cap = cv.VideoCapture(0)
+  while True:
+      _,frame = cap.read()
+  
+      for barcode in decode(frame):
+          print(barcode.data.decode('utf-8'))
+          global productExistingInputBarcode
+          productExistingInputBarcode = barcode.data.decode('utf-8')
+          pts = np.array([barcode.polygon],np.int32)
+          pts = pts.reshape((1,-1,2))
+          cv.polylines(frame,[pts],True,(0,255,0),3)
+          pts2 = barcode.rect
+          cv.putText(frame,productExistingInputBarcode,(pts2[0],pts2[1]),cv.FONT_HERSHEY_COMPLEX_SMALL,0.9,(255,0,255),2)
+          mongo.db.products.find_one_and_update({'_id': ObjectId(oid)}, {'$push': {'productBarcode': productExistingInputBarcode}})
+          # product.save(newBarcode)
+          return render_template('existingProduct.html', productExistingInputBarcode=productExistingInputBarcode, success=success, products=products, product=product)
+          
+      cv.imshow("Frame",frame)
+      if cv.waitKey(1) & 0xFF == 27:  # Press Escape Key to close all windows
+          break
+  cap.release()
+  cv.destroyAllWindows()
+  
 
 # @app.route('/records')
 # def record():
