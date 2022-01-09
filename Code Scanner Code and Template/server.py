@@ -178,7 +178,7 @@ def barcodeScannerInputProduct():
             pts2 = barcode.rect
             cv.putText(frame,productInputBarcode,(pts2[0],pts2[1]),cv.FONT_HERSHEY_COMPLEX_SMALL,0.9,(255,0,255),2)
             cv.destroyAllWindows()
-            return render_template('productInput.html', productInputBarcode=productInputBarcode )
+            return render_template('productInput.html', productInputBarcode=productInputBarcode, passwordVerified=passwordVerified )
             
         cv.imshow("Frame",frame)
         if cv.waitKey(1) & 0xFF == 27:  # Press Escape Key to close all windows
@@ -200,9 +200,9 @@ def productInputSubmit():
     # return render_template('productInput.html', success=success)
     scanned = mongo.db.products.insert_one({"productName": productName, "productBarcode": productAllBarcodes, "manufacturingDate": manufacturingDate, "productCategory": productCategory, "productPrice": productPrice})
     productInputBarcode = "Not scanned yet"
-    return render_template('productInput.html', productName=productName, productInputBarcode=productInputBarcode, manufacturingDate=manufacturingDate, productCategory=productCategory, productPrice=productPrice, success=success)
+    return render_template('productInput.html', productName=productName, productInputBarcode=productInputBarcode, manufacturingDate=manufacturingDate, productCategory=productCategory, productPrice=productPrice, success=success, passwordVerified=passwordVerified)
   else:
-    return render_template('productInput.html', error=error, productInputBarcode=productInputBarcode)
+    return render_template('productInput.html', error=error, productInputBarcode=productInputBarcode, passwordVerified=passwordVerified)
 
 
 
