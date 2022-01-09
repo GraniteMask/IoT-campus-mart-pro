@@ -247,7 +247,7 @@ def add(oid):
           mongo.db.products.find_one_and_update({'_id': ObjectId(oid)}, {'$push': {'productBarcode': productExistingInputBarcode}})
           # product.save(newBarcode)
           cv.destroyAllWindows()
-          return render_template('existingProduct.html', productExistingInputBarcode=productExistingInputBarcode, success=success, products=products, product=product)
+          return render_template('existingProduct.html', productExistingInputBarcode=productExistingInputBarcode, success=success, products=products, product=product, passwordVerified=passwordVerified)
           
       cv.imshow("Frame",frame)
       if cv.waitKey(1) & 0xFF == 27:  # Press Escape Key to close all windows
@@ -256,17 +256,17 @@ def add(oid):
   cv.destroyAllWindows()
 
 
-# Password Verification Codes
+# # Password Verification Codes
   
-@app.route('/deliveryVerification/passwordVerification/', methods=['POST'])
-def deliveryVerificationPassword():
-  passwordVerified = False
-  password = request.form['password']
-  if password == mainPassword :
-    passwordVerified = True
-    return render_template('codeScanner.html', passwordVerified=passwordVerified, studentQR=studentQR, productBarcode=productBarcode)
-  else:
-    return render_template('codeScanner.html', passwordVerified=passwordVerified, rejectAccess = 'Wrong Password')
+# @app.route('/deliveryVerification/passwordVerification/', methods=['POST'])
+# def deliveryVerificationPassword():
+#   passwordVerified = False
+#   password = request.form['password']
+#   if password == mainPassword :
+#     passwordVerified = True
+#     return render_template('codeScanner.html', passwordVerified=passwordVerified, studentQR=studentQR, productBarcode=productBarcode)
+#   else:
+#     return render_template('codeScanner.html', passwordVerified=passwordVerified, rejectAccess = 'Wrong Password')
 
 
 # @app.route('/records')
