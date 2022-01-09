@@ -5,7 +5,7 @@ Created on Tue Oct  9 13:56:55 2022
 @author: Ratnadeep Das Choudhury
 """
 
-from flask import Flask, render_template, Response
+from flask import Flask, render_template, Response, request
 from flask_pymongo import PyMongo
 from bson.json_util import dumps
 from bson.objectid import ObjectId
@@ -38,6 +38,8 @@ productExistingInputBarcode = "Not scanned yet"
 productExistingInputBarcodePlaceholder = "Not scanned yet"
 product="Select a product first"
 productAllBarcodes = []
+mainPassword = 'RU<r=eP~}s9r%md$'
+passwordVerified = False
 
 # For video Stream
 
@@ -66,11 +68,20 @@ productAllBarcodes = []
 
 # Button Functionalities
 
-@app.route('/deliveryVerification')
+@app.route('/deliveryVerification', methods=['GET', 'POST'])
 def index():
-  return render_template('codeScanner.html', studentQR=studentQR, productBarcode=productBarcode)
+  if request.method == 'POST':
+    global passwordVerified
+    password = request.form['password']
+    if password == mainPassword :
+      passwordVerified = True
+      return render_template('codeScanner.html', passwordVerified=passwordVerified, studentQR=studentQR, productBarcode=productBarcode)
+    else:
+      return render_template('codeScanner.html', passwordVerified=passwordVerified, rejectAccess = 'Wrong Password')
+  elif request.method == 'GET':
+    return render_template('codeScanner.html', studentQR=studentQR, productBarcode=productBarcode, passwordVerified=passwordVerified)
 
-@app.route('/studentQR/')
+@app.route('/deliveryVerification/studentQR/')
 def codeScanner():
     cap = cv.VideoCapture(0)
 
@@ -88,7 +99,7 @@ def codeScanner():
             cv.putText(frame,studentQR,(pts2[0],pts2[1]),cv.FONT_HERSHEY_COMPLEX_SMALL,0.9,(255,0,255),2)
             # scanned = mongo.db.scanned.insert_one({"scanned": studentQR})
             cv.destroyAllWindows()
-            return render_template('codeScanner.html', studentQR=studentQR, productBarcode=productBarcode)
+            return render_template('codeScanner.html', studentQR=studentQR, productBarcode=productBarcode, passwordVerified=passwordVerified)
             
         cv.imshow("Frame",frame)
         if cv.waitKey(1) & 0xFF == 27:  # Press Escape Key to close all windows
@@ -96,7 +107,7 @@ def codeScanner():
     cap.release()
     cv.destroyAllWindows()
 
-@app.route('/ProductBarcode/')
+@app.route('/deliveryVerification/ProductBarcode/')
 def barcodeScanner():
     cap = cv.VideoCapture(0)
 
@@ -113,7 +124,7 @@ def barcodeScanner():
             pts2 = barcode.rect
             cv.putText(frame,productBarcode,(pts2[0],pts2[1]),cv.FONT_HERSHEY_COMPLEX_SMALL,0.9,(255,0,255),2)
             cv.destroyAllWindows()
-            return render_template('codeScanner.html', productBarcode=productBarcode , studentQR=studentQR)
+            return render_template('codeScanner.html', productBarcode=productBarcode , studentQR=studentQR, passwordVerified=passwordVerified)
             
         cv.imshow("Frame",frame)
         if cv.waitKey(1) & 0xFF == 27:  # Press Escape Key to close all windows
@@ -121,7 +132,7 @@ def barcodeScanner():
     cap.release()
     cv.destroyAllWindows()
 
-@app.route('/Submit/')
+@app.route('/deliveryVerification/Submit/')
 def submit():
   global studentQR 
   global productBarcode
@@ -129,9 +140,9 @@ def submit():
     scanned = mongo.db.scanned.insert_one({"StudentId": studentQR, "BookBarcode": productBarcode})
     studentQR="Not scanned yet"
     productBarcode="Not scanned yet"
-    return render_template('codeScanner.html', productBarcode=productBarcode , studentQR=studentQR, success=success)
+    return render_template('codeScanner.html', productBarcode=productBarcode , studentQR=studentQR, success=success, passwordVerified=passwordVerified)
   else:
-    return render_template('codeScanner.html', productBarcode=productBarcode , studentQR=studentQR, warn=warn)
+    return render_template('codeScanner.html', productBarcode=productBarcode , studentQR=studentQR, warn=warn, passwordVerified=passwordVerified)
 
 
 # For New Product Input
@@ -221,7 +232,20 @@ def add(oid):
           break
   cap.release()
   cv.destroyAllWindows()
+
+
+# Password Verification Codes
   
+@app.route('/deliveryVerification/passwordVerification/', methods=['POST'])
+def deliveryVerificationPassword():
+  passwordVerified = False
+  password = request.form['password']
+  if password == mainPassword :
+    passwordVerified = True
+    return render_template('codeScanner.html', passwordVerified=passwordVerified, studentQR=studentQR, productBarcode=productBarcode)
+  else:
+    return render_template('codeScanner.html', passwordVerified=passwordVerified, rejectAccess = 'Wrong Password')
+
 
 # @app.route('/records')
 # def record():

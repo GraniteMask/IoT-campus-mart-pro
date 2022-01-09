@@ -136,21 +136,35 @@
 </head>
 <body>
     <div class="form">
-    <div class="title" style="text-transform: uppercase;">Welcome to IOT based Campus Mart Delivery System & Analytics</div>
-    <div class="subtitle"><em>Fill up the following information to successfully submit delivery information.</em></div>
-    <form action="/studentQR/" >
-        <input type="submit" class="submit" value="Scan student's Unique QR code" />
-    </form>
-    <p class="subtitle">Student QR Code: <em>{{ studentQR }}</em></p>
-    <form action="/ProductBarcode/" >
-        <input type="submit" class="submit" value="Scan Product's Barcode" />
-    </form>
-    <p class="subtitle">Barcode: <em>{{ productBarcode }}</em></p>
-    <form action="/Submit/" >
-        <input type="submit" class="submit" value="Submit" />
-    </form>
-    <p style="color: greenyellow">{{ success }}</p>
-    <p style="color: red">{{ warn }}</p>
+    {% if passwordVerified %}
+        <div class="title" style="text-transform: uppercase;">Welcome to IOT based Campus Mart Delivery System & Analytics</div>
+        <div class="subtitle"><em>Fill up the following information to successfully submit delivery information.</em></div>
+        <form action="/deliveryVerification/studentQR/" >
+            <input type="submit" class="submit" value="Scan student's Unique QR code" />
+        </form>
+        <p class="subtitle">Student QR Code: <em>{{ studentQR }}</em></p>
+        <form action="/deliveryVerification/ProductBarcode/" >
+            <input type="submit" class="submit" value="Scan Product's Barcode" />
+        </form>
+        <p class="subtitle">Barcode: <em>{{ productBarcode }}</em></p>
+        <form action="/deliveryVerification/Submit/" >
+            <input type="submit" class="submit" value="Submit" />
+        </form>
+        <p style="color: greenyellow">{{ success }}</p>
+        <p style="color: red">{{ warn }}</p>
+    {% else %}
+        <div class="title" style="text-transform: uppercase;">Welcome to IOT based Campus Mart Delivery System & Analytics</div>
+        <div class="subtitle"><em>Please enter administrative password to continue Delivery Verification.</em></div>
+        <form action="/deliveryVerification" method="POST">
+            <div class="input-container ic1">
+                <input id="password" name="password" class="input" type="password" placeholder=" " />
+                <div class="cut"></div>
+                <label for="password" class="placeholder">Password</label>
+            </div>
+            <input type="submit" class="submit" value="Submit" />
+        </form>
+    {% endif %}
+    <p style="color: red">{{ rejectAccess }}</p>
     </div>
 </body>
 </html>
