@@ -155,7 +155,11 @@ def productInputSubmit():
 
 @app.route('/existingProduct')
 def existingProductBarcodeInputIndex():
-  return render_template('existingProduct.html', productInputBarcode=productInputBarcode)
+  products = mongo.db.products.find()
+  # products = mongo.db.products.find({}, {'_id': 0, 'productName': 1})
+  # products= dumps(resp)
+  print(products)
+  return render_template('existingProduct.html', products=products)
 
 # @app.route('/records')
 # def record():
