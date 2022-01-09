@@ -145,7 +145,6 @@
     <p class="subtitle">Barcode: <em>{{ productInputBarcode }}</em></p> -->
 
     {% for product in products %}
-    
         <a href="{{ url_for('add', oid=product._id )}}" style="text-decoration: none; " class="submit">
             <button class="submit" style="text-align: center;">{{ product.productName }}</button>          
         </a> 
