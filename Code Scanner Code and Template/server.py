@@ -144,9 +144,10 @@ def productInputSubmit():
     productAllBarcodes.append(productInputBarcode)
     # return render_template('productInput.html', success=success)
     scanned = mongo.db.products.insert_one({"productName": productName, "productBarcode": productAllBarcodes, "manufacturingDate": manufacturingDate, "productCategory": productCategory, "productPrice": productPrice})
-    return render_template('productInput.html', productName=productName, productBarcode=productBarcode, manufacturingDate=manufacturingDate, productCategory=productCategory, productPrice=productPrice, success=success)
+    productInputBarcode = "Not scanned yet"
+    return render_template('productInput.html', productName=productName, productInputBarcode=productInputBarcode, manufacturingDate=manufacturingDate, productCategory=productCategory, productPrice=productPrice, success=success)
   else:
-    return render_template('productInput.html', error=error)
+    return render_template('productInput.html', error=error, productInputBarcode=productInputBarcode,)
 
   
 
