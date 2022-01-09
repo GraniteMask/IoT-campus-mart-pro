@@ -100,7 +100,7 @@ def submit():
     return render_template('codeScanner.html', productBarcode=productBarcode , studentQR=studentQR, warn=warn)
 
 
-# For Product Input
+# For New Product Input
 
 @app.route('/productInput')
 def productInputIndex():
@@ -149,7 +149,13 @@ def productInputSubmit():
   else:
     return render_template('productInput.html', error=error, productInputBarcode=productInputBarcode,)
 
-  
+
+
+# For Existing Product Barcode Input
+
+@app.route('/existingProduct')
+def existingProductBarcodeInputIndex():
+  return render_template('existingProduct.html', productInputBarcode=productInputBarcode)
 
 # @app.route('/records')
 # def record():
