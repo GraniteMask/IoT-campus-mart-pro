@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Created on Tue Oct  5 13:56:55 2021
+Created on Tue Oct  10 13:56:55 2022
 
 @author: Ratnadeep Das Choudhury
 """
@@ -157,7 +157,6 @@ def productInputSubmit():
 def existingProductBarcodeInputIndex():
   products = mongo.db.products.find()
   # products = mongo.db.products.find({}, {'_id': 0, 'productName': 1})
-  # products= dumps(resp)
   print(products)
   return render_template('existingProduct.html', products=products)
 
@@ -172,5 +171,6 @@ if __name__ == '__main__':
 
 
 
-  #install 'pip install dnspython' extra for mongo atlas
+#install 'pip install dnspython' extra for mongo atlas
+# products= dumps(resp)    #its like stringify
   
