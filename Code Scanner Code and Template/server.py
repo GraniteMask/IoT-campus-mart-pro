@@ -31,6 +31,7 @@ error = "Please enter all the information"
 success = "Submitted successfully"
 productInputBarcode = "Not scanned yet"
 productExistingInputBarcode = "Not scanned yet"
+productExistingInputBarcodePlaceholder = "Not scanned yet"
 product="Select a product first"
 productAllBarcodes = []
 
@@ -160,7 +161,7 @@ def existingProductBarcodeInputIndex():
   products = mongo.db.products.find()
   # products = mongo.db.products.find({}, {'_id': 0, 'productName': 1})
   print(products)
-  return render_template('existingProduct.html', products=products, productExistingInputBarcode=productExistingInputBarcode, product=product)
+  return render_template('existingProduct.html', products=products, productExistingInputBarcodePlaceholder=productExistingInputBarcodePlaceholder, product=product)
 
 @app.route('/add/<oid>')
 def add(oid):

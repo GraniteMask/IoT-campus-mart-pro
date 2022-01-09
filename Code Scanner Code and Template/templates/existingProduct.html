@@ -150,9 +150,15 @@
             <button class="submit" style="text-align: center;">{{ product.productName }}</button>          
         </a> 
     {% endfor %}
+
+
     <div style="margin-top: 40px;">   
         <div class="subtitle" ><em>{{product.productName}}</em></div>
-        <div class="subtitle">Barcode: <em>{{productExistingInputBarcode}}</em></div>
+        {% if productExistingInputBarcodePlaceholder %}
+            <div class="subtitle">Barcode: <em>{{productExistingInputBarcodePlaceholder}}</em></div>
+        {% elif productExistingInputBarcode %}
+            <div class="subtitle">Barcode: <em>{{productExistingInputBarcode}}</em></div>
+        {% endif %}
         <p style="color: greenyellow">{{ success }}</p>
     </div> 
 
