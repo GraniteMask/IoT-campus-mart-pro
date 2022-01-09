@@ -149,7 +149,7 @@ def productInputSubmit():
     productInputBarcode = "Not scanned yet"
     return render_template('productInput.html', productName=productName, productInputBarcode=productInputBarcode, manufacturingDate=manufacturingDate, productCategory=productCategory, productPrice=productPrice, success=success)
   else:
-    return render_template('productInput.html', error=error, productInputBarcode=productInputBarcode,)
+    return render_template('productInput.html', error=error, productInputBarcode=productInputBarcode)
 
 
 
