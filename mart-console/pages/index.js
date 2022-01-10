@@ -46,11 +46,11 @@ export default function Home(props) {
     <Layout>
 
       
-      <Typography variant="h2">Popular Products</Typography>
+      <Typography variant="h2">All Products</Typography>
         <Grid container spacing={3}>
           {products.map((product) => (
             <Grid item md={4} key={product._id}>
-              <Card>
+              <Card style={{ background: 'rgba(0, 0, 0, 0.1) no-repeat scroll 16px 16px'}}>
                 <NextLink href={`/product/${product.productName}`} passHref>
                   <CardActionArea>
                     {/* <CardMedia
@@ -59,16 +59,16 @@ export default function Home(props) {
                       title={product.name}
                     ></CardMedia> */}
                     <CardContent>
-                      <Typography>{product.productName}</Typography>
-                      <Typography>{product.manufacturingDate}</Typography>
-                      <Typography>{product.productCategory}</Typography>
-                      <Typography>Rs.{product.productPrice}</Typography>
+                      <Typography><span style={{fontWeight: 'bold'}}>Product Name:</span> {product.productName}</Typography>
+                      <Typography><span style={{fontWeight: 'bold'}}>Product Category:</span> {product.productCategory}</Typography>
+                      <Typography><span style={{fontWeight: 'bold'}}>Product Manufacturing Date:</span> {product.manufacturingDate}</Typography>
+                      <Typography><span style={{fontWeight: 'bold'}}>Product Price:</span> Rs.{product.productPrice}</Typography>
                     </CardContent>
                   </CardActionArea>
                 </NextLink>
                 <CardActions>
                   
-                  <Button size="small" color="primary" onClick={()=>addToCartHandler(product)}>
+                  <Button size="small" color="primary" onClick={()=>addToCartHandler(product)} variant="outlined">
                     Add to cart
                   </Button>
                 </CardActions>

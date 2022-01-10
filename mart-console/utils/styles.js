@@ -2,7 +2,8 @@ import {makeStyles} from "@material-ui/core"
 
 const useStyles = makeStyles((theme)=>({
     navbar:{
-        backgroundColor: "#203040",
+        backgroundColor: "#000000",
+        // backgroundColor: "#203040",
         '& a':{
             color: "#FFFFFF",
             marginLeft: 10,   //by default it is 10px
@@ -91,18 +92,7 @@ const useStyles = makeStyles((theme)=>({
         width: '100%'
     },
     fullContainer: { height: '100vh' },
-    mapInputBox: {
-        position: 'absolute',
-        display: 'flex',
-        left: 0,
-        right: 0,
-        margin: '10px auto',
-        width: 300,
-        height: 40,
-        '& input': {
-        width: 250,
-        },
-    },
+    
 
 }));
 
