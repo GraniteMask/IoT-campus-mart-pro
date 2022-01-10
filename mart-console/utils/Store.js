@@ -25,7 +25,7 @@ function reducer(state,action){
             const existItem = state.cart.cartItems.find(
                 (item) => item._id === newItem._id
             )
-            const cartItems = existItem ? state.cart.cartItems.map((item) => item.name === existItem.name ? newItem : item)
+            const cartItems = existItem ? state.cart.cartItems.map((item) => item.productName === existItem.productName ? newItem : item)
             :
             [...state.cart.cartItems, newItem]
             Cookies.set('cartItems', JSON.stringify(cartItems))
