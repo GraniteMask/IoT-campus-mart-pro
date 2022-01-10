@@ -3,7 +3,7 @@ import { Card, CardActionArea, Grid, CardMedia, CardContent, Typography, CardAct
 import Layout from '../components/Layout'
 import NextLink from 'next/link'
 import db from '../utils/db'
-// import Product from '../models/Product'
+import Product from '../models/Product'
 import axios from 'axios'
 import { useContext } from 'react'
 import { Store } from '../utils/Store'
@@ -11,10 +11,10 @@ import { useRouter } from 'next/router'
 import useStyles from '../utils/styles'
 
 
-// export default function Home(props) {
-export default function Home() {
+export default function Home(props) {
   const classes = useStyles()
-  // const {products, featuredProducts} = props
+  const {products} = props
+  console.log(products)
   const {state, dispatch} = useContext(Store)
   const router = useRouter()
 
@@ -48,33 +48,35 @@ export default function Home() {
       
       <Typography variant="h2">Popular Products</Typography>
         <Grid container spacing={3}>
-          {/* {products.map((product) => (
-            <Grid item md={4} key={product.name}>
+          {products.map((product) => (
+            <Grid item md={4} key={product._id}>
               <Card>
-                <NextLink href={`/product/${product.slug}`} passHref>
+                <NextLink href={`/product/${product.productName}`} passHref>
                   <CardActionArea>
-                    <CardMedia
+                    {/* <CardMedia
                        component="img"
                       image={product.image}
                       title={product.name}
-                    ></CardMedia>
+                    ></CardMedia> */}
                     <CardContent>
-                      <Typography>{product.name}</Typography>
-                      <Rating value={product.rating} readOnly></Rating>
+                      <Typography>{product.productName}</Typography>
+                      <Typography>{product.manufacturingDate}</Typography>
+                      <Typography>{product.productCategory}</Typography>
+                      <Typography>Rs.{product.productPrice}</Typography>
                     </CardContent>
                   </CardActionArea>
                 </NextLink>
                 <CardActions>
-                  <Typography>${product.price}</Typography>
+                  
                   <Button size="small" color="primary" onClick={()=>addToCartHandler(product)}>
                     Add to cart
                   </Button>
                 </CardActions>
               </Card>
             </Grid>
-          ))} */}
+          ))}
 
-            <Grid item md={4} >
+            {/* <Grid item md={4} >
               <Card>
                 <NextLink href={`/product/sdsdsds`} passHref>
                   <CardActionArea>
@@ -96,24 +98,21 @@ export default function Home() {
                   </Button>
                 </CardActions>
               </Card>
-            </Grid>
+            </Grid> */}
         </Grid>
     </Layout>
     
   )
 }
 
-// export async function getServerSideProps(){
-//   await db.connect()
-//   const featuredProductsDocs = await Product.find({isFeatured: true},'-reviews').lean().limit(3)
-//   const topRatedProducts = await Product.find({},'-reviews').lean().sort({
-//     rating: -1,
-//   }).limit(6)
-//   await db.disconnect()
-//   return{
-//     props:{
-//       featuredProducts: featuredProductsDocs.map(db.convertDocToObj),
-//       products: topRatedProducts.map(db.convertDocToObj),
-//     }
-//   }
-// }
+export async function getServerSideProps(){
+  await db.connect()
+  const allProducts = await Product.find().lean()
+  console.log(allProducts)
+  await db.disconnect()
+  return{
+    props:{
+      products: allProducts.map(db.convertDocToObj),
+    }
+  }
+}
