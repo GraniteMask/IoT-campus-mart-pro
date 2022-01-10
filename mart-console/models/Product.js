@@ -1,8 +1,11 @@
 import mongoose from 'mongoose'
 
 const productSchema = new mongoose.Schema({
-    name:{type: String, required: true},
-    
+    productName:{type: String, required: true},
+    productBarcode: {type: Array, required: true},
+    manufacturingDate: {type: String, required: true},
+    productCategory: {type: String, required: true},
+    productPrice: {type: String, required: true},
 })
 
 const Product = mongoose.models.Product || mongoose.model('Product', productSchema)
