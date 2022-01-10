@@ -48,7 +48,9 @@ export default function Home(props) {
       
       <Typography variant="h2">All Products</Typography>
         <Grid container spacing={3}>
-          {products.map((product) => (
+          {products.map((product) => { 
+           var countInStock = product.productBarcode.length
+           return(
             <Grid item md={4} key={product._id}>
               <Card style={{ background: 'rgba(0, 0, 0, 0.1) no-repeat scroll 16px 16px'}}>
                 <NextLink href={`/product/${product.productName}`} passHref>
@@ -61,6 +63,7 @@ export default function Home(props) {
                     <CardContent>
                       <Typography><span style={{fontWeight: 'bold'}}>Product Name:</span> {product.productName}</Typography>
                       <Typography><span style={{fontWeight: 'bold'}}>Product Category:</span> {product.productCategory}</Typography>
+                      <Typography><span style={{fontWeight: 'bold'}}>Quantity Available:</span> {countInStock}</Typography>
                       <Typography><span style={{fontWeight: 'bold'}}>Product Manufacturing Date:</span> {product.manufacturingDate}</Typography>
                       <Typography><span style={{fontWeight: 'bold'}}>Product Price:</span> Rs.{product.productPrice}</Typography>
                     </CardContent>
@@ -74,7 +77,7 @@ export default function Home(props) {
                 </CardActions>
               </Card>
             </Grid>
-          ))}
+          )})}
 
             {/* <Grid item md={4} >
               <Card>

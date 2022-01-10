@@ -194,13 +194,13 @@ def productInputSubmit():
   productName = request.form['productName']
   productPrice = request.form['productPrice']
   productCategory = request.form['productCategory']
-  manufacturingDate = request.form['manufacturingDate']
-  if productInputBarcode != "Not scanned yet" and productName !='' and productPrice != '' and productCategory != '' and manufacturingDate != '':
+  productCompany = request.form['productCompany']
+  if productInputBarcode != "Not scanned yet" and productName !='' and productPrice != '' and productCategory != '' and productCompany != '':
     productAllBarcodes.append(productInputBarcode)
     # return render_template('productInput.html', success=success)
-    scanned = mongo.db.products.insert_one({"productName": productName, "productBarcode": productAllBarcodes, "manufacturingDate": manufacturingDate, "productCategory": productCategory, "productPrice": productPrice})
+    scanned = mongo.db.products.insert_one({"productName": productName, "productBarcode": productAllBarcodes, "productCompany": productCompany, "productCategory": productCategory, "productPrice": productPrice})
     productInputBarcode = "Not scanned yet"
-    return render_template('productInput.html', productName=productName, productInputBarcode=productInputBarcode, manufacturingDate=manufacturingDate, productCategory=productCategory, productPrice=productPrice, success=success, passwordVerified=passwordVerified)
+    return render_template('productInput.html', productName=productName, productInputBarcode=productInputBarcode, productCompany=productCompany, productCategory=productCategory, productPrice=productPrice, success=success, passwordVerified=passwordVerified)
   else:
     return render_template('productInput.html', error=error, productInputBarcode=productInputBarcode, passwordVerified=passwordVerified)
 
