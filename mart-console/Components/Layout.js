@@ -18,7 +18,7 @@ import { InputBase } from '@material-ui/core'
 export default function Layout({title, description, children}) {
     const router = useRouter()
     const {state, dispatch} = useContext(Store)
-    const {darkMode, cart, userInfo} = state;
+    const { cart, userInfo} = state;
     const theme = createTheme({
         typography:{
             h1:{
@@ -36,7 +36,6 @@ export default function Layout({title, description, children}) {
             },  
         },
         palette:{
-            type: darkMode ? 'dark' : 'light',
             primary:{
                 main: '#f0c000',
             },
@@ -47,26 +46,7 @@ export default function Layout({title, description, children}) {
     })
     const classes = useStyles();
 
-    const [sidbarVisible, setSidebarVisible] = useState(false);
-    const sidebarOpenHandler = () => {
-        setSidebarVisible(true);
-    };
-    const sidebarCloseHandler = () => {
-        setSidebarVisible(false);
-    };
-
-    const [categories, setCategories] = useState([]);
     const { enqueueSnackbar } = useSnackbar();
-
-    const fetchCategories = async () => {
-        try {
-          const { data } = await axios.get(`/api/products/categories`);
-          setCategories(data);
-        } catch (err) {
-            console.log(err)
-          enqueueSnackbar(getError(err), { variant: 'error' });
-        }
-    };
 
     const [query, setQuery] = useState('');
     const queryChangeHandler = (e) => {
@@ -81,17 +61,11 @@ export default function Layout({title, description, children}) {
         fetchCategories();
     }, []);
 
-    const darkModeChangeHandler = () =>{
-        dispatch({type: darkMode ? 'DARK_MODE_OFF' : 'DARK_MODE_ON'})
-        const newDarkMode = !darkMode;
-        Cookies.set('darkMode', newDarkMode ? 'ON' : 'OFF');
-    }
-
     const [anchorEl, setAnchorEl] = useState(null)
 
     const loginClickHandler = (e) =>{
         setAnchorEl(e.currentTarget)
-        console.log('dsdsd')
+        // console.log('dsdsd')
     }
 
     const loginMenuCloseHandler = (e, redirect) =>{
@@ -136,51 +110,12 @@ export default function Layout({title, description, children}) {
                         <NextLink href="/" passHref>
                             <Link>
                                 <Typography className={classes.brand}>
-                                PictureLand 2.0
+                                    Campus Mart Pro
                                 </Typography>
                             </Link>
                         </NextLink>
                         </Box>
 
-                        <Drawer
-                            anchor="left"
-                            open={sidbarVisible}
-                            onClose={sidebarCloseHandler}
-                            >
-                            <List>
-                                <ListItem>
-                                <Box
-                                    display="flex"
-                                    alignItems="center"
-                                    justifyContent="space-between"
-                                >
-                                    <Typography>Shopping by category</Typography>
-                                    <IconButton
-                                    aria-label="close"
-                                    onClick={sidebarCloseHandler}
-                                    >
-                                    <CancelIcon />
-                                    </IconButton>
-                                </Box>
-                                </ListItem>
-                                <Divider light />
-                                {categories.map((category) => (
-                                <NextLink
-                                    key={category}
-                                    href={`/search?category=${category}`}
-                                    passHref
-                                >
-                                    <ListItem
-                                    button
-                                    component="a"
-                                    onClick={sidebarCloseHandler}
-                                    >
-                                    <ListItemText primary={category}></ListItemText>
-                                    </ListItem>
-                                </NextLink>
-                                ))}
-                            </List>
-                        </Drawer>
                         
                         <div className={classes.searchSection}>
                             <form onSubmit={submitHandler} className={classes.searchForm}>
@@ -200,7 +135,7 @@ export default function Layout({title, description, children}) {
                             </form>
                         </div>
                         <div>
-                            <Switch checked={darkMode} onChange={darkModeChangeHandler}></Switch>
+                            
                             <NextLink href='/cart'>
                                 <Link>
                                     {cart.cartItems.length > 0 ? <Badge color="secondary" badgeContent={cart.cartItems.length}>Cart</Badge> : ("Cart")}
@@ -244,7 +179,7 @@ export default function Layout({title, description, children}) {
                 </Container>
                 <footer className={classes.footer}>
                     <Typography>
-                        All rights reserved. 2021 PictureLand 2.0 
+                        All rights reserved. 2022 Campus Mart Pro
                     </Typography>
                 </footer>
             </ThemeProvider>
