@@ -63,7 +63,7 @@ export default function Home(props) {
                     <CardContent>
                       <Typography><span style={{fontWeight: 'bold'}}>Product Name:</span> {product.productName}</Typography>
                       <Typography><span style={{fontWeight: 'bold'}}>Product Category:</span> {product.productCategory}</Typography>
-                      <Typography><span style={{fontWeight: 'bold'}}>Quantity Available:</span> {countInStock}</Typography>
+                      <Typography><span style={{fontWeight: 'bold'}}>Quantity Available:</span> {countInStock == 0 ? 'Oops!! Product is out of stock.' : countInStock}</Typography>
                       <Typography><span style={{fontWeight: 'bold'}}>Manufacturer:</span> {product.productCompany}</Typography>
                       <Typography><span style={{fontWeight: 'bold'}}>Product Price:</span> Rs.{product.productPrice}</Typography>
                     </CardContent>
