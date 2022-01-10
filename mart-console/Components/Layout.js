@@ -51,10 +51,6 @@ export default function Layout({title, description, children}) {
     const queryChangeHandler = (e) => {
         setQuery(e.target.value);
     };
-    const submitHandler = (e) => {
-        e.preventDefault();
-        router.push(`/search?query=${query}`);
-    };
 
     
 
@@ -107,7 +103,7 @@ export default function Layout({title, description, children}) {
                         </Box>
 
                         
-                        <div className={classes.searchSection}>
+                        {/* <div className={classes.searchSection}>
                             <form onSubmit={submitHandler} className={classes.searchForm}>
                                 <InputBase
                                 name="query"
@@ -123,7 +119,7 @@ export default function Layout({title, description, children}) {
                                 <SearchIcon />
                                 </IconButton>
                             </form>
-                        </div>
+                        </div> */}
                         <div>
                             
                             <NextLink href='/cart'>
