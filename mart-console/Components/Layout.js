@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Head from 'next/head'
 import NextLink from 'next/link'
 import {AppBar, Typography, Toolbar, Container, Link, ThemeProvider, CssBaseline, Switch, Badge, Button, Menu, MenuItem, Box, IconButton, Drawer, Divider, List, ListItem, ListItemText} from '@material-ui/core'
@@ -7,7 +7,6 @@ import useStyles from '../utils/styles'
 import Cookies from 'js-cookie'
 import { Store } from '../utils/Store'
 import { useRouter } from 'next/router'
-import MenuIcon from '@material-ui/icons/Menu'
 import MenuIcon from '@material-ui/icons/Menu'
 import CancelIcon from '@material-ui/icons/Cancel'
 import { useSnackbar } from 'notistack'
@@ -37,7 +36,7 @@ export default function Layout({title, description, children}) {
         },
         palette:{
             primary:{
-                main: '#f0c000',
+                main: '#000000',
             },
             secondary:{
                 main: "#208080",
@@ -57,9 +56,7 @@ export default function Layout({title, description, children}) {
         router.push(`/search?query=${query}`);
     };
 
-    useEffect(() => {
-        fetchCategories();
-    }, []);
+    
 
     const [anchorEl, setAnchorEl] = useState(null)
 
@@ -91,7 +88,7 @@ export default function Layout({title, description, children}) {
     return (
         <div>
             <Head>
-                <title>{title? `${title} - PictureLand 2.0`:'PictureLand 2.0'}</title>
+                <title>{title? `${title} - Campus Mart Pro`:'Campus Mart Pro'}</title>
                 {description && <meta name="description" content={description}></meta>}
             </Head>
             <ThemeProvider theme={theme}>
@@ -99,14 +96,7 @@ export default function Layout({title, description, children}) {
                 <AppBar position="static" className={classes.navbar}>
                     <Toolbar className={classes.toolbar}>
                         <Box display="flex" alignItems="center">
-                        <IconButton
-                            edge="start"
-                            aria-label="open drawer"
-                            onClick={sidebarOpenHandler}
-                            className={classes.menuButton}
-                        >
-                            <MenuIcon className={classes.navbarButton} />
-                        </IconButton>   
+
                         <NextLink href="/" passHref>
                             <Link>
                                 <Typography className={classes.brand}>
