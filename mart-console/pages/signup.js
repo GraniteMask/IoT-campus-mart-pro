@@ -117,6 +117,21 @@ function Register() {
             return
         }
 
+        if(block == ''){
+            enqueueSnackbar("Select your Block", {variant: 'error'})
+            return
+        }
+
+        if(course == ''){
+            enqueueSnackbar("Select your Stream", {variant: 'error'})
+            return
+        }
+
+        if(year == ''){
+            enqueueSnackbar("Select your Year", {variant: 'error'})
+            return
+        }
+
         try{
             const {data} = await axios.post('/api/users/register', {name, email, password})
             dispatch({type:"USER_LOGIN", payload: data})
@@ -304,7 +319,7 @@ function Register() {
                                 : 
                                 course == 'btechComputerCyber' ? 'BTech. Computer Science and Cyber Security Engineering'
                                 :
-                                'Choose your stream'
+                                'Select your stream'
                             } 
                             <ExpandMoreIcon style={{marginLeft: "1rem"}}/>
                         </Button>
