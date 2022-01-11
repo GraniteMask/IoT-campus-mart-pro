@@ -3,10 +3,15 @@ import jwt from 'jsonwebtoken'
 const signToken = (user) =>{
     return jwt.sign(
         {
-            _id: user.id,
+            _id: user._id,
             name: user.name,
             email: user.email,
-            isAdmin: user.isAdmin,
+            registrationNumber: user.registrationNumber,
+            roomNumber: user.roomNumber,
+            block: user.block,
+            course: user.course,
+            year: user.year
+            
         },
 
         process.env.JWT_SECRET,
