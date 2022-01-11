@@ -17,6 +17,7 @@ handler.post(async(req, res)=>{
         block: req.body.block,
         course: req.body.course,
         year: req.body.year,
+        qrId: req.body.qrId
     })
     const user = await newUser.save()
     await db.disconnect()
