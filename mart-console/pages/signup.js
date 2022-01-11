@@ -133,7 +133,7 @@ function Register() {
         }
 
         try{
-            const {data} = await axios.post('/api/students/register', {name, email, password, registrationNumber, roomNumber, block, year, course})
+            const {data} = await axios.post('/api/students/signup', {name, email, password, registrationNumber, roomNumber, block, year, course})
             dispatch({type:"USER_LOGIN", payload: data})
             // console.log(data)
             Cookies.set('userInfo', JSON.stringify(data))
