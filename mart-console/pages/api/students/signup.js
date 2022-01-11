@@ -34,7 +34,8 @@ handler.post(async(req, res)=>{
             roomNumber: user.roomNumber,
             block: user.block,
             course: user.course,
-            year: user.year
+            year: user.year,
+            qrId: user.qrId
         })
     }catch(err){
         console.log(err)

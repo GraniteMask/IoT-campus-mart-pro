@@ -10,8 +10,8 @@ const signToken = (user) =>{
             roomNumber: user.roomNumber,
             block: user.block,
             course: user.course,
-            year: user.year
-            
+            year: user.year,
+            qrId: user.qrId
         },
 
         process.env.JWT_SECRET,

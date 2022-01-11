@@ -21,14 +21,18 @@ function Profile() {
     const classes = useStyles()
     const {enqueueSnackbar, closeSnackbar} = useSnackbar()
 
+
     useEffect(()=>{
         if(!userInfo){
             return router.push('/login')
         }
+
         setValue('name', userInfo.name)
         setValue('email', userInfo.email)
     }, [])
 
+    
+console.log(userInfo)
     const submitHandler = async ({name, email, password, confirmPassword}) =>{
         // e.preventDefault()
         closeSnackbar()
@@ -84,6 +88,12 @@ function Profile() {
                             <ListItem>
                             <form onSubmit={handleSubmit(submitHandler)} className={classes.form}>
                                 <List>
+                                    <ListItem>
+                                        <Typography variant="h6">Your Unique QR code. Use it for scanning while receiving your order:</Typography>
+                                    </ListItem>
+                                    <ListItem>
+                                        <img src={`https://api.qrserver.com/v1/create-qr-code/?data=${userInfo.qrId}&amp;size=300x300`} alt="" title="" />
+                                    </ListItem>
                                     <ListItem>
                                         <Controller name="name" control={control} defaultValue="" rules={{
                                             required: true,
@@ -158,6 +168,8 @@ function Profile() {
                                     <ListItem>
                                         <Button variant="contained" type="submit" fullWidth color="primary">Update</Button>
                                     </ListItem>
+
+                                    
                                 </List>
                             </form>
                             </ListItem>
