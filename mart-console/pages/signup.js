@@ -1,5 +1,5 @@
 import { Button, List, ListItem, TextField, Typography, Link, Popper, Grow, Paper, ClickAwayListener, MenuList, MenuItem } from '@material-ui/core'
-import React, { useContext, useEffect, useRef } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import Layout from '../components/Layout'
 import useStyles from '../utils/styles'
 import NextLink from 'next/link'
@@ -10,6 +10,7 @@ import Cookies from 'js-cookie'
 import { Controller, useForm } from 'react-hook-form'
 import { useSnackbar } from 'notistack'
 import dynamic from 'next/dynamic'
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
  
 function Register() {
     const [openBlock, setOpenBlock] = useState(false);
@@ -20,6 +21,7 @@ function Register() {
     const {redirect} = router.query
     const {userInfo} = state;
     const anchorRefBlock = useRef(null);
+    const prevOpenBlock = useRef(openBlock);
 
     // console.log(userInfo)
 
@@ -30,18 +32,23 @@ function Register() {
     },[])
 
     const handleToggleBlock = () => {
-        setOpenBlock((prevOpen) => !prevOpen);
+        setOpenBlock((prevOpenBlock) => !prevOpenBlock);
     };
 
-    const handleCloseService = (event) => {
-        if (anchorRefService.current && anchorRefService.current.contains(event.target)) {
+    const handleCloseBlock = (event) => {
+        if (anchorRefBlock.current && anchorRefBlock.current.contains(event.target)) {
             return;
         }
 
-        setOpenService(false);
+        setOpenBlock(false);
     };
     
-   
+    function handleListKeyDownBlock(event) {
+        if (event.key === 'Tab') {
+            event.preventDefault();
+            setOpenBlock(false);
+        }
+    }
 
     
 
@@ -159,26 +166,26 @@ function Register() {
                     <ListItem>
                         <Button
                             ref={anchorRefBlock}
-                            aria-controls={openService ? 'menu-list-grow' : undefined}
+                            aria-controls={openBlock ? 'menu-list-grow' : undefined}
                             aria-haspopup="true"
-                            onClick={handleToggleService}
-                            style={{ color: "yellow", textTransform: "none", opacity: "0.8"}}
-                            className="organize_number_of_people search_navbar_button_color_white"
+                            onClick={handleToggleBlock}
+                            fullWidth
+                            variant='outlined'
                         >
                             Select your block<ExpandMoreIcon style={{marginLeft: "1rem"}}/>
                         </Button>
-                        <Popper style={{ zIndex: 999999 }} open={openService} anchorEl={anchorRefService.current} role={undefined} transition disablePortal>
+                        <Popper style={{ zIndex: 999999 }} open={openBlock} anchorEl={anchorRefBlock.current} role={undefined} transition disablePortal>
                             {({ TransitionProps, placement }) => (
                                 <Grow
                                     {...TransitionProps}
                                     style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}
                                 >
                                     <Paper>
-                                        <ClickAwayListener onClickAway={handleCloseService}>
-                                            <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDownService}>
-                                                <MenuItem onClick={()=>handleExplore('foodBox')}>Redingle FoodBox</MenuItem>
-                                                <MenuItem onClick={()=>handleExplore('homeBuffet')}>Redingle Home Buffet</MenuItem>
-                                                <MenuItem onClick={()=>handleExplore('grandBuffet')}>Redingle Grand Buffet</MenuItem>
+                                        <ClickAwayListener onClickAway={handleCloseBlock}>
+                                            <MenuList autoFocusItem={openBlock} id="menu-list-grow" onKeyDown={handleListKeyDownBlock}>
+                                                <MenuItem onClick={()=>handleExplore('blockA')}>Block A</MenuItem>
+                                                <MenuItem onClick={()=>handleExplore('blockB')}>Block B</MenuItem>
+                                                <MenuItem onClick={()=>handleExplore('blockC')}>Block C</MenuItem>
                                             </MenuList>
                                         </ClickAwayListener>
                                     </Paper>
