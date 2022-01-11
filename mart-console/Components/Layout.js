@@ -96,7 +96,7 @@ export default function Layout({title, description, children}) {
                         <NextLink href="/" passHref>
                             <Link>
                                 <Typography className={classes.brand}>
-                                    Campus Mart Pro
+                                    CAMPUS MART PRO
                                 </Typography>
                             </Link>
                         </NextLink>
@@ -165,7 +165,7 @@ export default function Layout({title, description, children}) {
                 </Container>
                 <footer className={classes.footer}>
                     <Typography>
-                        All rights reserved. 2022 Campus Mart Pro
+                        &#169; All rights reserved. 2022 CAMPUS MART PRO
                     </Typography>
                 </footer>
             </ThemeProvider>
