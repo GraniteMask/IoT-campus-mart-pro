@@ -32,7 +32,7 @@ function Profile() {
     }, [])
 
     
-console.log(userInfo)
+// console.log(userInfo)
     const submitHandler = async ({name, email, password, confirmPassword}) =>{
         // e.preventDefault()
         closeSnackbar()
