@@ -27,7 +27,7 @@ function CartScreen() {
     }
 
     const checkoutHandler = () =>{
-        router.push('/shipping')
+        router.push('/checkOut')
     }
 
     return (

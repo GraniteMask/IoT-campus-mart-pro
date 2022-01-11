@@ -53,7 +53,7 @@ export default function Home(props) {
            return(
             <Grid item md={4} key={product._id}>
               <Card style={{ background: 'rgba(0, 0, 0, 0.1) no-repeat scroll 16px 16px'}}>
-                <NextLink href={`/product/${product.productName}`} passHref>
+                {/* <NextLink href={`/product/${product.productName}`} passHref> */}
                   <CardActionArea>
                     {/* <CardMedia
                        component="img"
@@ -68,7 +68,7 @@ export default function Home(props) {
                       <Typography><span style={{fontWeight: 'bold'}}>Product Price:</span> Rs.{product.productPrice}</Typography>
                     </CardContent>
                   </CardActionArea>
-                </NextLink>
+                {/* </NextLink> */}
                 <CardActions>
                   
                   <Button size="small" color="primary" onClick={()=>addToCartHandler(product)} variant="outlined">
