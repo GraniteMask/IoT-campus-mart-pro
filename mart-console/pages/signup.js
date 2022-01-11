@@ -111,7 +111,7 @@ function Register() {
         <Layout title="Register">
             <form onSubmit={handleSubmit(submitHandler)} className={classes.form}>
                 <Typography component="h1" variant="h1">
-                    Register for students
+                    Sign Up for Students
                 </Typography>
                 <List>
                     <ListItem>
@@ -182,6 +182,24 @@ function Register() {
                                 errors.confirmPassword.type === 'minLength'?
                                 'Confirm Password length must be longer than 5'
                                 :'Confirm Password is required'
+                                :''}
+                            {...field}></TextField>
+                        )}>
+
+                        </Controller>
+                    </ListItem>
+                    <ListItem>
+                        <Controller name="roomNumber" control={control} defaultValue="" rules={{
+                            required: true,
+                            minLength: 2,
+                        }} render={({field})=>(
+                            <TextField variant="outlined" fullWidth id="roomNumber" label="Room Number" inputProps={{type: 'text'}} 
+                            error={Boolean(errors.roomNumber)}
+                            helperText ={
+                                errors.roomNumber ? 
+                                errors.roomNumber.type === 'minLength'?
+                                'Room Number length must be more than 1 '
+                                :'Room Number is required'
                                 :''}
                             {...field}></TextField>
                         )}>
