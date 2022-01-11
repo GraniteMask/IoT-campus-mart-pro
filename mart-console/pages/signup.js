@@ -108,7 +108,7 @@ function Register() {
 
     
 
-    const submitHandler = async ({name, email, password, confirmPassword}) =>{
+    const submitHandler = async ({name, email, password, confirmPassword, registrationNumber, roomNumber}) =>{
         // e.preventDefault()
         closeSnackbar()
         if(password !== confirmPassword){
@@ -133,7 +133,7 @@ function Register() {
         }
 
         try{
-            const {data} = await axios.post('/api/users/register', {name, email, password})
+            const {data} = await axios.post('/api/users/register', {name, email, password, registrationNumber, roomNumber, block, year, course})
             dispatch({type:"USER_LOGIN", payload: data})
             // console.log(data)
             Cookies.set('userInfo', JSON.stringify(data))
