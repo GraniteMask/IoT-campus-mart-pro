@@ -9,6 +9,7 @@ const studentSchema = new mongoose.Schema({
     block:{type: String, required: true},
     course:{type: String, required: true},
     year:{type: String, required: true},
+    qrId:{type: String, required: true},
 })
 
 const Student = mongoose.models.Student || mongoose.model('Student', studentSchema)

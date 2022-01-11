@@ -11,11 +11,13 @@ import { Controller, useForm } from 'react-hook-form'
 import { useSnackbar } from 'notistack'
 import dynamic from 'next/dynamic'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import { uuid } from 'uuidv4';
  
 function Register() {
     const [openBlock, setOpenBlock] = useState(false);
     const [openYear, setOpenYear] = useState(false);
     const [openCourse, setOpenCourse] = useState(false);
+    const [qrId, SetQrId] = useState('')
     const [block, setBlock] = useState('')
     const [year, setYear] = useState('')
     const [course, setCourse] = useState('')
@@ -38,8 +40,9 @@ function Register() {
     useEffect(()=>{
         if(userInfo){
             router.push('/')
-        }
+        }    
     },[])
+
 
     const handleToggleBlock = () => {
         setOpenBlock((prevOpenBlock) => !prevOpenBlock);
@@ -133,7 +136,8 @@ function Register() {
         }
 
         try{
-            const {data} = await axios.post('/api/students/signup', {name, email, password, registrationNumber, roomNumber, block, year, course})
+            SetQrId(uuid())
+            const {data} = await axios.post('/api/students/signup', {name, email, password, registrationNumber, roomNumber, block, year, course, qrId})
             dispatch({type:"USER_LOGIN", payload: data})
             // console.log(data)
             Cookies.set('userInfo', JSON.stringify(data))
