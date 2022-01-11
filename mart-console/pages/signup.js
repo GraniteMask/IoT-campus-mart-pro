@@ -11,7 +11,7 @@ import { Controller, useForm } from 'react-hook-form'
 import { useSnackbar } from 'notistack'
 import dynamic from 'next/dynamic'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import { uuid } from 'uuidv4';
+
  
 function Register() {
     const [openBlock, setOpenBlock] = useState(false);
@@ -136,8 +136,8 @@ function Register() {
         }
 
         try{
-            SetQrId(uuid())
-            const {data} = await axios.post('/api/students/signup', {name, email, password, registrationNumber, roomNumber, block, year, course, qrId})
+           
+            const {data} = await axios.post('/api/students/signup', {name, email, password, registrationNumber, roomNumber, block, year, course})
             dispatch({type:"USER_LOGIN", payload: data})
             // console.log(data)
             Cookies.set('userInfo', JSON.stringify(data))
