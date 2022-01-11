@@ -157,6 +157,24 @@ function Register() {
                         </Controller>
                     </ListItem>
                     <ListItem>
+                        <Controller name="registrationNumber" control={control} defaultValue="" rules={{
+                            required: true,
+                            minLength: 2,
+                        }} render={({field})=>(
+                            <TextField variant="outlined" fullWidth id="registrationNumber" label="Registration Number" inputProps={{type: 'text'}} 
+                            error={Boolean(errors.registrationNumber)}
+                            helperText ={
+                                errors.registrationNumber ? 
+                                errors.registrationNumber.type === 'minLength'?
+                                'Registration number length must be more than 1 '
+                                :'Registration number is required'
+                                :''}
+                            {...field}></TextField>
+                        )}>
+
+                        </Controller>
+                    </ListItem>
+                    <ListItem>
                         <Controller name="email" control={control} defaultValue="" rules={{
                             required: true,
                             pattern: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/,
@@ -269,7 +287,26 @@ function Register() {
                             fullWidth
                             variant='outlined'
                         >
-                            {} <ExpandMoreIcon style={{marginLeft: "1rem"}}/>
+                            {
+                                course == 'btechElectricalAndElectronics' ? 'BTech. Electrical and Electronics Engineering'
+                                :
+                                course == 'btechComputer' ? 'BTech. Computer Science Engineering'
+                                :
+                                course == 'btechMechanical' ? 'BTech. Mechanical Engineering'
+                                :
+                                course == 'btechECE' ? 'BTech. Electronics and Communication Engineering'
+                                :
+                                course == 'btechElectronicsComputer' ? 'BTech. Electronics and Computer Science Engineering'
+                                :
+                                course == 'btechCivil' ? 'BTech. Civil Engineering'
+                                :
+                                course == 'btechComputerAI' ? 'BTech. Computer Science and Artificial Intelligence Engineering'
+                                : 
+                                course == 'btechComputerCyber' ? 'BTech. Computer Science and Cyber Security Engineering'
+                                :
+                                'Choose your stream'
+                            } 
+                            <ExpandMoreIcon style={{marginLeft: "1rem"}}/>
                         </Button>
                         <Popper style={{ zIndex: 999999 }} open={openCourse} anchorEl={anchorRefCourse.current} role={undefined} transition disablePortal>
                             {({ TransitionProps, placement }) => (
