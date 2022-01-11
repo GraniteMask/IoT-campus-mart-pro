@@ -14,7 +14,9 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
  
 function Register() {
     const [openBlock, setOpenBlock] = useState(false);
+    const [openYear, setOpenYear] = useState(false);
     const [block, setBlock] = useState('')
+    const [year, setYear] = useState('')
     const {handleSubmit, control, formState: {errors}} = useForm()
     const {enqueueSnackbar, closeSnackbar} = useSnackbar()
     const router = useRouter()
@@ -22,7 +24,9 @@ function Register() {
     const {redirect} = router.query
     const {userInfo} = state;
     const anchorRefBlock = useRef(null);
+    const anchorRefYear = useRef(null);
     const prevOpenBlock = useRef(openBlock);
+    const prevOpenYear = useRef(openYear);
     const classes = useStyles()
 
     // console.log(userInfo)
@@ -36,6 +40,9 @@ function Register() {
     const handleToggleBlock = () => {
         setOpenBlock((prevOpenBlock) => !prevOpenBlock);
     };
+    const handleToggleYear = () => {
+        setOpenYear((prevOpenYear) => !prevOpenYear);
+    };
 
     const handleCloseBlock = (event) => {
         if (anchorRefBlock.current && anchorRefBlock.current.contains(event.target)) {
@@ -44,8 +51,21 @@ function Register() {
 
         setOpenBlock(false);
     };
+    const handleCloseYear = (event) => {
+        if (anchorRefYear.current && anchorRefYear.current.contains(event.target)) {
+            return;
+        }
+
+        setOpenYear(false);
+    };
     
     function handleListKeyDownBlock(event) {
+        if (event.key === 'Tab') {
+            event.preventDefault();
+            setOpenBlock(false);
+        }
+    }
+    function handleListKeyDownYear(event) {
         if (event.key === 'Tab') {
             event.preventDefault();
             setOpenBlock(false);
@@ -55,6 +75,10 @@ function Register() {
     const handleBlock = (e) =>{
         setBlock(e)
         setOpenBlock(false);
+    }
+    const handleYear = (e) =>{
+        setYear(e)
+        setOpenYear(false);
     }
 
 
@@ -194,6 +218,40 @@ function Register() {
                             )}
                         </Popper>
                     </ListItem>
+                    <ListItem>
+                        <Button
+                            ref={anchorRefYear}
+                            aria-controls={openYear ? 'menu-list-grow' : undefined}
+                            aria-haspopup="true"
+                            onClick={handleToggleYear}
+                            fullWidth
+                            variant='outlined'
+                        >
+                            {year == 'first' ? 'First' : year == 'second' ? 'Second' : year == 'third' ? 'Third' : year == 'fourth' ? 'Fourth' : year == 'fifth' ? 'Fifth' : year == 'sixth' ? 'Sixth' : 'Select your '} Year<ExpandMoreIcon style={{marginLeft: "1rem"}}/>
+                        </Button>
+                        <Popper style={{ zIndex: 999999 }} open={openYear} anchorEl={anchorRefYear.current} role={undefined} transition disablePortal>
+                            {({ TransitionProps, placement }) => (
+                                <Grow
+                                    {...TransitionProps}
+                                    style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}
+                                >
+                                    <Paper>
+                                        <ClickAwayListener onClickAway={handleCloseYear}>
+                                            <MenuList autoFocusItem={openYear} id="menu-list-grow" onKeyDown={handleListKeyDownYear}>
+                                                <MenuItem onClick={()=>handleYear('first')}>First</MenuItem>
+                                                <MenuItem onClick={()=>handleYear('second')}>Second</MenuItem>
+                                                <MenuItem onClick={()=>handleYear('third')}>Third</MenuItem>
+                                                <MenuItem onClick={()=>handleYear('fourth')}>Fourth</MenuItem>
+                                                <MenuItem onClick={()=>handleYear('fifth')}>Fifth</MenuItem>
+                                                <MenuItem onClick={()=>handleYear('sixth')}>Sixth</MenuItem>
+                                            </MenuList>
+                                        </ClickAwayListener>
+                                    </Paper>
+                                </Grow>
+                            )}
+                        </Popper>
+                    </ListItem>
+                    
                     {/* <ListItem>
                         <TextField variant="outlined" fullWidth id="confirmPassword" label="Confirm Password" inputProps={{type: 'password'}} onChange={e=> setConfirmPassword(e.target.value)}></TextField>
                     </ListItem> */}

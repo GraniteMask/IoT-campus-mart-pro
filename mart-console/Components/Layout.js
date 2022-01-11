@@ -36,7 +36,7 @@ export default function Layout({title, description, children}) {
         },
         palette:{
             primary:{
-                main: '#000000',
+                main: '#9966CC',
             },
             secondary:{
                 main: "#208080",
