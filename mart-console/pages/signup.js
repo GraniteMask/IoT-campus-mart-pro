@@ -1,5 +1,5 @@
-import { Button, List, ListItem, TextField, Typography, Link } from '@material-ui/core'
-import React, { useContext, useEffect } from 'react'
+import { Button, List, ListItem, TextField, Typography, Link, Popper, Grow, Paper, ClickAwayListener, MenuList, MenuItem } from '@material-ui/core'
+import React, { useContext, useEffect, useRef } from 'react'
 import Layout from '../components/Layout'
 import useStyles from '../utils/styles'
 import NextLink from 'next/link'
@@ -12,20 +12,36 @@ import { useSnackbar } from 'notistack'
 import dynamic from 'next/dynamic'
  
 function Register() {
+    const [openBlock, setOpenBlock] = useState(false);
     const {handleSubmit, control, formState: {errors}} = useForm()
     const {enqueueSnackbar, closeSnackbar} = useSnackbar()
     const router = useRouter()
     const {state, dispatch} = useContext(Store)
     const {redirect} = router.query
     const {userInfo} = state;
+    const anchorRefBlock = useRef(null);
 
     // console.log(userInfo)
-    
+
     useEffect(()=>{
         if(userInfo){
             router.push('/')
         }
     },[])
+
+    const handleToggleBlock = () => {
+        setOpenBlock((prevOpen) => !prevOpen);
+    };
+
+    const handleCloseService = (event) => {
+        if (anchorRefService.current && anchorRefService.current.contains(event.target)) {
+            return;
+        }
+
+        setOpenService(false);
+    };
+    
+   
 
     
 
@@ -63,7 +79,7 @@ function Register() {
         <Layout title="Register">
             <form onSubmit={handleSubmit(submitHandler)} className={classes.form}>
                 <Typography component="h1" variant="h1">
-                    Register
+                    Register for students
                 </Typography>
                 <List>
                     <ListItem>
@@ -89,7 +105,7 @@ function Register() {
                             required: true,
                             pattern: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/,
                         }} render={({field})=>(
-                            <TextField variant="outlined" fullWidth id="email" label="Email" inputProps={{type: 'email'}} 
+                            <TextField variant="outlined" fullWidth id="email" label="Official Email" inputProps={{type: 'email'}} 
                             error={Boolean(errors.email)}
                             helperText ={
                                 errors.email ? 
@@ -139,6 +155,36 @@ function Register() {
                         )}>
 
                         </Controller>
+                    </ListItem>
+                    <ListItem>
+                        <Button
+                            ref={anchorRefBlock}
+                            aria-controls={openService ? 'menu-list-grow' : undefined}
+                            aria-haspopup="true"
+                            onClick={handleToggleService}
+                            style={{ color: "yellow", textTransform: "none", opacity: "0.8"}}
+                            className="organize_number_of_people search_navbar_button_color_white"
+                        >
+                            Select your block<ExpandMoreIcon style={{marginLeft: "1rem"}}/>
+                        </Button>
+                        <Popper style={{ zIndex: 999999 }} open={openService} anchorEl={anchorRefService.current} role={undefined} transition disablePortal>
+                            {({ TransitionProps, placement }) => (
+                                <Grow
+                                    {...TransitionProps}
+                                    style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}
+                                >
+                                    <Paper>
+                                        <ClickAwayListener onClickAway={handleCloseService}>
+                                            <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDownService}>
+                                                <MenuItem onClick={()=>handleExplore('foodBox')}>Redingle FoodBox</MenuItem>
+                                                <MenuItem onClick={()=>handleExplore('homeBuffet')}>Redingle Home Buffet</MenuItem>
+                                                <MenuItem onClick={()=>handleExplore('grandBuffet')}>Redingle Grand Buffet</MenuItem>
+                                            </MenuList>
+                                        </ClickAwayListener>
+                                    </Paper>
+                                </Grow>
+                            )}
+                        </Popper>
                     </ListItem>
                     {/* <ListItem>
                         <TextField variant="outlined" fullWidth id="confirmPassword" label="Confirm Password" inputProps={{type: 'password'}} onChange={e=> setConfirmPassword(e.target.value)}></TextField>

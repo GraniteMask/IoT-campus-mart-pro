@@ -55,7 +55,7 @@ function Login() {
         <Layout title="Login">
             <form onSubmit={handleSubmit(submitHandler)} className={classes.form}>
                 <Typography component="h1" variant="h1">
-                    Login
+                    Login for Students
                 </Typography>
                 <List>
                     <ListItem>
@@ -75,7 +75,7 @@ function Login() {
                         )}>
 
                         </Controller>
-                        {/* <TextField variant="outlined" fullWidth id="email" label="Email" inputProps={{type: 'email'}} onChange={e=> setEmail(e.target.value)}></TextField> */}
+
                     </ListItem>
                     <ListItem>
                         <Controller name="password" control={control} defaultValue=""  
