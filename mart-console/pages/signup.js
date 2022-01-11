@@ -9,9 +9,9 @@ import {useRouter} from 'next/router'
 import Cookies from 'js-cookie'
 import { Controller, useForm } from 'react-hook-form'
 import { useSnackbar } from 'notistack'
+import dynamic from 'next/dynamic'
  
-
-export default function Register() {
+function Register() {
     const {handleSubmit, control, formState: {errors}} = useForm()
     const {enqueueSnackbar, closeSnackbar} = useSnackbar()
     const router = useRouter()
@@ -66,15 +66,6 @@ export default function Register() {
                     Register
                 </Typography>
                 <List>
-                    {/* <ListItem>
-                        <TextField variant="outlined" fullWidth id="name" label="Name" inputProps={{type: 'text'}} onChange={e=> setName(e.target.value)}></TextField>
-                    </ListItem> */}
-                    {/* <ListItem>
-                        <TextField variant="outlined" fullWidth id="email" label="Email" inputProps={{type: 'email'}} onChange={e=> setEmail(e.target.value)}></TextField>
-                    </ListItem>
-                    <ListItem>
-                        <TextField variant="outlined" fullWidth id="password" label="password" inputProps={{type: 'password'}} onChange={e=> setPassword(e.target.value)}></TextField>
-                    </ListItem> */}
                     <ListItem>
                         <Controller name="name" control={control} defaultValue="" rules={{
                             required: true,
@@ -163,3 +154,5 @@ export default function Register() {
         </Layout>
     )
 }
+
+export default dynamic(()=> Promise.resolve(Register),{ssr:true})
