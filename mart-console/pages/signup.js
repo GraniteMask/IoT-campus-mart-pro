@@ -54,6 +54,7 @@ function Register() {
 
     const handleBlock = (e) =>{
         setBlock(e)
+        setOpenBlock(false);
     }
 
 
@@ -172,7 +173,7 @@ function Register() {
                             fullWidth
                             variant='outlined'
                         >
-                            Select your block<ExpandMoreIcon style={{marginLeft: "1rem"}}/>
+                            {block == 'blockA' ? 'Block A' : block == 'blockB' ? 'Block B' : block == 'blockC' ? 'Block C' : 'Select your block'}<ExpandMoreIcon style={{marginLeft: "1rem"}}/>
                         </Button>
                         <Popper style={{ zIndex: 999999 }} open={openBlock} anchorEl={anchorRefBlock.current} role={undefined} transition disablePortal>
                             {({ TransitionProps, placement }) => (
