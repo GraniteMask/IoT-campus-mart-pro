@@ -15,8 +15,10 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 function Register() {
     const [openBlock, setOpenBlock] = useState(false);
     const [openYear, setOpenYear] = useState(false);
+    const [openCourse, setOpenCourse] = useState(false);
     const [block, setBlock] = useState('')
     const [year, setYear] = useState('')
+    const [course, setCourse] = useState('')
     const {handleSubmit, control, formState: {errors}} = useForm()
     const {enqueueSnackbar, closeSnackbar} = useSnackbar()
     const router = useRouter()
@@ -25,8 +27,10 @@ function Register() {
     const {userInfo} = state;
     const anchorRefBlock = useRef(null);
     const anchorRefYear = useRef(null);
+    const anchorRefCourse = useRef(null);
     const prevOpenBlock = useRef(openBlock);
     const prevOpenYear = useRef(openYear);
+    const prevOpenCourse = useRef(openCourse);
     const classes = useStyles()
 
     // console.log(userInfo)
@@ -43,6 +47,9 @@ function Register() {
     const handleToggleYear = () => {
         setOpenYear((prevOpenYear) => !prevOpenYear);
     };
+    const handleToggleCourse = () => {
+        setOpenCourse((prevOpenCourse) => !prevOpenCourse);
+    };
 
     const handleCloseBlock = (event) => {
         if (anchorRefBlock.current && anchorRefBlock.current.contains(event.target)) {
@@ -58,6 +65,13 @@ function Register() {
 
         setOpenYear(false);
     };
+    const handleCloseCourse = (event) => {
+        if (anchorRefCourse.current && anchorRefCourse.current.contains(event.target)) {
+            return;
+        }
+
+        setOpenCourse(false);
+    };
     
     function handleListKeyDownBlock(event) {
         if (event.key === 'Tab') {
@@ -71,6 +85,12 @@ function Register() {
             setOpenBlock(false);
         }
     }
+    function handleListKeyDownCourse(event) {
+        if (event.key === 'Tab') {
+            event.preventDefault();
+            setOpenCourse(false);
+        }
+    }
 
     const handleBlock = (e) =>{
         setBlock(e)
@@ -79,6 +99,10 @@ function Register() {
     const handleYear = (e) =>{
         setYear(e)
         setOpenYear(false);
+    }
+    const handleCourse = (e) =>{
+        setCourse(e)
+        setOpenCourse(false);
     }
 
 
@@ -229,6 +253,41 @@ function Register() {
                                                 <MenuItem onClick={()=>handleBlock('blockA')}>Block A</MenuItem>
                                                 <MenuItem onClick={()=>handleBlock('blockB')}>Block B</MenuItem>
                                                 <MenuItem onClick={()=>handleBlock('blockC')}>Block C</MenuItem>
+                                            </MenuList>
+                                        </ClickAwayListener>
+                                    </Paper>
+                                </Grow>
+                            )}
+                        </Popper>
+                    </ListItem>
+                    <ListItem>
+                        <Button
+                            ref={anchorRefCourse}
+                            aria-controls={openCourse ? 'menu-list-grow' : undefined}
+                            aria-haspopup="true"
+                            onClick={handleToggleCourse}
+                            fullWidth
+                            variant='outlined'
+                        >
+                            {} <ExpandMoreIcon style={{marginLeft: "1rem"}}/>
+                        </Button>
+                        <Popper style={{ zIndex: 999999 }} open={openCourse} anchorEl={anchorRefCourse.current} role={undefined} transition disablePortal>
+                            {({ TransitionProps, placement }) => (
+                                <Grow
+                                    {...TransitionProps}
+                                    style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}
+                                >
+                                    <Paper>
+                                        <ClickAwayListener onClickAway={handleCloseCourse}>
+                                            <MenuList autoFocusItem={openCourse} id="menu-list-grow" onKeyDown={handleListKeyDownCourse}>
+                                                <MenuItem onClick={()=>handleCourse('btechElectricalAndElectronics')}>BTech. Electrical and Electronics Engineering</MenuItem>
+                                                <MenuItem onClick={()=>handleCourse('btechComputer')}>BTech. Computer Science Engineering</MenuItem>
+                                                <MenuItem onClick={()=>handleCourse('btechMechanical')}>BTech. Mechanical Engineering</MenuItem>
+                                                <MenuItem onClick={()=>handleCourse('btechECE')}>BTech. Electronics and Communication Engineering</MenuItem>
+                                                <MenuItem onClick={()=>handleCourse('btechElectronicsComputer')}>BTech. Electronics and Computer Science Engineering</MenuItem>
+                                                <MenuItem onClick={()=>handleCourse('btechCivil')}>BTech. Civil Engineering</MenuItem>
+                                                <MenuItem onClick={()=>handleCourse('btechComputerAI')}>BTech. Computer Science and Artificial Intelligence Engineering</MenuItem>
+                                                <MenuItem onClick={()=>handleCourse('btechComputerCyber')}>BTech. Computer Science and Cyber Security Engineering</MenuItem>
                                             </MenuList>
                                         </ClickAwayListener>
                                     </Paper>
