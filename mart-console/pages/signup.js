@@ -14,6 +14,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
  
 function Register() {
     const [openBlock, setOpenBlock] = useState(false);
+    const [block, setBlock] = useState('')
     const {handleSubmit, control, formState: {errors}} = useForm()
     const {enqueueSnackbar, closeSnackbar} = useSnackbar()
     const router = useRouter()
@@ -22,6 +23,7 @@ function Register() {
     const {userInfo} = state;
     const anchorRefBlock = useRef(null);
     const prevOpenBlock = useRef(openBlock);
+    const classes = useStyles()
 
     // console.log(userInfo)
 
@@ -50,14 +52,12 @@ function Register() {
         }
     }
 
+    const handleBlock = (e) =>{
+        setBlock(e)
+    }
+
+
     
-
-    // const [name, setName] = useState('')
-    // const [email, setEmail] = useState('')
-    // const [password, setPassword] = useState('')
-    // const [confirmPassword, setConfirmPassword] = useState('')
-
-    const classes = useStyles()
 
     const submitHandler = async ({name, email, password, confirmPassword}) =>{
         // e.preventDefault()
@@ -183,9 +183,9 @@ function Register() {
                                     <Paper>
                                         <ClickAwayListener onClickAway={handleCloseBlock}>
                                             <MenuList autoFocusItem={openBlock} id="menu-list-grow" onKeyDown={handleListKeyDownBlock}>
-                                                <MenuItem onClick={()=>handleExplore('blockA')}>Block A</MenuItem>
-                                                <MenuItem onClick={()=>handleExplore('blockB')}>Block B</MenuItem>
-                                                <MenuItem onClick={()=>handleExplore('blockC')}>Block C</MenuItem>
+                                                <MenuItem onClick={()=>handleBlock('blockA')}>Block A</MenuItem>
+                                                <MenuItem onClick={()=>handleBlock('blockB')}>Block B</MenuItem>
+                                                <MenuItem onClick={()=>handleBlock('blockC')}>Block C</MenuItem>
                                             </MenuList>
                                         </ClickAwayListener>
                                     </Paper>
