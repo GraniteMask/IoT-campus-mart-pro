@@ -123,7 +123,7 @@ function Profile() {
         }
 
         try{
-            const {data} = await axios.put('/api/users/profile', {name, email, password},{
+            const {data} = await axios.put('/api/students/profile', {name, email, password},{
                 headers: 
                 {authorization: `Bearer ${userInfo.token}`}
             })
