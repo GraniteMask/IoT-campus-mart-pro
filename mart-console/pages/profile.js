@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useRef, useState } from 'react'
+import { Button, List, ListItem, TextField, Typography, Popper, Grow, Paper, ClickAwayListener, MenuList, MenuItem, ListItemText, Card, Grid} from '@material-ui/core'
 import dynamic from 'next/dynamic'
 import { useContext } from 'react'
 import { Store } from '../utils/Store'
@@ -6,20 +7,32 @@ import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 import axios from 'axios'
 import Layout from '../components/Layout'
-import { Button, Card,  Grid, ListItem, ListItemText, Typography, List,  TextField } from '@material-ui/core'
 import useStyles from '../utils/styles'
 import NextLink from 'next/link'
 import { Controller, useForm } from 'react-hook-form'
 import { useSnackbar } from 'notistack'
 import Cookies from 'js-cookie'
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 function Profile() {
     const {state, dispatch} = useContext(Store)
-    const {handleSubmit, control, formState: {errors}, setValue} = useForm()
     const { userInfo } = state
+    const [openBlock, setOpenBlock] = useState(false);
+    const [openYear, setOpenYear] = useState(false);
+    const [openCourse, setOpenCourse] = useState(false);
+    const [block, setBlock] = useState(userInfo.block)
+    const [year, setYear] = useState(userInfo.year)
+    const [course, setCourse] = useState(userInfo.course)
+    const {handleSubmit, control, formState: {errors}, setValue} = useForm()
     const router = useRouter()
     const classes = useStyles()
     const {enqueueSnackbar, closeSnackbar} = useSnackbar()
+    const anchorRefBlock = useRef(null);
+    const anchorRefYear = useRef(null);
+    const anchorRefCourse = useRef(null);
+    const prevOpenBlock = useRef(openBlock);
+    const prevOpenYear = useRef(openYear);
+    const prevOpenCourse = useRef(openCourse);
 
 
     useEffect(()=>{
@@ -33,8 +46,72 @@ function Profile() {
         setValue('roomNumber', userInfo.roomNumber)
     }, [])
 
+    const handleToggleBlock = () => {
+        setOpenBlock((prevOpenBlock) => !prevOpenBlock);
+    };
+    const handleToggleYear = () => {
+        setOpenYear((prevOpenYear) => !prevOpenYear);
+    };
+    const handleToggleCourse = () => {
+        setOpenCourse((prevOpenCourse) => !prevOpenCourse);
+    };
+
+    const handleCloseBlock = (event) => {
+        if (anchorRefBlock.current && anchorRefBlock.current.contains(event.target)) {
+            return;
+        }
+
+        setOpenBlock(false);
+    };
+    const handleCloseYear = (event) => {
+        if (anchorRefYear.current && anchorRefYear.current.contains(event.target)) {
+            return;
+        }
+
+        setOpenYear(false);
+    };
+    const handleCloseCourse = (event) => {
+        if (anchorRefCourse.current && anchorRefCourse.current.contains(event.target)) {
+            return;
+        }
+
+        setOpenCourse(false);
+    };
     
-// console.log(userInfo)
+    function handleListKeyDownBlock(event) {
+        if (event.key === 'Tab') {
+            event.preventDefault();
+            setOpenBlock(false);
+        }
+    }
+    function handleListKeyDownYear(event) {
+        if (event.key === 'Tab') {
+            event.preventDefault();
+            setOpenBlock(false);
+        }
+    }
+    function handleListKeyDownCourse(event) {
+        if (event.key === 'Tab') {
+            event.preventDefault();
+            setOpenCourse(false);
+        }
+    }
+
+    const handleBlock = (e) =>{
+        setBlock(e)
+        setOpenBlock(false);
+    }
+    const handleYear = (e) =>{
+        setYear(e)
+        setOpenYear(false);
+    }
+    const handleCourse = (e) =>{
+        setCourse(e)
+        setOpenCourse(false);
+    }
+
+    
+
 
     const submitHandler = async ({name, email, password, confirmPassword}) =>{
         // e.preventDefault()
@@ -168,6 +245,124 @@ function Profile() {
                                         )}>
 
                                         </Controller>
+                                    </ListItem>
+                                    <ListItem>
+                                        <Button
+                                            ref={anchorRefBlock}
+                                            aria-controls={openBlock ? 'menu-list-grow' : undefined}
+                                            aria-haspopup="true"
+                                            onClick={handleToggleBlock}
+                                            fullWidth
+                                            variant='outlined'
+                                        >
+                                            {block == 'blockA' ? 'Block A' : block == 'blockB' ? 'Block B' : block == 'blockC' ? 'Block C' : 'Select your block'}<ExpandMoreIcon style={{marginLeft: "1rem"}}/>
+                                        </Button>
+                                        <Popper style={{ zIndex: 999999 }} open={openBlock} anchorEl={anchorRefBlock.current} role={undefined} transition disablePortal>
+                                            {({ TransitionProps, placement }) => (
+                                                <Grow
+                                                    {...TransitionProps}
+                                                    style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}
+                                                >
+                                                    <Paper>
+                                                        <ClickAwayListener onClickAway={handleCloseBlock}>
+                                                            <MenuList autoFocusItem={openBlock} id="menu-list-grow" onKeyDown={handleListKeyDownBlock}>
+                                                                <MenuItem onClick={()=>handleBlock('blockA')}>Block A</MenuItem>
+                                                                <MenuItem onClick={()=>handleBlock('blockB')}>Block B</MenuItem>
+                                                                <MenuItem onClick={()=>handleBlock('blockC')}>Block C</MenuItem>
+                                                            </MenuList>
+                                                        </ClickAwayListener>
+                                                    </Paper>
+                                                </Grow>
+                                            )}
+                                        </Popper>
+                                    </ListItem>
+                                    <ListItem>
+                                        <Button
+                                            ref={anchorRefCourse}
+                                            aria-controls={openCourse ? 'menu-list-grow' : undefined}
+                                            aria-haspopup="true"
+                                            onClick={handleToggleCourse}
+                                            fullWidth
+                                            variant='outlined'
+                                            disabled
+                                        >
+                                            {
+                                                course == 'btechElectricalAndElectronics' ? 'BTech. Electrical and Electronics Engineering'
+                                                :
+                                                course == 'btechComputer' ? 'BTech. Computer Science Engineering'
+                                                :
+                                                course == 'btechMechanical' ? 'BTech. Mechanical Engineering'
+                                                :
+                                                course == 'btechECE' ? 'BTech. Electronics and Communication Engineering'
+                                                :
+                                                course == 'btechElectronicsComputer' ? 'BTech. Electronics and Computer Science Engineering'
+                                                :
+                                                course == 'btechCivil' ? 'BTech. Civil Engineering'
+                                                :
+                                                course == 'btechComputerAI' ? 'BTech. Computer Science and Artificial Intelligence Engineering'
+                                                : 
+                                                course == 'btechComputerCyber' ? 'BTech. Computer Science and Cyber Security Engineering'
+                                                :
+                                                'Select your stream'
+                                            } 
+                                            <ExpandMoreIcon style={{marginLeft: "1rem"}}/>
+                                        </Button>
+                                        <Popper style={{ zIndex: 999999 }} open={openCourse} anchorEl={anchorRefCourse.current} role={undefined} transition disablePortal>
+                                            {({ TransitionProps, placement }) => (
+                                                <Grow
+                                                    {...TransitionProps}
+                                                    style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}
+                                                >
+                                                    <Paper>
+                                                        <ClickAwayListener onClickAway={handleCloseCourse}>
+                                                            <MenuList autoFocusItem={openCourse} id="menu-list-grow" onKeyDown={handleListKeyDownCourse}>
+                                                                <MenuItem onClick={()=>handleCourse('btechElectricalAndElectronics')}>BTech. Electrical and Electronics Engineering</MenuItem>
+                                                                <MenuItem onClick={()=>handleCourse('btechComputer')}>BTech. Computer Science Engineering</MenuItem>
+                                                                <MenuItem onClick={()=>handleCourse('btechMechanical')}>BTech. Mechanical Engineering</MenuItem>
+                                                                <MenuItem onClick={()=>handleCourse('btechECE')}>BTech. Electronics and Communication Engineering</MenuItem>
+                                                                <MenuItem onClick={()=>handleCourse('btechElectronicsComputer')}>BTech. Electronics and Computer Science Engineering</MenuItem>
+                                                                <MenuItem onClick={()=>handleCourse('btechCivil')}>BTech. Civil Engineering</MenuItem>
+                                                                <MenuItem onClick={()=>handleCourse('btechComputerAI')}>BTech. Computer Science and Artificial Intelligence Engineering</MenuItem>
+                                                                <MenuItem onClick={()=>handleCourse('btechComputerCyber')}>BTech. Computer Science and Cyber Security Engineering</MenuItem>
+                                                            </MenuList>
+                                                        </ClickAwayListener>
+                                                    </Paper>
+                                                </Grow>
+                                            )}
+                                        </Popper>
+                                    </ListItem>
+                                    <ListItem>
+                                        <Button
+                                            ref={anchorRefYear}
+                                            aria-controls={openYear ? 'menu-list-grow' : undefined}
+                                            aria-haspopup="true"
+                                            onClick={handleToggleYear}
+                                            fullWidth
+                                            variant='outlined'
+                                        >
+                                            {year == 'first' ? 'First' : year == 'second' ? 'Second' : year == 'third' ? 'Third' : year == 'fourth' ? 'Fourth' : year == 'fifth' ? 'Fifth' : year == 'sixth' ? 'Sixth' : 'Select your '} Year<ExpandMoreIcon style={{marginLeft: "1rem"}}/>
+                                        </Button>
+                                        <Popper style={{ zIndex: 999999 }} open={openYear} anchorEl={anchorRefYear.current} role={undefined} transition disablePortal>
+                                            {({ TransitionProps, placement }) => (
+                                                <Grow
+                                                    {...TransitionProps}
+                                                    style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}
+                                                >
+                                                    <Paper>
+                                                        <ClickAwayListener onClickAway={handleCloseYear}>
+                                                            <MenuList autoFocusItem={openYear} id="menu-list-grow" onKeyDown={handleListKeyDownYear}>
+                                                                <MenuItem onClick={()=>handleYear('first')}>First</MenuItem>
+                                                                <MenuItem onClick={()=>handleYear('second')}>Second</MenuItem>
+                                                                <MenuItem onClick={()=>handleYear('third')}>Third</MenuItem>
+                                                                <MenuItem onClick={()=>handleYear('fourth')}>Fourth</MenuItem>
+                                                                <MenuItem onClick={()=>handleYear('fifth')}>Fifth</MenuItem>
+                                                                <MenuItem onClick={()=>handleYear('sixth')}>Sixth</MenuItem>
+                                                            </MenuList>
+                                                        </ClickAwayListener>
+                                                    </Paper>
+                                                </Grow>
+                                            )}
+                                        </Popper>
                                     </ListItem>
                                     <ListItem>
                                         <Controller name="password" control={control} defaultValue=""  
