@@ -29,6 +29,7 @@ function Profile() {
 
         setValue('name', userInfo.name)
         setValue('email', userInfo.email)
+        setValue('registrationNumber', userInfo.registrationNumber)
     }, [])
 
     
@@ -125,6 +126,24 @@ function Profile() {
                                                 errors.email.type === 'pattern'?
                                                 'Email is not valid'
                                                 :'Email is required'
+                                                :''}
+                                            {...field}></TextField>
+                                        )}>
+
+                                        </Controller>
+                                    </ListItem>
+                                    <ListItem>
+                                        <Controller name="registrationNumber" control={control} defaultValue="" rules={{
+                                            required: true,
+                                            minLength: 2,
+                                        }} render={({field})=>(
+                                            <TextField variant="outlined" fullWidth id="registrationNumber" label="Registration Number" inputProps={{type: 'text'}}  disabled
+                                            error={Boolean(errors.registrationNumber)}
+                                            helperText ={
+                                                errors.registrationNumber ? 
+                                                errors.registrationNumber.type === 'minLength'?
+                                                'Registration number length must be more than 1 '
+                                                :'Registration number is required'
                                                 :''}
                                             {...field}></TextField>
                                         )}>
