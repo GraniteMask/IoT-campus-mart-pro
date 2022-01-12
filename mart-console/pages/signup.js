@@ -17,7 +17,6 @@ function Register() {
     const [openBlock, setOpenBlock] = useState(false);
     const [openYear, setOpenYear] = useState(false);
     const [openCourse, setOpenCourse] = useState(false);
-    const [qrId, SetQrId] = useState('')
     const [block, setBlock] = useState('')
     const [year, setYear] = useState('')
     const [course, setCourse] = useState('')
