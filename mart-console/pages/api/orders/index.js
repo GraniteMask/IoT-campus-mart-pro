@@ -9,7 +9,7 @@ handler.post(async(req,res)=>{
     await db.connect()
     const newOrder = new Order({
         ...req.body,
-        student: req.user._id,
+        studentId: req.user._id,
     })
     const order = await newOrder.save()
     res.status(201).send(order)

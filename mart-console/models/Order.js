@@ -10,7 +10,8 @@ const orderSchema = new mongoose.Schema({
     course:{type: String, required: true},
     year:{type: String, required: true},
     qrId:{type: String, required: true},
-    
+    quantity: {type: Number, required: true},
+    barcodes: {type: Array, required: true}
 },{
     timestamps: true
 })
