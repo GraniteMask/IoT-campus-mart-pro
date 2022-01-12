@@ -35,7 +35,7 @@ function Login() {
         // e.preventDefault()
         closeSnackbar()
         try{
-            const {data} = await axios.post('/api/users/login', {email, password})
+            const {data} = await axios.post('/api/students/login', {email, password})
             dispatch({type:"USER_LOGIN", payload: data})
             // console.log(data)
             Cookies.set('userInfo', JSON.stringify(data))
