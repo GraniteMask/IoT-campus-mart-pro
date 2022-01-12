@@ -82,7 +82,26 @@ function PlaceOrder() {
                                         Registration Number: {userInfo.registrationNumber}
                                     </ListItem>
                                     <ListItem>
-                                        Stream: {userInfo.course}
+                                        Stream: {
+                                        
+                                        userInfo.course == 'btechElectricalAndElectronics' ? 'BTech. Electrical and Electronics Engineering'
+                                        :
+                                        userInfo.course == 'btechComputer' ? 'BTech. Computer Science Engineering'
+                                        :
+                                        userInfo.course == 'btechMechanical' ? 'BTech. Mechanical Engineering'
+                                        :
+                                        userInfo.course == 'btechECE' ? 'BTech. Electronics and Communication Engineering'
+                                        :
+                                        userInfo.course == 'btechElectronicsComputer' ? 'BTech. Electronics and Computer Science Engineering'
+                                        :
+                                        userInfo.course == 'btechCivil' ? 'BTech. Civil Engineering'
+                                        :
+                                        userInfo.course == 'btechComputerAI' ? 'BTech. Computer Science and Artificial Intelligence Engineering'
+                                        : 
+                                        userInfo.course == 'btechComputerCyber' ? 'BTech. Computer Science and Cyber Security Engineering'
+                                        :
+                                        userInfo.course
+                                        }
                                     </ListItem>
                                     <ListItem>
                                         Year of Study: {userInfo.year}
