@@ -37,7 +37,7 @@ function PlaceOrder() {
     const placeOrderHandler = async () =>{
         closeSnackbar()
         try{
-            setLoading(true)
+            // setLoading(true)
             // console.log('sdsds')
             const {data} = await axios.post('/api/orders',{
                 orderItems: cartItems,
@@ -55,10 +55,10 @@ function PlaceOrder() {
                     authorization: `Bearer ${userInfo.token}`
                 },
             })
-            dispatch({type: 'CART_CLEAR'})
-            Cookies.remove('cartItems')
-            setLoading(false)
-            router.push(`/order/${data._id}`)
+            // dispatch({type: 'CART_CLEAR'})
+            // Cookies.remove('cartItems')
+            // setLoading(false)
+            // router.push(`/order/${data._id}`)
         }catch(err){
             setLoading(false)
             enqueueSnackbar(err, {variant: 'error'})
