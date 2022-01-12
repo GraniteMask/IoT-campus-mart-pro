@@ -18,7 +18,7 @@ function PlaceOrder() {
     const { userInfo, cart: {cartItems, shippingAddress, paymentMethod} } = state
 
     const round2 = num => Math.round(num*100 + Number.EPSILON)/100  //123.456 => 123.46
-    const itemsPrice = round2(cartItems.reduce((a,c) => a + c.price*c.quantity, 0))
+    const itemsPrice = round2(cartItems.reduce((a,c) => a + c.productPrice*c.quantity, 0))
     const shippingPrice = itemsPrice > 200 ? 0 : 15
     const taxPrice = round2(itemsPrice*0.15)
     const totalPrice = round2(itemsPrice + shippingPrice + taxPrice)
