@@ -41,11 +41,13 @@ function PlaceOrder() {
             // console.log('sdsds')
             const {data} = await axios.post('/api/orders',{
                 orderItems: cartItems,
-                shippingAddress,
-                paymentMethod,
-                itemsPrice,
-                shippingPrice,
-                taxPrice,
+                name: userInfo.name,
+                registrationNumber: userInfo.registrationNumber,
+                course: userInfo.course,
+                year: userInfo.year,
+                email: userInfo.email,
+                roomNumber: userInfo.roomNumber,
+                block: userInfo.block,
                 totalPrice
             },{
                 headers:{
@@ -196,7 +198,7 @@ function PlaceOrder() {
                                     </Grid>
                                 </ListItem>
                                 <ListItem>
-                                    <Button onClick={placeOrderHandler} variant="contained" color="primary" fullWidth>Proceed to payment</Button>
+                                    <Button onClick={placeOrderHandler} variant="contained" color="primary" fullWidth>Confirm Order</Button>
                                 </ListItem>
                                 {loading && (
                                     <ListItem>
