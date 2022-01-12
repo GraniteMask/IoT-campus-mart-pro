@@ -170,7 +170,7 @@ function PlaceOrder() {
                                             <Typography>Items:</Typography>
                                         </Grid>
                                         <Grid item xs={6}>
-                                            <Typography>${itemsPrice}</Typography>
+                                            <Typography>Rs.{itemsPrice}</Typography>
                                         </Grid>
                                     </Grid>
                                 </ListItem>
@@ -180,7 +180,7 @@ function PlaceOrder() {
                                             <Typography>Tax:</Typography>
                                         </Grid>
                                         <Grid item xs={6}>
-                                            <Typography>${taxPrice}</Typography>
+                                            <Typography>Rs.{taxPrice}</Typography>
                                         </Grid>
                                     </Grid>
                                 </ListItem>
@@ -190,7 +190,7 @@ function PlaceOrder() {
                                             <Typography>Shipping:</Typography>
                                         </Grid>
                                         <Grid item xs={6}>
-                                            <Typography>${shippingPrice}</Typography>
+                                            <Typography>Rs.{shippingPrice}</Typography>
                                         </Grid>
                                     </Grid>
                                 </ListItem>
@@ -200,7 +200,7 @@ function PlaceOrder() {
                                             <Typography><strong>Total:</strong></Typography>
                                         </Grid>
                                         <Grid item xs={6}>
-                                            <Typography><strong>${totalPrice}</strong></Typography>
+                                            <Typography><strong>Rs.{totalPrice}</strong></Typography>
                                         </Grid>
                                     </Grid>
                                 </ListItem>
