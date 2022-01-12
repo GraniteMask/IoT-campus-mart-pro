@@ -82,17 +82,6 @@ function PlaceOrder() {
                         </Card>
 
                         <Card className={classes.section}>
-                                <List>
-                                    <ListItem>
-                                        <Typography component="h2" varaint="h2">Payment Method</Typography>
-                                    </ListItem>
-                                    <ListItem>
-                                        {paymentMethod}
-                                    </ListItem>
-                                </List>
-                        </Card>
-
-                        <Card className={classes.section}>
                             <List>
                                 <ListItem>
                                     <Typography component="h2" varaint="h2">Order Items</Typography>
