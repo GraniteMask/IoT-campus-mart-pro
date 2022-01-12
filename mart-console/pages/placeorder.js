@@ -113,7 +113,8 @@ function PlaceOrder() {
                                         Room Number: {userInfo.roomNumber}
                                     </ListItem>
                                     <ListItem>
-                                        Block: {userInfo.block}
+                                        Block: 
+                                         {userInfo.block == 'blockA' ? ' Block A' : userInfo.block == 'blockB' ? ' Block B' : userInfo.block == 'blockC' ? ' Block C' : userInfo.block}
                                     </ListItem>
                                 </List>
                         </Card>
