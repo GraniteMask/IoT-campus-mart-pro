@@ -73,10 +73,28 @@ function PlaceOrder() {
                         <Card className={classes.section}>
                                 <List>
                                     <ListItem>
-                                        <Typography component="h2" varaint="h2">Shipping Address</Typography>
+                                        <Typography component="h2" varaint="h2">Student Information</Typography>
                                     </ListItem>
                                     <ListItem>
-                                        {shippingAddress.fullName}, {shippingAddress.address},{' '}{shippingAddress.city}, {shippingAddress.postalCode},{' '}{shippingAddress.country}
+                                        Name: {userInfo.name}
+                                    </ListItem>
+                                    <ListItem>
+                                        Registration Number: {userInfo.registrationNumber}
+                                    </ListItem>
+                                    <ListItem>
+                                        Stream: {userInfo.course}
+                                    </ListItem>
+                                    <ListItem>
+                                        Year of Study: {userInfo.year}
+                                    </ListItem>
+                                    <ListItem>
+                                        Email: {userInfo.email}
+                                    </ListItem>
+                                    <ListItem>
+                                        Room Number: {userInfo.roomNumber}
+                                    </ListItem>
+                                    <ListItem>
+                                        Block: {userInfo.block}
                                     </ListItem>
                                 </List>
                         </Card>
