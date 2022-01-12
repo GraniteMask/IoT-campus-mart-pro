@@ -133,6 +133,8 @@ function PlaceOrder() {
                                             <TableRow>
                                                 
                                                 <TableCell>Name</TableCell>
+                                                <TableCell>Manufacturer</TableCell>
+                                                <TableCell>Category</TableCell>
                                                 <TableCell align="right">Quantity</TableCell>
                                                 <TableCell align="right">Price</TableCell>
                                             </TableRow>
@@ -156,6 +158,12 @@ function PlaceOrder() {
                                                                 <Typography>{item.productName}</Typography>
                                                             {/* </Link>
                                                         </NextLink> */}
+                                                    </TableCell>
+                                                    <TableCell>
+                                                        <Typography>{item.productCompany}</Typography>                                                    
+                                                    </TableCell>
+                                                    <TableCell>
+                                                        <Typography>{item.productCategory}</Typography>                                                    
                                                     </TableCell>
 
                                                     <TableCell align="right">
