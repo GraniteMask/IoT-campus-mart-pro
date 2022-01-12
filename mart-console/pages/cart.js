@@ -27,7 +27,7 @@ function CartScreen() {
     }
 
     const checkoutHandler = () =>{
-        router.push('/checkOut')
+        router.push('/payment')
     }
 
     return (
@@ -93,7 +93,7 @@ function CartScreen() {
                                     </Typography>
                                 </ListItem>
                                 <ListItem>
-                                    <Button variant="contained" color="primary" fullWidth onClick={checkoutHandler}>Check Out</Button>
+                                    <Button variant="contained" color="primary" fullWidth onClick={checkoutHandler}>Proceed to payment</Button>
                                 </ListItem>
                             </List>
                         </Card>
