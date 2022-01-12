@@ -15,7 +15,7 @@ function PlaceOrder() {
     const classes = useStyles()
     const router = useRouter()
     const {state, dispatch} = useContext(Store)
-    const { userInfo, cart: {cartItems, shippingAddress, paymentMethod} } = state
+    const { userInfo, cart: {cartItems} } = state
 
     const round2 = num => Math.round(num*100 + Number.EPSILON)/100  //123.456 => 123.46
     const itemsPrice = round2(cartItems.reduce((a,c) => a + c.productPrice*c.quantity, 0))
@@ -48,6 +48,7 @@ function PlaceOrder() {
                 email: userInfo.email,
                 roomNumber: userInfo.roomNumber,
                 block: userInfo.block,
+                qrId: userInfo.qrId,
                 totalPrice
             },{
                 headers:{
