@@ -24,9 +24,9 @@ function PlaceOrder() {
     const totalPrice = round2(itemsPrice + shippingPrice + taxPrice)
 
     useEffect(()=>{
-        if(!paymentMethod){
-            router.push('/payment')
-        }
+        // if(!paymentMethod){
+        //     router.push('/payment')
+        // }
         if(cartItems.length === 0){
             router.push('/cart')
         }
@@ -109,7 +109,7 @@ function PlaceOrder() {
                                     <Table>
                                         <TableHead>
                                             <TableRow>
-                                                <TableCell>Image</TableCell>
+                                                
                                                 <TableCell>Name</TableCell>
                                                 <TableCell align="right">Quantity</TableCell>
                                                 <TableCell align="right">Price</TableCell>
@@ -120,20 +120,20 @@ function PlaceOrder() {
                                             {cartItems.map((item)=>(
                                                 <TableRow key={item._id}>
 
-                                                    <TableCell>
+                                                    {/* <TableCell>
                                                         <NextLink href={`/product/${item.slug}`} passHref>
                                                             <Link>
                                                                 <Image src={item.image} alt={item.name} width={50} height={50}></Image>
                                                             </Link>
                                                         </NextLink>
-                                                    </TableCell>
+                                                    </TableCell> */}
 
                                                     <TableCell>
-                                                        <NextLink href={`/product/${item.slug}`} passHref>
-                                                            <Link>
-                                                                <Typography>{item.name}</Typography>
-                                                            </Link>
-                                                        </NextLink>
+                                                        {/* <NextLink href={`/product/${item.slug}`} passHref>
+                                                            <Link> */}
+                                                                <Typography>{item.productName}</Typography>
+                                                            {/* </Link>
+                                                        </NextLink> */}
                                                     </TableCell>
 
                                                     <TableCell align="right">
@@ -141,7 +141,7 @@ function PlaceOrder() {
                                                     </TableCell>
 
                                                     <TableCell align="right">
-                                                        <Typography>${item.price}</Typography>
+                                                        <Typography>Rs. {item.productPrice}</Typography>
                                                     </TableCell>
 
                                                 </TableRow>
