@@ -73,7 +73,7 @@ function PlaceOrder() {
                         <Card className={classes.section}>
                                 <List>
                                     <ListItem>
-                                        <Typography component="h2" varaint="h2">Student Information</Typography>
+                                        <Typography component="h2" variant="h2">Student Information</Typography>
                                     </ListItem>
                                     <ListItem>
                                         Name: {userInfo.name}
@@ -104,7 +104,7 @@ function PlaceOrder() {
                                         }
                                     </ListItem>
                                     <ListItem>
-                                        Year of Study: {userInfo.year}
+                                        Year of Study: {userInfo.year == 'first' ? 'First' : userInfo.year == 'second' ? 'Second' : userInfo.year == 'third' ? 'Third' : userInfo.year == 'fourth' ? 'Fourth' : userInfo.year == 'fifth' ? 'Fifth' : userInfo.year == 'sixth' ? 'Sixth' : userInfo.year} Year
                                     </ListItem>
                                     <ListItem>
                                         Email: {userInfo.email}
