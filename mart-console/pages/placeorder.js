@@ -19,9 +19,8 @@ function PlaceOrder() {
 
     const round2 = num => Math.round(num*100 + Number.EPSILON)/100  //123.456 => 123.46
     const itemsPrice = round2(cartItems.reduce((a,c) => a + c.productPrice*c.quantity, 0))
-    const shippingPrice = itemsPrice > 200 ? 0 : 15
-    const taxPrice = round2(itemsPrice*0.15)
-    const totalPrice = round2(itemsPrice + shippingPrice + taxPrice)
+    // const taxPrice = round2(itemsPrice*0.15)
+    const totalPrice = round2(itemsPrice )
 
     useEffect(()=>{
         // if(!paymentMethod){
@@ -181,39 +180,11 @@ function PlaceOrder() {
                             <List>
                                 <ListItem>
                                     <Typography variant="h2">
-                                       Order Summary
+                                       Place your Order
                                     </Typography>
                                 </ListItem>
-                                <ListItem>
-                                    <Grid container>
-                                        <Grid item xs={6}>
-                                            <Typography>Items:</Typography>
-                                        </Grid>
-                                        <Grid item xs={6}>
-                                            <Typography>Rs.{itemsPrice}</Typography>
-                                        </Grid>
-                                    </Grid>
-                                </ListItem>
-                                <ListItem>
-                                    <Grid container>
-                                        <Grid item xs={6}>
-                                            <Typography>Tax:</Typography>
-                                        </Grid>
-                                        <Grid item xs={6}>
-                                            <Typography>Rs.{taxPrice}</Typography>
-                                        </Grid>
-                                    </Grid>
-                                </ListItem>
-                                <ListItem>
-                                    <Grid container>
-                                        <Grid item xs={6}>
-                                            <Typography>Shipping:</Typography>
-                                        </Grid>
-                                        <Grid item xs={6}>
-                                            <Typography>Rs.{shippingPrice}</Typography>
-                                        </Grid>
-                                    </Grid>
-                                </ListItem>
+                                
+                               
                                 <ListItem>
                                     <Grid container>
                                         <Grid item xs={6}>
@@ -225,7 +196,7 @@ function PlaceOrder() {
                                     </Grid>
                                 </ListItem>
                                 <ListItem>
-                                    <Button onClick={placeOrderHandler} variant="contained" color="primary" fullWidth>Place your Order</Button>
+                                    <Button onClick={placeOrderHandler} variant="contained" color="primary" fullWidth>Proceed to payment</Button>
                                 </ListItem>
                                 {loading && (
                                     <ListItem>
