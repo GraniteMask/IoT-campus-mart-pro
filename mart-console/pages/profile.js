@@ -30,6 +30,7 @@ function Profile() {
         setValue('name', userInfo.name)
         setValue('email', userInfo.email)
         setValue('registrationNumber', userInfo.registrationNumber)
+        setValue('roomNumber', userInfo.roomNumber)
     }, [])
 
     
@@ -144,6 +145,24 @@ function Profile() {
                                                 errors.registrationNumber.type === 'minLength'?
                                                 'Registration number length must be more than 1 '
                                                 :'Registration number is required'
+                                                :''}
+                                            {...field}></TextField>
+                                        )}>
+
+                                        </Controller>
+                                    </ListItem>
+                                    <ListItem>
+                                        <Controller name="roomNumber" control={control} defaultValue="" rules={{
+                                            required: true,
+                                            minLength: 2,
+                                        }} render={({field})=>(
+                                            <TextField variant="outlined" fullWidth id="roomNumber" label="Room Number" inputProps={{type: 'text'}} 
+                                            error={Boolean(errors.roomNumber)}
+                                            helperText ={
+                                                errors.roomNumber ? 
+                                                errors.roomNumber.type === 'minLength'?
+                                                'Room Number length must be more than 1 '
+                                                :'Room Number is required'
                                                 :''}
                                             {...field}></TextField>
                                         )}>
