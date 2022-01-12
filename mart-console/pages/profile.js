@@ -113,7 +113,7 @@ function Profile() {
     
 
 
-    const submitHandler = async ({name, email, password, confirmPassword}) =>{
+    const submitHandler = async ({name, email, password, confirmPassword, roomNumber}) =>{
         // e.preventDefault()
         closeSnackbar()
         if(password !== confirmPassword){
@@ -123,7 +123,7 @@ function Profile() {
         }
 
         try{
-            const {data} = await axios.put('/api/students/profile', {name, email, password},{
+            const {data} = await axios.put('/api/students/student-profile', {password, block, year, roomNumber},{
                 headers: 
                 {authorization: `Bearer ${userInfo.token}`}
             })
@@ -162,7 +162,7 @@ function Profile() {
                         <List>
                             <ListItem>
                                 <Typography component="h1" variant="h1">
-                                    Profile
+                                   Student Profile
                                 </Typography>
                             </ListItem>
                             <ListItem>
