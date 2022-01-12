@@ -1,7 +1,8 @@
 import nc from 'next-connect'
-// import Order from '../../../models/Order'
+import Order from '../../../models/Order'
 import { isAuth } from '../../../utils/auth'
 import db from '../../../utils/db'
+import Students from '../../../models/Students'
 
 const handler = nc()
 handler.use(isAuth)
