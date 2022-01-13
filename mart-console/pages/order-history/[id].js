@@ -39,7 +39,8 @@ function Order({params}) {
     const {
         totalPrice,
         orderItems,
-        createdAt
+        createdAt,
+        productBarcode
     } = order
 
     useEffect(()=>{
@@ -225,6 +226,29 @@ function Order({params}) {
                                         <CircularProgress />
                                     </ListItem>
                                 )}
+                            </List>
+                        </Card>
+                        <Card className={classes.section}>
+                            <List>
+                                <ListItem>
+                                    <Typography variant="h6">
+                                        Barcodes of the product ordered:
+                                    </Typography>
+                                </ListItem>
+                                {
+                                    orderItems.map(item =>(
+                                        item.productBarcode.map(barcode=>(
+                                            // console.log(barcode)
+                                            <List>
+                                                <ListItem>{item.productName}</ListItem>
+                                                <ListItem>
+                                                    {barcode}
+                                                </ListItem>
+                                            </List>
+                                        ))
+                                        
+                                    ))
+                                }
                             </List>
                         </Card>
                     </Grid>

@@ -71,7 +71,7 @@ export default function Home(props) {
                 {/* </NextLink> */}
                 <CardActions>
                   
-                  <Button size="small" color="primary" onClick={()=>addToCartHandler(product)} variant="outlined">
+                  <Button size="small" color="primary" onClick={()=>addToCartHandler(product)} variant="contained">
                     Add to cart
                   </Button>
                 </CardActions>
