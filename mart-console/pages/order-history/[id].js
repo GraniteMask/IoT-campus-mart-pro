@@ -1,15 +1,16 @@
 import { Button, Card, Grid, Link, List, ListItem, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography, CircularProgress } from '@material-ui/core'
-import React, { useContext, useEffect, useState } from 'react'
-import Layout from '../components/Layout'
-import { Store } from '../utils/Store'
+import React, { useContext, useEffect, useReducer, useState } from 'react'
+import Layout from '../../Components/Layout'
+import { Store } from '../../utils/Store'
 import NextLink from 'next/link'
 import Image from 'next/image'
 import dynamic from 'next/dynamic'
 import axios from 'axios'
 import { useRouter } from 'next/router'
-import useStyles from '../utils/styles'
+import useStyles from '../../utils/styles'
 import { useSnackbar } from 'notistack'
 import Cookies from 'js-cookie'
+import moment from 'moment'
 
 
 function reducer(state, action){
@@ -25,13 +26,13 @@ function reducer(state, action){
     }
 }
 
-function PlaceOrder({params}) {
+function Order({params}) {
     const orderId = params.id
     const classes = useStyles()
     const router = useRouter()
-    const {state, dispatch} = useContext(Store)
+    const {state} = useContext(Store)
     const { userInfo } = state
-    const [{loading, order}, dispatch] = useReducer(reducer, {loading: true, order:{}, error:''})
+    const [{loading, order, error}, dispatch] = useReducer(reducer, {loading: true, order:{}, error:''})
     const round2 = num => Math.round(num*100 + Number.EPSILON)/100  //123.456 => 123.46
 
 
@@ -195,7 +196,7 @@ function PlaceOrder({params}) {
                             <List>
                                 <ListItem>
                                     <Typography variant="h2">
-                                        Place your Order
+                                        Other Details
                                     </Typography>
                                 </ListItem>
                                 
@@ -213,10 +214,10 @@ function PlaceOrder({params}) {
                                 <ListItem>
                                     <Grid container>
                                         <Grid item xs={6}>
-                                            <Typography><strong>Order Date:</strong></Typography>
+                                            <Typography><strong>Ordered On:</strong></Typography>
                                         </Grid>
                                         <Grid item xs={6}>
-                                            <Typography><strong>{createdAt}</strong></Typography>
+                                            <Typography><strong>{moment(createdAt).format('MMMM Do YYYY, h:mm:ss a')}</strong></Typography>
                                         </Grid>
                                     </Grid>
                                 </ListItem>
@@ -238,4 +239,8 @@ function PlaceOrder({params}) {
     )
 }
 
-export default dynamic(()=> Promise.resolve(PlaceOrder),{ssr:false})
+export async function getServerSideProps({params}){
+    return {props: {params}}
+}
+
+export default dynamic(()=> Promise.resolve(Order),{ssr:false})
