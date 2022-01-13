@@ -1,4 +1,4 @@
-import { Button, List, ListItem, TextField, Typography, Link } from '@material-ui/core'
+import { Button, List, ListItem, TextField, Typography, Link, Card } from '@material-ui/core'
 import React, { useContext, useEffect } from 'react'
 import Layout from '../components/Layout'
 import useStyles from '../utils/styles'
@@ -58,6 +58,7 @@ function Login() {
                     Login for Students
                 </Typography>
                 <List>
+                    <Card style={{padding: '1rem'}}>
                     <ListItem>
                         <Controller name="email" control={control} defaultValue="" rules={{
                             required: true,
@@ -103,6 +104,7 @@ function Login() {
                     <ListItem>
                         Don&apos;t have an account ? &nbsp; {' '} <NextLink href={`/signup?redirect=${redirect || '/'}`} passHref><Link>Sign Up</Link></NextLink>
                     </ListItem>
+                    </Card>
                 </List>
             </form>
         </Layout>
