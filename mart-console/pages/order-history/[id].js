@@ -240,9 +240,9 @@ function Order({params}) {
                                         item.productBarcode.map(barcode=>(
                                             // console.log(barcode)
                                             <List>
-                                                <ListItem>{item.productName}</ListItem>
+                                                <ListItem><strong>Name: </strong>{item.productName}</ListItem>
                                                 <ListItem>
-                                                    {barcode}
+                                                    <strong>Barcode:</strong>{barcode}
                                                 </ListItem>
                                             </List>
                                         ))
