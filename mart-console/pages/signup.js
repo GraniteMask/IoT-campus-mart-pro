@@ -1,4 +1,4 @@
-import { Button, List, ListItem, TextField, Typography, Link, Popper, Grow, Paper, ClickAwayListener, MenuList, MenuItem } from '@material-ui/core'
+import { Button, List, ListItem, TextField, Typography, Link, Popper, Grow, Paper, ClickAwayListener, MenuList, MenuItem, Card } from '@material-ui/core'
 import React, { useContext, useEffect, useRef, useState } from 'react'
 import Layout from '../components/Layout'
 import useStyles from '../utils/styles'
@@ -156,6 +156,7 @@ function Register() {
                     Sign Up for Students
                 </Typography>
                 <List>
+                    <Card style={{padding: '1rem'}}>
                     <ListItem>
                         <Controller name="name" control={control} defaultValue="" rules={{
                             required: true,
@@ -393,6 +394,7 @@ function Register() {
                     <ListItem>
                         Already have an account ? &nbsp; {' '} <NextLink href={`/login?redirect=${redirect || '/'}`} passHref><Link>Login</Link></NextLink>
                     </ListItem>
+                    </Card>
                 </List>
             </form>
         </Layout>

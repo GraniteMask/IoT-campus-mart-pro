@@ -52,7 +52,7 @@ export default function Home(props) {
            var countInStock = product.productBarcode.length
            return(
             <Grid item md={4} key={product._id}>
-              <Card>
+              <Card  style={{padding: '1rem'}}>
                 {/* <NextLink href={`/product/${product.productName}`} passHref> */}
                   <CardActionArea>
                     {/* <CardMedia
