@@ -3,8 +3,8 @@ import mongoose from 'mongoose'
 const orderSchema = new mongoose.Schema({
     studentId:{type: mongoose.Schema.Types.ObjectId, ref:'Student' ,required: true},
     name:{type: String, required: true},
-    registrationNumber:{type: String, required: true, unique: true},
-    email:{type: String, required: true, unique: true},
+    registrationNumber:{type: String, required: true},
+    email:{type: String, required: true},
     roomNumber:{type: String, required: true},
     block:{type: String, required: true},
     course:{type: String, required: true},

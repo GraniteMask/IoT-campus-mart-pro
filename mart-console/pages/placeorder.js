@@ -60,7 +60,7 @@ function PlaceOrder() {
             // setLoading(false)
             // router.push(`/order/${data._id}`)
         }catch(err){
-            setLoading(false)
+            // setLoading(false)
             enqueueSnackbar(err, {variant: 'error'})
         }
     }
