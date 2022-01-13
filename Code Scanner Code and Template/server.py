@@ -246,6 +246,7 @@ def add(oid):
           cv.polylines(frame,[pts],True,(0,255,0),3)
           pts2 = barcode.rect
           cv.putText(frame,productExistingInputBarcode,(pts2[0],pts2[1]),cv.FONT_HERSHEY_COMPLEX_SMALL,0.9,(255,0,255),2)
+          cap.release()
           cv.destroyAllWindows()
           for barcode in productBarcode:
             print(barcode)

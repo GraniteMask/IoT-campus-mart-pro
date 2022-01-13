@@ -14,20 +14,14 @@ handler.post(async(req,res)=>{
         // console.log(req.body.orderItems.length)
 
         for(var i=0; i<req.body.orderItems.length; i++){
-            console.log(i)
+            // console.log(i)
             var tempBarcodes = new Array()
             for(var j=0; j<req.body.orderItems[i].quantity; j++){
                 // console.log(req.body.orderItems[i].productBarcode[j])
                 tempBarcodes.push(req.body.orderItems[i].productBarcode[j])    
             }
-            for(var b=0; b<req.body.orderItems[i].productBarcode.length; b++){
-                for(var c=0; c<tempBarcodes.length; c++){
-                    if(req.body.orderItems[i].productBarcode[b] != tempBarcodes[c]){
-                        delete req.body.orderItems[i].productBarcode[b]
-                    }
-                }
-                
-            }
+            req.body.orderItems[i].productBarcode = tempBarcodes
+            // console.log(req.body.orderItems[i].productBarcode)
             // console.log(tempBarcodes)
             // console.log(req.body.orderItems[i].productBarcode)
         }
@@ -36,17 +30,19 @@ handler.post(async(req,res)=>{
             ...req.body,
             studentId: req.user._id,
         })
-
-        // for(var i=0; i<req.body.orderItems.length; i++){
-        //     for(var j=0; j<req.body.orderItems.productBarcode; j++){
-        //         if(j<req.body.orderItems.quantity){
-        //             delete req.body.orderItems[i].productBarcode[j]
-        //         }
-        //     }
-        // }
-
+        
         const order = await newOrder.save()
 
+        if(order){
+            for(var i=0; i<req.body.orderItems.length; i++){
+                for(var j=0; j<req.body.orderItems[i].productBarcode.length; j++){
+                    await Product.findByIdAndUpdate(req.body.orderItems[i]._id,{
+                        $pull:{productBarcode: req.body.orderItems[i].productBarcode[j]}
+                    })
+                }
+                
+            }
+        }
         
 
         res.status(201).send(order)
