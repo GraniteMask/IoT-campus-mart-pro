@@ -63,9 +63,9 @@ export default function Layout({title, description, children}) {
 
     const loginMenuCloseHandler = (e, redirect) =>{
         setAnchorEl(null)
-        // if(redirect){
-        //     router.push(redirect)
-        // }
+        if(redirect){
+            router.push(redirect)
+        }
     }
 
     const logOutClickHandler = () =>{
@@ -138,6 +138,7 @@ export default function Layout({title, description, children}) {
                             keepMounted
                             open={Boolean(anchorEl)}
                             onClose={loginMenuCloseHandler}
+                            disableBackdropClick
                             >
                             <MenuItem onClick={(e)=>loginMenuCloseHandler(e, '/profile')}>Profile</MenuItem>
                             <MenuItem onClick={(e)=>loginMenuCloseHandler(e, '/order-history')}>Order History</MenuItem>
