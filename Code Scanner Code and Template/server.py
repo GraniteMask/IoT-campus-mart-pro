@@ -40,6 +40,7 @@ product="Select a product first"
 productAllBarcodes = []
 mainPassword = 'RU<r=eP~}s9r%md$'
 passwordVerified = False
+barcodeExist = 'This barcode already exist'
 
 # For video Stream
 
@@ -230,6 +231,7 @@ def existingProductBarcodeInputIndex():
 @app.route('/add/<oid>')
 def add(oid):
   product = mongo.db.products.find_one({'_id': ObjectId(oid)})
+  productBarcode = product['productBarcode']
   products = mongo.db.products.find()
   cap = cv.VideoCapture(0)
   while True:
@@ -244,10 +246,17 @@ def add(oid):
           cv.polylines(frame,[pts],True,(0,255,0),3)
           pts2 = barcode.rect
           cv.putText(frame,productExistingInputBarcode,(pts2[0],pts2[1]),cv.FONT_HERSHEY_COMPLEX_SMALL,0.9,(255,0,255),2)
-          mongo.db.products.find_one_and_update({'_id': ObjectId(oid)}, {'$push': {'productBarcode': productExistingInputBarcode}})
-          # product.save(newBarcode)
           cv.destroyAllWindows()
+          for barcode in productBarcode:
+            print(barcode)
+            if barcode == productExistingInputBarcode:
+              return render_template('existingProduct.html', productExistingInputBarcode=productExistingInputBarcode, barcodeExist=barcodeExist, products=products, product=product, passwordVerified=passwordVerified)
+           
+          mongo.db.products.find_one_and_update({'_id': ObjectId(oid)}, {'$push': {'productBarcode': productExistingInputBarcode}})
           return render_template('existingProduct.html', productExistingInputBarcode=productExistingInputBarcode, success=success, products=products, product=product, passwordVerified=passwordVerified)
+          # product.save(newBarcode)
+          
+          
           
       cv.imshow("Frame",frame)
       if cv.waitKey(1) & 0xFF == 27:  # Press Escape Key to close all windows
