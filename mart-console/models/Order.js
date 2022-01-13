@@ -10,6 +10,7 @@ const orderSchema = new mongoose.Schema({
     course:{type: String, required: true},
     year:{type: String, required: true},
     qrId:{type: String, required: true},
+    totalPrice: {type: Number, required: true},
     orderItems: [
         {productName:{type: String, required: true},
         productBarcode: {type: Array, required: true},
