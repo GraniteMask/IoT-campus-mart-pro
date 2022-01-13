@@ -73,18 +73,18 @@ function PlaceOrder() {
                     <Grid item md={9} xs={12}>
 
                         <Card className={classes.section}>
-                                <List>
+                        <List>
                                     <ListItem>
                                         <Typography component="h2" variant="h2">Student Information</Typography>
                                     </ListItem>
                                     <ListItem>
-                                        Name: {userInfo.name}
+                                        <strong>Name:</strong> &nbsp;{userInfo.name}
                                     </ListItem>
                                     <ListItem>
-                                        Registration Number: {userInfo.registrationNumber}
+                                        <strong>Registration Number:</strong> &nbsp;{userInfo.registrationNumber}
                                     </ListItem>
                                     <ListItem>
-                                        Stream: {
+                                        <strong>Stream:</strong> &nbsp;{
                                         
                                         userInfo.course == 'btechElectricalAndElectronics' ? 'BTech. Electrical and Electronics Engineering'
                                         :
@@ -106,17 +106,16 @@ function PlaceOrder() {
                                         }
                                     </ListItem>
                                     <ListItem>
-                                        Year of Study: {userInfo.year == 'first' ? 'First' : userInfo.year == 'second' ? 'Second' : userInfo.year == 'third' ? 'Third' : userInfo.year == 'fourth' ? 'Fourth' : userInfo.year == 'fifth' ? 'Fifth' : userInfo.year == 'sixth' ? 'Sixth' : userInfo.year} Year
+                                        <strong>Year of Study:</strong> &nbsp;{userInfo.year == 'first' ? 'First' : userInfo.year == 'second' ? 'Second' : userInfo.year == 'third' ? 'Third' : userInfo.year == 'fourth' ? 'Fourth' : userInfo.year == 'fifth' ? 'Fifth' : userInfo.year == 'sixth' ? 'Sixth' : userInfo.year} Year
                                     </ListItem>
                                     <ListItem>
-                                        Email: {userInfo.email}
+                                        <strong>Email:</strong>&nbsp; {userInfo.email}
                                     </ListItem>
                                     <ListItem>
-                                        Room Number: {userInfo.roomNumber}
+                                        <strong>Room Number:</strong>&nbsp; {userInfo.roomNumber}
                                     </ListItem>
                                     <ListItem>
-                                        Block: 
-                                         {userInfo.block == 'blockA' ? ' Block A' : userInfo.block == 'blockB' ? ' Block B' : userInfo.block == 'blockC' ? ' Block C' : userInfo.block}
+                                        <strong>Block:</strong>&nbsp; {userInfo.block == 'blockA' ? ' Block A' : userInfo.block == 'blockB' ? ' Block B' : userInfo.block == 'blockC' ? ' Block C' : userInfo.block}
                                     </ListItem>
                                 </List>
                         </Card>
