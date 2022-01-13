@@ -88,7 +88,7 @@ function OrderHistory() {
                                         <TableHead>
                                             <TableRow>
                                                 <TableCell>ID</TableCell>
-                                                <TableCell>DATE</TableCell>
+                                                <TableCell>ORDERED ON</TableCell>
                                                 <TableCell>TOTAL</TableCell>
                                                 {/* <TableCell>DELIVERED</TableCell> */}
                                                 <TableCell>ACTION</TableCell>
@@ -98,8 +98,8 @@ function OrderHistory() {
                                             {orders.map((order)=>(
                                                 <TableRow key={order._id}>
                                                     <TableCell>{order._id.substring(20, 24)}</TableCell>
-                                                    <TableCell>{order.createdAt}</TableCell>
-                                                    <TableCell>${order.totalPrice}</TableCell>
+                                                    <TableCell>{moment(order.createdAt).format('MMMM Do YYYY, h:mm:ss a')}</TableCell>
+                                                    <TableCell>Rs.{order.totalPrice}</TableCell>
                                                     {/* <TableCell>{order.iDelivered ?
                                                     `delivered at ${order.deliveredAt}` :
                                                     'not delivered'}</TableCell> */}
