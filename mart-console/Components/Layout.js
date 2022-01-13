@@ -14,6 +14,7 @@ import axios from 'axios'
 import SearchIcon from '@material-ui/icons/Search';
 import { InputBase } from '@material-ui/core'
 
+
 export default function Layout({title, description, children}) {
     const router = useRouter()
     const {state, dispatch} = useContext(Store)
@@ -40,8 +41,17 @@ export default function Layout({title, description, children}) {
             },
             secondary:{
                 main: "#208080",
-            }
+            },
         },
+        overrides: {
+            MuiCssBaseline: {
+              "@global": {
+                body: {
+                    background: "url(https://www.transparenttextures.com/patterns/cartographer.png) repeat" 
+                }
+              }
+            }
+          }
     })
     const classes = useStyles();
 

@@ -46,13 +46,13 @@ export default function Home(props) {
     <Layout>
 
       
-      <Typography variant="h2">All Products</Typography>
+      <Typography variant="h1">ALL PRODUCTS:</Typography>
         <Grid container spacing={3}>
           {products.map((product) => { 
            var countInStock = product.productBarcode.length
            return(
             <Grid item md={4} key={product._id}>
-              <Card style={{ background: 'rgba(0, 0, 0, 0.1) no-repeat scroll 16px 16px'}}>
+              <Card>
                 {/* <NextLink href={`/product/${product.productName}`} passHref> */}
                   <CardActionArea>
                     {/* <CardMedia

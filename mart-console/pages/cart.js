@@ -37,53 +37,55 @@ function CartScreen() {
             (
                 <Grid container spacing={1}>
                     <Grid item md={8} xs={12}>
-                        <TableContainer>
-                            <Table>
-                                <TableHead>
-                                    <TableRow>
-                                        <TableCell>Name</TableCell>
-                                        <TableCell align="right">Quantity</TableCell>
-                                        <TableCell align="right">Price</TableCell>
-                                        <TableCell align="right">Action</TableCell>
-                                    </TableRow>
-                                </TableHead>
-
-                                <TableBody>
-                                    {cartItems.map((item)=>(
-                                        <TableRow key={item._id}>
-
-                                            <TableCell>
-                                                <NextLink href={`/`} passHref>
-                                                    <Link>
-                                                        <Typography>{item.productName}</Typography>
-                                                    </Link>
-                                                </NextLink>
-                                            </TableCell>
-
-                                            <TableCell align="right">
-                                                <Select value={item.quantity} onChange={(e)=>updateCartHandler(item, e.target.value)}>
-                                                    {[...Array(item.productBarcode.length).keys()].map((x)=>(
-                                                        <MenuItem key={x+1} value={x+1}>{x+1}</MenuItem>))}
-                                                </Select>
-                                            </TableCell>
-
-                                            <TableCell align="right">
-                                                Rs. {item.productPrice}
-                                            </TableCell>
-
-                                            <TableCell align="right">
-                                                <Button variant="contained" color="secondary" onClick={()=>removeItemHandler(item)}>Delete</Button>
-                                            </TableCell>
-
+                        <Card>
+                            <TableContainer>
+                                <Table>
+                                    <TableHead>
+                                        <TableRow>
+                                            <TableCell>Name</TableCell>
+                                            <TableCell align="right">Quantity</TableCell>
+                                            <TableCell align="right">Price</TableCell>
+                                            <TableCell align="right">Action</TableCell>
                                         </TableRow>
-                                    ))}
-                                </TableBody>
-                            </Table>
+                                    </TableHead>
 
-                        </TableContainer>
+                                    <TableBody>
+                                        {cartItems.map((item)=>(
+                                            <TableRow key={item._id}>
+
+                                                <TableCell>
+                                                    <NextLink href={`/`} passHref>
+                                                        <Link>
+                                                            <Typography>{item.productName}</Typography>
+                                                        </Link>
+                                                    </NextLink>
+                                                </TableCell>
+
+                                                <TableCell align="right">
+                                                    <Select value={item.quantity} onChange={(e)=>updateCartHandler(item, e.target.value)}>
+                                                        {[...Array(item.productBarcode.length).keys()].map((x)=>(
+                                                            <MenuItem key={x+1} value={x+1}>{x+1}</MenuItem>))}
+                                                    </Select>
+                                                </TableCell>
+
+                                                <TableCell align="right">
+                                                    Rs. {item.productPrice}
+                                                </TableCell>
+
+                                                <TableCell align="right">
+                                                    <Button variant="contained" color="secondary" onClick={()=>removeItemHandler(item)}>Delete</Button>
+                                                </TableCell>
+
+                                            </TableRow>
+                                        ))}
+                                    </TableBody>
+                                </Table>
+
+                            </TableContainer>
+                        </Card>
                     </Grid>
                     <Grid item md={4} xs={12}>
-                        <Card style={{ background: 'rgba(0, 0, 0, 0.1) no-repeat scroll 16px 16px'}}>
+                        <Card>
                             <List>
                                 <ListItem>
                                     <Typography variant="h2">

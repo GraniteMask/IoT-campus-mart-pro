@@ -59,7 +59,7 @@ function OrderHistory() {
                         <List>
                             <NextLink href="/profile" passHref>
                                 <ListItem button component="a">
-                                    <ListItemText primary="User Profile"></ListItemText>
+                                    <ListItemText primary="Student Profile"></ListItemText>
                                 </ListItem>
                             </NextLink>
                             <NextLink href="/order-history" passHref>
