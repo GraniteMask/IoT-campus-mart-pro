@@ -58,7 +58,7 @@ function PlaceOrder() {
             dispatch({type: 'CART_CLEAR'})
             Cookies.remove('cartItems')
             setLoading(false)
-            // router.push(`/order-history/${data._id}`)
+            router.push(`/order-history/${data._id}`)
         }catch(err){
             // setLoading(false)
             enqueueSnackbar(err, {variant: 'error'})

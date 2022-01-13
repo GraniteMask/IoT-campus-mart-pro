@@ -25,16 +25,21 @@ function reducer(state, action){
     }
 }
 
-function PlaceOrder() {
+function PlaceOrder({params}) {
+    const orderId = params.id
     const classes = useStyles()
     const router = useRouter()
     const {state, dispatch} = useContext(Store)
-    const { userInfo, cart: {cartItems} } = state
-    const [{loading}, dispatch] = useReducer(reducer, {loading: true})
+    const { userInfo } = state
+    const [{loading, order}, dispatch] = useReducer(reducer, {loading: true, order:{}, error:''})
     const round2 = num => Math.round(num*100 + Number.EPSILON)/100  //123.456 => 123.46
-    const itemsPrice = round2(cartItems.reduce((a,c) => a + c.productPrice*c.quantity, 0))
-    // const taxPrice = round2(itemsPrice*0.15)
-    const totalPrice = round2(itemsPrice)
+
+
+    const {
+        totalPrice,
+        orderItems,
+        createdAt
+    } = order
 
     useEffect(()=>{
         // if(!paymentMethod){
@@ -49,53 +54,24 @@ function PlaceOrder() {
                 })
                 dispatch({type:'FETCH_SUCCESS', payload:data})
             }catch(err){
-                dispatch({type:'FETCH_FAIL'})
+                dispatch({type:'FETCH_FAIL', payload: err})
             }
         }
         fetchOrder()
-
-        if(cartItems.length === 0){
-            router.push('/cart')
-        }
     },[])
 
-    const {closeSnackbar, enqueueSnackbar} = useSnackbar()
-    const [loading, setLoading] = useState(false)
+ 
 
-    const placeOrderHandler = async () =>{
-        closeSnackbar()
-        try{
-            // setLoading(true)
-            // console.log('sdsds')
-            const {data} = await axios.post('/api/orders',{
-                orderItems: cartItems,
-                name: userInfo.name,
-                registrationNumber: userInfo.registrationNumber,
-                course: userInfo.course,
-                year: userInfo.year,
-                email: userInfo.email,
-                roomNumber: userInfo.roomNumber,
-                block: userInfo.block,
-                qrId: userInfo.qrId,
-                totalPrice
-            },{
-                headers:{
-                    authorization: `Bearer ${userInfo.token}`
-                },
-            })
-            dispatch({type: 'CART_CLEAR'})
-            Cookies.remove('cartItems')
-            setLoading(false)
-            // router.push(`/order/${data._id}`)
-        }catch(err){
-            // setLoading(false)
-            enqueueSnackbar(err, {variant: 'error'})
-        }
-    }
+    
 
     return (
         <Layout title="Place Order">
-            <Typography component="h1" variant="h1">Place Order</Typography>
+            {loading ? (<CircularProgress />)
+            :
+            error ? (<Typography className={classes.error}>{error}</Typography>)
+            :
+            (<>
+                <Typography component="h1" variant="h1">Order Summary</Typography>
            
                 <Grid container spacing={1}>
                     <Grid item md={9} xs={12}>
@@ -144,7 +120,7 @@ function PlaceOrder() {
                                     </ListItem>
                                     <ListItem>
                                         Block: 
-                                         {userInfo.block == 'blockA' ? ' Block A' : userInfo.block == 'blockB' ? ' Block B' : userInfo.block == 'blockC' ? ' Block C' : userInfo.block}
+                                            {userInfo.block == 'blockA' ? ' Block A' : userInfo.block == 'blockB' ? ' Block B' : userInfo.block == 'blockC' ? ' Block C' : userInfo.block}
                                     </ListItem>
                                 </List>
                         </Card>
@@ -152,7 +128,7 @@ function PlaceOrder() {
                         <Card className={classes.section}>
                             <List>
                                 <ListItem>
-                                    <Typography component="h2" varaint="h2">Order Items</Typography>
+                                    <Typography component="h2" varaint="h2">Ordered Items Details</Typography>
                                 </ListItem>
                                 <ListItem>
                                 <TableContainer>
@@ -169,7 +145,7 @@ function PlaceOrder() {
                                         </TableHead>
 
                                         <TableBody>
-                                            {cartItems.map((item)=>(
+                                            {orderItems.map((item)=>(
                                                 <TableRow key={item._id}>
 
                                                     {/* <TableCell>
@@ -210,20 +186,20 @@ function PlaceOrder() {
                                 </TableContainer> 
                                 </ListItem>
                             </List>
- 
+
                         </Card>
-                       
+                        
                     </Grid>
                     <Grid item md={3} xs={12}>
                         <Card className={classes.section}>
                             <List>
                                 <ListItem>
                                     <Typography variant="h2">
-                                       Place your Order
+                                        Place your Order
                                     </Typography>
                                 </ListItem>
                                 
-                               
+                                
                                 <ListItem>
                                     <Grid container>
                                         <Grid item xs={6}>
@@ -235,7 +211,14 @@ function PlaceOrder() {
                                     </Grid>
                                 </ListItem>
                                 <ListItem>
-                                    <Button onClick={placeOrderHandler} variant="contained" color="primary" fullWidth>Confirm Order</Button>
+                                    <Grid container>
+                                        <Grid item xs={6}>
+                                            <Typography><strong>Order Date:</strong></Typography>
+                                        </Grid>
+                                        <Grid item xs={6}>
+                                            <Typography><strong>{createdAt}</strong></Typography>
+                                        </Grid>
+                                    </Grid>
                                 </ListItem>
                                 {loading && (
                                     <ListItem>
@@ -246,6 +229,10 @@ function PlaceOrder() {
                         </Card>
                     </Grid>
                 </Grid>
+                </>
+            )
+            }
+            
             
         </Layout>
     )
