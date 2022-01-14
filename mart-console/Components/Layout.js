@@ -132,6 +132,11 @@ export default function Layout({title, description, children}) {
                         </div> */}
                         <div>
                             
+                            <NextLink href='/data-analytics'>
+                                <Link>
+                                    Data Analytics
+                                </Link>
+                            </NextLink>
                             <NextLink href='/cart'>
                                 <Link>
                                     {cart.cartItems.length > 0 ? <Badge color="secondary" badgeContent={cart.cartItems.length}>Cart</Badge> : ("Cart")}
