@@ -1,5 +1,5 @@
 import React, { useReducer, useRef, useState } from 'react'
-import { Button, List, ListItem, TextField, Typography, Popper, Grow, Paper, ClickAwayListener, MenuList, MenuItem, ListItemText, Card, Grid, CircularProgress} from '@material-ui/core'
+import { Button, List, ListItem, TextField, Typography, Popper, Grow, Paper, ClickAwayListener, MenuList, MenuItem, ListItemText, Card, Grid, CircularProgress, CardContent} from '@material-ui/core'
 import dynamic from 'next/dynamic'
 import { useContext } from 'react'
 import { Store } from '../utils/Store'
@@ -81,7 +81,14 @@ function DataAnalytics() {
                             (
                                 <Grid container spacing={5}>
                                     <Grid item md={4}>
-                                        
+                                        <Card raised>
+                                            <CardContent>
+                                                <Typography variant="h1">
+                                                    ${productData.productsCount}
+                                                </Typography>
+                                                <Typography>Products online</Typography>
+                                            </CardContent>
+                                        </Card>
                                     </Grid>
                                 </Grid>
                             )}
