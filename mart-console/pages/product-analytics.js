@@ -1,5 +1,5 @@
 import React, { useReducer, useRef, useState } from 'react'
-import { Button, List, ListItem, TextField, Typography, Popper, Grow, Paper, ClickAwayListener, MenuList, MenuItem, ListItemText, Card, Grid, CircularProgress, CardContent} from '@material-ui/core'
+import { Button, List, ListItem, TextField, Typography, Popper, Grow, Paper, ClickAwayListener, MenuList, MenuItem, ListItemText, Card, Grid, CircularProgress, CardContent, CardActions} from '@material-ui/core'
 import dynamic from 'next/dynamic'
 import { useContext } from 'react'
 import { Store } from '../utils/Store'
@@ -89,11 +89,19 @@ function DataAnalytics() {
                                 <Grid container spacing={5}>
                                     <Grid item md={4}>
                                         <Card raised style={{background: 'rgba(0, 0, 0, 0.1) no-repeat scroll 16px 16px'}}>
-                                            <CardContent style={{textAlign: 'center'}}>
-                                                <Typography variant="h2" color= "primary">
-                                                    {productData.productsCount} Products online
+                                            <CardContent >
+                                                <Typography variant="h1" color= "primary">
+                                                    {productData.productsCount}
                                                 </Typography>
+                                                <Typography>Products online</Typography>
                                             </CardContent>
+                                            <CardActions>
+                                                <NextLink href="/admin/orders" passHref>
+                                                    <Button size="small" color="secondary" variant='contained'>
+                                                        View products
+                                                    </Button>
+                                                </NextLink>
+                                            </CardActions>
                                         </Card>
                                     </Grid>
                                 </Grid>
