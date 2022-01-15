@@ -55,17 +55,18 @@ handler.get(async(req,res)=>{
     }
 
 
-    const allItems = await Order.aggregate([
+    const mostPopularProducts = await Order.aggregate([
         {$match : {}},
         {$unwind : "$orderItems" },
-        {$group: {_id: '$orderItems.productName', totalNumberOfQtyOrder: {$sum: '$orderItems.quantity'}}}
+        {$group: {_id: '$orderItems.productName', totalNumberOfQtyOrder: {$sum: '$orderItems.quantity'}}},
+        {$sort: {totalNumberOfQtyOrder: -1}}
     ])
-    const allItems2 = await Order.aggregate([
-        {$match : {}},
-        {$unwind : "$orderItems" },
-        {$group: {_id: '$orderItems.productName', totalNumberOfOrdersInWhichThisIsPresent: {$sum: 1}}}
-    ])
-    
+    // const allItems2 = await Order.aggregate([
+    //     {$match : {}},
+    //     {$unwind : "$orderItems" },
+    //     {$group: {_id: '$orderItems.productName', totalNumberOfOrdersInWhichThisIsPresent: {$sum: 1}}}
+    // ])
+
     const totalSalesOfEachItem = await Order.aggregate([
         {$match : {}},
         {$unwind : "$orderItems" },
@@ -96,7 +97,7 @@ handler.get(async(req,res)=>{
     // }
 
     await db.disconnect()
-    res.send({ordersCount, productsCount, userCount, ordersPrice, salesData, allItems, allItems2, individualProducts, totalSalesOfEachItem})
+    res.send({ordersCount, productsCount, userCount, ordersPrice, salesData, mostPopularProducts, individualProducts, totalSalesOfEachItem})
 })
 
 export default handler
