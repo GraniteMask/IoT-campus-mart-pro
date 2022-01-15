@@ -58,9 +58,25 @@ function DataAnalytics() {
 
 
     //  console.log(productData.salesData.map((x)=> x._id))
+
+    // var usedColor = ['#9966CC']
     
+    // function getRandomColor() {
+    //     var letters = '0123456789ABCDEF'.split('');
+    //     var color = '#';
+    //     for (var i = 0; i < 6; i++ ) {
+    //         color += letters[Math.floor(Math.random() * 16)];
+    //     }       
+    //     for(var j=0; j<usedColor.length; j++){
+    //         if(usedColor !== color){
+    //             usedColor.push(color)
+    //             return color;
+    //         }
+    //     }
+    // }
 
-
+    // var fillcolor = getRandomColor()
+    // console.log(fillcolor)
     
 
     return (
@@ -135,7 +151,7 @@ function DataAnalytics() {
                             )}
                             </ListItem>
                             <ListItem>
-                                <Typography component="h2" variant="h1">
+                                <Typography variant="h2">
                                     Dashboard:
                                 </Typography>
                             </ListItem>
