@@ -160,7 +160,7 @@ function DataAnalytics() {
                                     datasets: [
                                         {
                                             label: 'Most Popular Products',
-                                            backgroundColor: ['#00008B', '#0a2351','#002D62', '#00308F',  '#0039a6','#0000FF', '#007FFF', '#2a52be', '#318CE7', '#1F75FE' ],
+                                            backgroundColor: ['#00008B', '#0a2351', '#00308F',  '#0039a6','#0000FF', '#007FFF', '#2a52be', '#318CE7', '#1F75FE', '#6CB4EE' ],
                                             data: productData.mostPopularProducts.map((x)=>x.totalNumberOfQtyOrder)
                                         }
                                     ]}}
