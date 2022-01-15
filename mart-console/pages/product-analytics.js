@@ -80,6 +80,7 @@ function DataAnalytics() {
                 <Grid item md={9} xs={12}>
                     <Card className={classes.section}>
                         <List>
+                            <ListItem>
                             {loading ? (<CircularProgress />)
                             :
                             error ? (<Typography className={classes.error}>{error}</Typography>)
@@ -87,17 +88,17 @@ function DataAnalytics() {
                             (
                                 <Grid container spacing={5}>
                                     <Grid item md={4}>
-                                        <Card raised>
-                                            <CardContent>
-                                                <Typography variant="h1">
-                                                    {/* ${productData.productsCount} */}
+                                        <Card raised style={{background: 'rgba(0, 0, 0, 0.1) no-repeat scroll 16px 16px'}}>
+                                            <CardContent style={{textAlign: 'center'}}>
+                                                <Typography variant="h2" color= "primary">
+                                                    {productData.productsCount} Products online
                                                 </Typography>
-                                                <Typography>Products online</Typography>
                                             </CardContent>
                                         </Card>
                                     </Grid>
                                 </Grid>
                             )}
+                            </ListItem>
                         </List>
                     </Card>
                 </Grid>
