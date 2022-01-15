@@ -1,5 +1,5 @@
-import React, { useRef, useState } from 'react'
-import { Button, List, ListItem, TextField, Typography, Popper, Grow, Paper, ClickAwayListener, MenuList, MenuItem, ListItemText, Card, Grid} from '@material-ui/core'
+import React, { useReducer, useRef, useState } from 'react'
+import { Button, List, ListItem, TextField, Typography, Popper, Grow, Paper, ClickAwayListener, MenuList, MenuItem, ListItemText, Card, Grid, CircularProgress} from '@material-ui/core'
 import dynamic from 'next/dynamic'
 import { useContext } from 'react'
 import { Store } from '../utils/Store'
@@ -14,13 +14,35 @@ import { useSnackbar } from 'notistack'
 import Cookies from 'js-cookie'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
+function reducer(state, action){
+    switch(action.type){
+        case "FETCH_REQUEST":
+            return {...state, loading: true, error:''}
+        case 'FETCH_SUCCESS':
+            return {...state, loading: false, productData: action.payload, error:''}
+        case 'FETCH_FAIL':
+            return {...state, loading: false, error: action.payload}
+
+        default:
+            state
+    }
+}
+
 function DataAnalytics() {
 
     const classes = useStyles()
+    const [{loading, error, productData}, dispatch] = useReducer(reducer, {loading: true, productData:{salesData: []}, error:''}) 
     
 
     useEffect(()=>{
-
+        try{
+            dispatch({type: 'FETCH_REQUEST'})
+            const {data} = axios.get('/api/data-analytics/productSales')
+            dispatch({type:'FETCH_SUCCESS', payload:data})
+        }catch(err){
+            dispatch({type:'FETCH_FAIL', payload: err})
+        }
+        
     },[])
 
 
@@ -51,7 +73,19 @@ function DataAnalytics() {
                 </Grid>
                 <Grid item md={9} xs={12}>
                     <Card className={classes.section}>
-                       
+                        <List>
+                            {loading ? (<CircularProgress />)
+                            :
+                            error ? (<Typography className={classes.error}>{error}</Typography>)
+                            :
+                            (
+                                <Grid container spacing={5}>
+                                    <Grid item md={4}>
+                                        
+                                    </Grid>
+                                </Grid>
+                            )}
+                        </List>
                     </Card>
                 </Grid>
             </Grid>
