@@ -65,6 +65,12 @@ handler.get(async(req,res)=>{
         {$unwind : "$orderItems" },
         {$group: {_id: '$orderItems.productName', totalNumberOfOrdersInWhichThisIsPresent: {$sum: 1}}}
     ])
+    
+    const totalSalesOfEachItem = await Order.aggregate([
+        {$match : {}},
+        {$unwind : "$orderItems" },
+        {$group: {_id: '$orderItems.productName', totalSalesofItem: {$sum: {$multiply: [{ $toInt: '$orderItems.quantity' },{ $toInt: '$orderItems.productPrice' }]}}}}
+    ])
 
 
     // for(var a=0; a<allItems.length; a++){
@@ -90,7 +96,7 @@ handler.get(async(req,res)=>{
     // }
 
     await db.disconnect()
-    res.send({ordersCount, productsCount, userCount, ordersPrice, salesData, allItems, allItems2, individualProducts})
+    res.send({ordersCount, productsCount, userCount, ordersPrice, salesData, allItems, allItems2, individualProducts, totalSalesOfEachItem})
 })
 
 export default handler
