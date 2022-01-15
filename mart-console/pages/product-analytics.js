@@ -13,6 +13,11 @@ import { Controller, useForm } from 'react-hook-form'
 import { useSnackbar } from 'notistack'
 import Cookies from 'js-cookie'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import { Bar } from 'react-chartjs-2';
+
+
+
+
 
 function reducer(state, action){
     switch(action.type){
@@ -31,7 +36,7 @@ function reducer(state, action){
 function DataAnalytics() {
 
     const classes = useStyles()
-    const [{loading, error, productData}, dispatch] = useReducer(reducer, {loading: true, productData:{}, error:''}) 
+    const [{loading, error, productData}, dispatch] = useReducer(reducer, {loading: true, productData:{salesData:[]}, error:''}) 
     
 
     useEffect(()=>{
@@ -52,7 +57,7 @@ function DataAnalytics() {
     },[])
 
 
-     console.log(productData)
+    //  console.log(productData.salesData.map((x)=> x._id))
     
 
 
@@ -129,6 +134,25 @@ function DataAnalytics() {
                                 </Grid>
                             )}
                             </ListItem>
+                            <ListItem>
+                                <Typography component="h2" variant="h1">
+                                    Sales of products in each month
+                                </Typography>
+                            </ListItem>
+                            <ListItem>
+                                <Bar data={{labels: productData.salesData.map((x)=> x._id),
+                                datasets: [
+                                    {
+                                        labels: 'Sales',
+                                        backgroundColor: 'rgba(162,222,208,1)',
+                                        data: productData.salesData.map((x)=>x.totalSales)
+                                    }
+                                ]}}
+                                options={{
+                                    legend: {display: true, position: 'right'},
+                                }}>
+                                </Bar>
+                            </ListItem>
                         </List>
                     </Card>
                 </Grid>
@@ -143,3 +167,5 @@ function DataAnalytics() {
 }
 
 export default dynamic(()=> Promise.resolve(DataAnalytics),{ssr:false})
+
+//npm i react-chartjs-2@2.10.0 chart.js@2.9.4
