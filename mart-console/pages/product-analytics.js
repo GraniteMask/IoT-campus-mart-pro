@@ -74,6 +74,11 @@ function DataAnalytics() {
                                     <ListItemText primary="Student Analytics"></ListItemText>
                                 </ListItem>
                             </NextLink>
+                            <NextLink href="/allOrders" passHref>
+                                <ListItem button component="a">
+                                    <ListItemText primary="All Orders"></ListItemText>
+                                </ListItem>
+                            </NextLink>
                         </List>
                     </Card>
                 </Grid>
@@ -81,7 +86,7 @@ function DataAnalytics() {
                     <Card className={classes.section}>
                         <List>
                             <ListItem>
-                                <Typography variant="h1">Product Analysis</Typography>
+                                <Typography variant="h1">Product Analytics</Typography>
                             </ListItem>
                             <ListItem>
                             {loading ? (<CircularProgress />)
@@ -94,17 +99,31 @@ function DataAnalytics() {
                                         <Card raised style={{background: 'rgba(0, 0, 0, 0.1) no-repeat scroll 16px 16px'}}>
                                             <CardContent >
                                                 <Typography variant="h1" color= "primary">
+                                                    Rs.{productData.ordersPrice}
+                                                </Typography>
+                                                <Typography>TOTAL SALES</Typography>
+                                            </CardContent>
+                                            
+                                        </Card>
+                                    </Grid>
+                                    <Grid item md={4}>
+                                        <Card raised style={{background: 'rgba(0, 0, 0, 0.1) no-repeat scroll 16px 16px'}}>
+                                            <CardContent >
+                                                <Typography variant="h1" color= "primary">
                                                     {productData.productsCount}
                                                 </Typography>
                                                 <Typography>PRODUCTS ONLINE</Typography>
                                             </CardContent>
-                                            <CardActions>
-                                                <NextLink href="/admin/orders" passHref>
-                                                    <Button size="small" color="secondary" variant='contained'>
-                                                        View products
-                                                    </Button>
-                                                </NextLink>
-                                            </CardActions>
+                                        </Card>
+                                    </Grid>
+                                    <Grid item md={4}>
+                                        <Card raised style={{background: 'rgba(0, 0, 0, 0.1) no-repeat scroll 16px 16px'}}>
+                                            <CardContent>
+                                                <Typography variant="h1" color= "primary">
+                                                    {productData.ordersCount}
+                                                </Typography>
+                                                <Typography>TOTAL ORDERS</Typography>
+                                            </CardContent>
                                         </Card>
                                     </Grid>
                                 </Grid>
