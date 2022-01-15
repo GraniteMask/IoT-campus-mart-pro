@@ -168,7 +168,7 @@ function DataAnalytics() {
                                     legend: {display: true, position: 'right'},
                                     title: {
                                         display: true,
-                                        text: 'Total Orders in each month',
+                                        text: 'Sales of products in each month',
                                         fontSize: 15
                                     },
                                     // scales: {
@@ -195,7 +195,7 @@ function DataAnalytics() {
                                         legend: {display: true, position: 'right'},
                                         title: {
                                             display: true,
-                                            text: ' Sales of products in each month',
+                                            text: 'Total Orders in each month',
                                             fontSize: 15
                                         },
                                     }}
