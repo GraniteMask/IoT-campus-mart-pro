@@ -36,7 +36,7 @@ function reducer(state, action){
 function DataAnalytics() {
 
     const classes = useStyles()
-    const [{loading, error, productData}, dispatch] = useReducer(reducer, {loading: true, productData:{salesData:[], ordersInMonth: []}, error:''}) 
+    const [{loading, error, productData}, dispatch] = useReducer(reducer, {loading: true, productData:{salesData:[], ordersInMonth: [], mostPopularProducts: []}, error:''}) 
     
 
     useEffect(()=>{
@@ -165,7 +165,7 @@ function DataAnalytics() {
                                     }
                                 ]}}
                                 options={{
-                                    legend: {display: true, position: 'right'},
+                                    legend: {display: true, position: 'top'},
                                     title: {
                                         display: true,
                                         text: 'Sales of products in each month',
@@ -192,7 +192,7 @@ function DataAnalytics() {
                                         }
                                     ]}}
                                     options={{
-                                        legend: {display: true, position: 'right'},
+                                        legend: {display: true, position: 'top'},
                                         title: {
                                             display: true,
                                             text: 'Total Orders in each month',
@@ -203,7 +203,7 @@ function DataAnalytics() {
                                 </Bar>
                             </ListItem>
                             <ListItem>
-                                <Bar data={{labels: productData.mostPopularProducts.map((x)=> x._id),
+                                <Pie data={{labels: productData.mostPopularProducts.map((x)=> x._id),
                                     datasets: [
                                         {
                                             label: 'Most Popular Products',
@@ -212,7 +212,7 @@ function DataAnalytics() {
                                         }
                                     ]}}
                                     options={{
-                                        legend: {display: true, position: 'right'},
+                                        legend: {display: true, position: 'top'},
                                         title: {
                                             display: true,
                                             text: 'Most Popular Products with respective quantity ordered',
@@ -220,7 +220,7 @@ function DataAnalytics() {
                                         },
                                     }}
                                 >
-                                </Bar>
+                                </Pie>
                             </ListItem>
                         </List>
                     </Card>
