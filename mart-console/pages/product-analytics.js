@@ -169,7 +169,7 @@ function DataAnalytics() {
                                     title: {
                                         display: true,
                                         text: ' Sales of products in each month',
-                                        fontSize: 20
+                                        fontSize: 15
                                     },
                                     // scales: {
                                     //     yAxes: [{
