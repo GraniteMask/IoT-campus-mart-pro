@@ -143,14 +143,15 @@ function DataAnalytics() {
                                 <Bar data={{labels: productData.salesData.map((x)=> x._id),
                                 datasets: [
                                     {
-                                        labels: 'Sales',
-                                        backgroundColor: 'rgba(162,222,208,1)',
+                                        label: 'Sales',
+                                        backgroundColor: '#9966CC',
                                         data: productData.salesData.map((x)=>x.totalSales)
                                     }
                                 ]}}
-                                options={{
-                                    legend: {display: true, position: 'right'},
-                                }}>
+                                // options={{
+                                //     legend: {display: true, position: 'right'},
+                                // }}
+                                >
                                 </Bar>
                             </ListItem>
                         </List>
