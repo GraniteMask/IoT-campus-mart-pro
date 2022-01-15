@@ -122,7 +122,7 @@ function DataAnalytics() {
                                                 <Typography variant="h1" color= "primary">
                                                     Rs.{productData.ordersPrice}
                                                 </Typography>
-                                                <Typography>TOTAL SALES</Typography>
+                                                <Typography>TOTAL SALES (all-time)</Typography>
                                             </CardContent>
                                             
                                         </Card>
@@ -143,7 +143,7 @@ function DataAnalytics() {
                                                 <Typography variant="h1" color= "primary">
                                                     {productData.ordersCount}
                                                 </Typography>
-                                                <Typography>TOTAL ORDERS</Typography>
+                                                <Typography>TOTAL ORDERS (all-time) </Typography>
                                             </CardContent>
                                         </Card>
                                     </Grid>
