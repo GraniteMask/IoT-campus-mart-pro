@@ -36,7 +36,7 @@ function reducer(state, action){
 function DataAnalytics() {
 
     const classes = useStyles()
-    const [{loading, error, productData}, dispatch] = useReducer(reducer, {loading: true, productData:{salesData:[], ordersInMonth: [], mostPopularProducts: []}, error:''}) 
+    const [{loading, error, productData}, dispatch] = useReducer(reducer, {loading: true, productData:{salesData:[], ordersInMonth: [], mostPopularProducts: [], totalSalesOfEachItem: []}, error:''}) 
     
 
     useEffect(()=>{
@@ -188,7 +188,7 @@ function DataAnalytics() {
                                     legend: {display: true, position: 'top'},
                                     title: {
                                         display: true,
-                                        text: 'Sales of products in each month',
+                                        text: 'Cumulative sales of all products in each month',
                                         fontSize: 15
                                     },
                                     // scales: {
@@ -201,6 +201,26 @@ function DataAnalytics() {
                                 }}
                                 >
                                 </Bar>
+                            </ListItem>
+                            <ListItem>
+                                <Pie data={{labels: productData.totalSalesOfEachItem.map((x)=> x._id),
+                                    datasets: [
+                                        {
+                                            label: 'Most Popular Products',
+                                            backgroundColor: ['#00008B', '#0a2351', '#00308F',  '#0039a6','#0000FF', '#007FFF', '#2a52be', '#318CE7', '#1F75FE', '#6CB4EE' ],
+                                            data: productData.totalSalesOfEachItem.map((x)=>x.totalSalesofItem)
+                                        }
+                                    ]}}
+                                    options={{
+                                        legend: {display: true, position: 'top'},
+                                        title: {
+                                            display: true,
+                                            text: 'Total Sales of each product with respective amount (in Rs.)',
+                                            fontSize: 15
+                                        },
+                                    }}
+                                >
+                                </Pie>
                             </ListItem>
                             <ListItem>
                                 <Bar data={{labels: productData.ordersInMonth.map((x)=> x._id),
@@ -222,6 +242,7 @@ function DataAnalytics() {
                                 >
                                 </Bar>
                             </ListItem>
+                            
                             
                         </List>
                     </Card>

@@ -80,7 +80,8 @@ handler.get(async(req,res)=>{
     const totalSalesOfEachItem = await Order.aggregate([
         {$match : {}},
         {$unwind : "$orderItems" },
-        {$group: {_id: '$orderItems.productName', totalSalesofItem: {$sum: {$multiply: [{ $toInt: '$orderItems.quantity' },{ $toInt: '$orderItems.productPrice' }]}}}}
+        {$group: {_id: '$orderItems.productName', totalSalesofItem: {$sum: {$multiply: [{ $toInt: '$orderItems.quantity' },{ $toInt: '$orderItems.productPrice' }]}}}},
+        {$sort: {totalSalesofItem: -1}}
     ])
 
 
