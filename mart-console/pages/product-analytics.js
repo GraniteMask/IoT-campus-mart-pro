@@ -136,7 +136,7 @@ function DataAnalytics() {
                             </ListItem>
                             <ListItem>
                                 <Typography component="h2" variant="h1">
-                                    Sales of products in each month
+                                    Dashboard:
                                 </Typography>
                             </ListItem>
                             <ListItem>
@@ -148,9 +148,14 @@ function DataAnalytics() {
                                         data: productData.salesData.map((x)=>x.totalSales)
                                     }
                                 ]}}
-                                // options={{
-                                //     legend: {display: true, position: 'right'},
-                                // }}
+                                options={{
+                                    legend: {display: true, position: 'right'},
+                                    title: {
+                                        display: true,
+                                        text: ' Sales of products in each month',
+                                        fontSize: 20
+                                    }
+                                }}
                                 >
                                 </Bar>
                             </ListItem>
