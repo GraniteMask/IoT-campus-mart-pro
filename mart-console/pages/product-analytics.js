@@ -31,22 +31,25 @@ function reducer(state, action){
 function DataAnalytics() {
 
     const classes = useStyles()
-    const [{loading, error, productData}, dispatch] = useReducer(reducer, {loading: true, productData:{salesData: []}, error:''}) 
+    const [{loading, error, productData}, dispatch] = useReducer(reducer, {loading: true, productData:{}, error:''}) 
     
 
     useEffect(()=>{
         try{
             dispatch({type: 'FETCH_REQUEST'})
             const {data} = axios.get('/api/data-analytics/productSales')
+            console.log(data)
             dispatch({type:'FETCH_SUCCESS', payload:data})
         }catch(err){
-            dispatch({type:'FETCH_FAIL', payload: err})
+            console.log(err)
+            // dispatch({type:'FETCH_FAIL', payload: err})
         }
+       
         
     },[])
 
 
-    
+     console.log(productData)
     
 
 
@@ -84,7 +87,7 @@ function DataAnalytics() {
                                         <Card raised>
                                             <CardContent>
                                                 <Typography variant="h1">
-                                                    ${productData.productsCount}
+                                                    {/* ${productData.productsCount} */}
                                                 </Typography>
                                                 <Typography>Products online</Typography>
                                             </CardContent>

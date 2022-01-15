@@ -97,7 +97,7 @@ handler.get(async(req,res)=>{
     // }
 
     await db.disconnect()
-    res.send({ordersCount, productsCount, userCount, ordersPrice, salesData, mostPopularProducts, individualProducts, totalSalesOfEachItem})
+    res.send({ordersCount, productsCount, userCount, ordersPrice, salesData, mostPopularProducts, totalSalesOfEachItem})
 })
 
 export default handler
