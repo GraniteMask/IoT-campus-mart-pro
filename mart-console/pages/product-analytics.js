@@ -168,7 +168,7 @@ function DataAnalytics() {
                                     legend: {display: true, position: 'right'},
                                     title: {
                                         display: true,
-                                        text: ' Sales of products in each month',
+                                        text: 'Total Orders in each month',
                                         fontSize: 15
                                     },
                                     // scales: {
@@ -187,7 +187,7 @@ function DataAnalytics() {
                                     datasets: [
                                         {
                                             label: 'Sales',
-                                            backgroundColor: '#9966CC',
+                                            backgroundColor: '#6CB4EE',
                                             data: productData.ordersInMonth.map((x)=>x.totalNumbers)
                                         }
                                     ]}}
@@ -198,13 +198,6 @@ function DataAnalytics() {
                                             text: ' Sales of products in each month',
                                             fontSize: 15
                                         },
-                                        // scales: {
-                                        //     yAxes: [{
-                                        //         ticks: {
-                                        //             beginAtZero: true
-                                        //         }
-                                        //     }]
-                                        // }
                                     }}
                                 >
                                 </Bar>
