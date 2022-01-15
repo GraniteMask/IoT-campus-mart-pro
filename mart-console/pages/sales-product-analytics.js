@@ -13,7 +13,7 @@ import { Controller, useForm } from 'react-hook-form'
 import { useSnackbar } from 'notistack'
 import Cookies from 'js-cookie'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import { Bar, Pie } from 'react-chartjs-2';
+import { Bar, Pie, Doughnut } from 'react-chartjs-2';
 
 
 
@@ -36,7 +36,7 @@ function reducer(state, action){
 function DataAnalytics() {
 
     const classes = useStyles()
-    const [{loading, error, productData}, dispatch] = useReducer(reducer, {loading: true, productData:{salesData:[], ordersInMonth: [], mostPopularProducts: [], totalSalesOfEachItem: []}, error:''}) 
+    const [{loading, error, productData}, dispatch] = useReducer(reducer, {loading: true, productData:{salesData:[], ordersInMonth: [], mostPopularProducts: [], totalSalesOfEachItem: [], mostPopularCategory: []}, error:''}) 
     
 
     useEffect(()=>{
@@ -176,11 +176,31 @@ function DataAnalytics() {
                                 </Pie>
                             </ListItem>
                             <ListItem>
+                                <Doughnut data={{labels: productData.mostPopularCategory.map((x)=> x._id),
+                                    datasets: [
+                                        {
+                                            label: 'Most Popular Products',
+                                            backgroundColor: ['#00008B', '#0a2351', '#00308F',  '#0039a6','#0000FF', '#007FFF', '#2a52be', '#318CE7', '#1F75FE', '#6CB4EE' ],
+                                            data: productData.mostPopularCategory.map((x)=>x.totalNumberOfOrder)
+                                        }
+                                    ]}}
+                                    options={{
+                                        legend: {display: true, position: 'top'},
+                                        title: {
+                                            display: true,
+                                            text: 'Most Popular Category of Products with respective total orders',
+                                            fontSize: 15
+                                        },
+                                    }}
+                                >
+                                </Doughnut>
+                            </ListItem>
+                            <ListItem>
                                 <Bar data={{labels: productData.salesData.map((x)=> x._id),
                                 datasets: [
                                     {
                                         label: 'Sales',
-                                        backgroundColor: '#9966CC',
+                                        backgroundColor: '#6CB4EE',
                                         data: productData.salesData.map((x)=>x.totalSales)
                                     }
                                 ]}}
