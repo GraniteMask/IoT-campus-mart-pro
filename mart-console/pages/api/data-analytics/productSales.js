@@ -34,6 +34,16 @@ handler.get(async(req,res)=>{
         },
     ]);
 
+    const ordersInMonth = await Order.aggregate([
+        
+        {
+            $group: {
+                _id: {$dateToString: {format: '%Y-%m', date: '$createdAt'}},
+                totalNumbers: {$sum: 1},
+            },
+        },
+    ]);
+
     // const individualProducts = await Order.aggregate([
     //     {$match: {'orderItems.productName': 'product 2'}},
     //     {
@@ -97,7 +107,7 @@ handler.get(async(req,res)=>{
     // }
 
     await db.disconnect()
-    res.send({ordersCount, productsCount, userCount, ordersPrice, salesData, mostPopularProducts, totalSalesOfEachItem})
+    res.send({ordersCount, productsCount, userCount, ordersPrice, salesData, mostPopularProducts, totalSalesOfEachItem, ordersInMonth})
 })
 
 export default handler
