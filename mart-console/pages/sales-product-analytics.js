@@ -13,7 +13,7 @@ import { Controller, useForm } from 'react-hook-form'
 import { useSnackbar } from 'notistack'
 import Cookies from 'js-cookie'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import { Bar } from 'react-chartjs-2';
+import { Bar, Pie } from 'react-chartjs-2';
 
 
 
@@ -196,6 +196,26 @@ function DataAnalytics() {
                                         title: {
                                             display: true,
                                             text: 'Total Orders in each month',
+                                            fontSize: 15
+                                        },
+                                    }}
+                                >
+                                </Bar>
+                            </ListItem>
+                            <ListItem>
+                                <Bar data={{labels: productData.mostPopularProducts.map((x)=> x._id),
+                                    datasets: [
+                                        {
+                                            label: 'Most Popular Products',
+                                            backgroundColor: '#6CB4EE',
+                                            data: productData.mostPopularProducts.map((x)=>x.totalNumberOfQtyOrder)
+                                        }
+                                    ]}}
+                                    options={{
+                                        legend: {display: true, position: 'right'},
+                                        title: {
+                                            display: true,
+                                            text: 'Most Popular Products with respective quantity ordered',
                                             fontSize: 15
                                         },
                                     }}
