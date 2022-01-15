@@ -132,7 +132,7 @@ export default function Layout({title, description, children}) {
                         </div> */}
                         <div>
                             
-                            <NextLink href='/product-analytics'>
+                            <NextLink href='/sales-product-analytics'>
                                 <Link>
                                     Data Analytics
                                 </Link>
