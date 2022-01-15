@@ -36,7 +36,7 @@ function reducer(state, action){
 function DataAnalytics() {
 
     const classes = useStyles()
-    const [{loading, error, productData}, dispatch] = useReducer(reducer, {loading: true, productData:{salesData:[]}, error:''}) 
+    const [{loading, error, productData}, dispatch] = useReducer(reducer, {loading: true, productData:{salesData:[], ordersInMonth: []}, error:''}) 
     
 
     useEffect(()=>{
@@ -179,6 +179,33 @@ function DataAnalytics() {
                                     //     }]
                                     // }
                                 }}
+                                >
+                                </Bar>
+                            </ListItem>
+                            <ListItem>
+                                <Bar data={{labels: productData.ordersInMonth.map((x)=> x._id),
+                                    datasets: [
+                                        {
+                                            label: 'Sales',
+                                            backgroundColor: '#9966CC',
+                                            data: productData.ordersInMonth.map((x)=>x.totalNumbers)
+                                        }
+                                    ]}}
+                                    options={{
+                                        legend: {display: true, position: 'right'},
+                                        title: {
+                                            display: true,
+                                            text: ' Sales of products in each month',
+                                            fontSize: 15
+                                        },
+                                        // scales: {
+                                        //     yAxes: [{
+                                        //         ticks: {
+                                        //             beginAtZero: true
+                                        //         }
+                                        //     }]
+                                        // }
+                                    }}
                                 >
                                 </Bar>
                             </ListItem>
