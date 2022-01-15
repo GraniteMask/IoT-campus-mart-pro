@@ -34,25 +34,25 @@ handler.get(async(req,res)=>{
         },
     ]);
 
-    const individualProducts = await Order.aggregate([
-        {$match: {'orderItems.productName': 'product 2'}},
-        {
-            $project: {
-                orderItems:{
-                    $filter:{
-                        input: '$orderItems',
-                        as: 'orderItem',
-                        cond: {$eq: ['$$orderItem.productName', 'product 2']}
-                    }
-                }
-            }
-        }
-    ])
-    for(var i=0; i<individualProducts.length; i++){
-        for(var j=0; j<individualProducts[i].orderItems.length; j++){
-            console.log(individualProducts[i].orderItems[j].productPrice * individualProducts[i].orderItems[j].quantity)
-        }
-    }
+    // const individualProducts = await Order.aggregate([
+    //     {$match: {'orderItems.productName': 'product 2'}},
+    //     {
+    //         $project: {
+    //             orderItems:{
+    //                 $filter:{
+    //                     input: '$orderItems',
+    //                     as: 'orderItem',
+    //                     cond: {$eq: ['$$orderItem.productName', 'product 2']}
+    //                 }
+    //             }
+    //         }
+    //     }
+    // ])
+    // for(var i=0; i<individualProducts.length; i++){
+    //     for(var j=0; j<individualProducts[i].orderItems.length; j++){
+    //         console.log(individualProducts[i].orderItems[j].productPrice * individualProducts[i].orderItems[j].quantity)
+    //     }
+    // }
 
 
     const mostPopularProducts = await Order.aggregate([
