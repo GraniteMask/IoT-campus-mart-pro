@@ -131,3 +131,6 @@ handler.get(async(req,res)=>{
 })
 
 export default handler
+
+
+//use radar chart to determine popularity of product group with year of student

@@ -13,7 +13,7 @@ import { Controller, useForm } from 'react-hook-form'
 import { useSnackbar } from 'notistack'
 import Cookies from 'js-cookie'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import { Bar, Pie, Doughnut } from 'react-chartjs-2';
+import { Bar, Pie, Doughnut, Line } from 'react-chartjs-2';
 
 
 
@@ -36,7 +36,7 @@ function reducer(state, action){
 function DataAnalytics() {
 
     const classes = useStyles()
-    const [{loading, error, productData}, dispatch] = useReducer(reducer, {loading: true, productData:{salesData:[], ordersInMonth: [], mostPopularProducts: [], totalSalesOfEachItem: [], mostPopularCategory: []}, error:''}) 
+    const [{loading, error, productData}, dispatch] = useReducer(reducer, {loading: true, productData:{salesData:[], ordersInMonth: [], mostPopularProducts: [], totalSalesOfEachItem: [], mostPopularCategory: [], ordersDaily: []}, error:''}) 
     
 
     useEffect(()=>{
@@ -179,7 +179,7 @@ function DataAnalytics() {
                                 <Doughnut data={{labels: productData.mostPopularCategory.map((x)=> x._id),
                                     datasets: [
                                         {
-                                            label: 'Most Popular Products',
+                                            label: 'Most Popular Category',
                                             backgroundColor: ['#00008B', '#0a2351', '#00308F',  '#0039a6','#0000FF', '#007FFF', '#2a52be', '#318CE7', '#1F75FE', '#6CB4EE' ],
                                             data: productData.mostPopularCategory.map((x)=>x.totalNumberOfOrder)
                                         }
@@ -194,6 +194,27 @@ function DataAnalytics() {
                                     }}
                                 >
                                 </Doughnut>
+                            </ListItem>
+                            <ListItem>
+                                <Line data={{labels: productData.ordersDaily.map((x)=> x._id),
+                                    datasets: [
+                                        {
+                                            label: 'Sales on each day',
+                                            backgroundColor: '#6CB4EE',
+                                            data: productData.ordersDaily.map((x)=>x.totalNumbers),
+                                            borderColor: '#0000FF',
+                                        }
+                                    ]}}
+                                    options={{
+                                        legend: {display: true, position: 'top'},
+                                        title: {
+                                            display: true,
+                                            text: 'Sales on each day (in Rs.)',
+                                            fontSize: 15
+                                        },
+                                    }}
+                                >
+                                </Line>
                             </ListItem>
                             <ListItem>
                                 <Bar data={{labels: productData.salesData.map((x)=> x._id),
@@ -226,7 +247,7 @@ function DataAnalytics() {
                                 <Pie data={{labels: productData.totalSalesOfEachItem.map((x)=> x._id),
                                     datasets: [
                                         {
-                                            label: 'Most Popular Products',
+                                            label: 'Total Sales of Each Item',
                                             backgroundColor: ['#00008B', '#0a2351', '#00308F',  '#0039a6','#0000FF', '#007FFF', '#2a52be', '#318CE7', '#1F75FE', '#6CB4EE' ],
                                             data: productData.totalSalesOfEachItem.map((x)=>x.totalSalesofItem)
                                         }
@@ -246,7 +267,7 @@ function DataAnalytics() {
                                 <Bar data={{labels: productData.ordersInMonth.map((x)=> x._id),
                                     datasets: [
                                         {
-                                            label: 'Sales',
+                                            label: 'Total Orders (monthly)',
                                             backgroundColor: '#6CB4EE',
                                             data: productData.ordersInMonth.map((x)=>x.totalNumbers)
                                         }
