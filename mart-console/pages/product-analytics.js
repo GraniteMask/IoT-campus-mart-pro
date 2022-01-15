@@ -81,6 +81,9 @@ function DataAnalytics() {
                     <Card className={classes.section}>
                         <List>
                             <ListItem>
+                                <Typography variant="h1">Product Analysis</Typography>
+                            </ListItem>
+                            <ListItem>
                             {loading ? (<CircularProgress />)
                             :
                             error ? (<Typography className={classes.error}>{error}</Typography>)
@@ -93,7 +96,7 @@ function DataAnalytics() {
                                                 <Typography variant="h1" color= "primary">
                                                     {productData.productsCount}
                                                 </Typography>
-                                                <Typography>Products online</Typography>
+                                                <Typography>PRODUCTS ONLINE</Typography>
                                             </CardContent>
                                             <CardActions>
                                                 <NextLink href="/admin/orders" passHref>
