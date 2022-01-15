@@ -35,15 +35,18 @@ function DataAnalytics() {
     
 
     useEffect(()=>{
-        try{
-            dispatch({type: 'FETCH_REQUEST'})
-            const {data} = axios.get('/api/data-analytics/productSales')
-            console.log(data)
-            dispatch({type:'FETCH_SUCCESS', payload:data})
-        }catch(err){
-            console.log(err)
-            // dispatch({type:'FETCH_FAIL', payload: err})
+        const fetchData = async()=>{
+            try{
+                dispatch({type: 'FETCH_REQUEST'})
+                const {data} = await axios.get('/api/data-analytics/productSales')
+                // console.log(data)
+                dispatch({type:'FETCH_SUCCESS', payload:data})
+            }catch(err){
+                console.log(err)
+                // dispatch({type:'FETCH_FAIL', payload: err})
+            }
         }
+        fetchData()
        
         
     },[])
