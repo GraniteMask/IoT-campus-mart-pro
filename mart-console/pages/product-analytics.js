@@ -170,7 +170,14 @@ function DataAnalytics() {
                                         display: true,
                                         text: ' Sales of products in each month',
                                         fontSize: 20
-                                    }
+                                    },
+                                    // scales: {
+                                    //     yAxes: [{
+                                    //         ticks: {
+                                    //             beginAtZero: true
+                                    //         }
+                                    //     }]
+                                    // }
                                 }}
                                 >
                                 </Bar>
