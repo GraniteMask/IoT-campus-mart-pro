@@ -23,9 +23,9 @@ function PlaceOrder() {
     const totalPrice = round2(itemsPrice)
 
     useEffect(()=>{
-        // if(!paymentMethod){
-        //     router.push('/payment')
-        // }
+        if(!userInfo){
+            router.push('/login')
+        }
         if(cartItems.length === 0){
             router.push('/cart')
         }
