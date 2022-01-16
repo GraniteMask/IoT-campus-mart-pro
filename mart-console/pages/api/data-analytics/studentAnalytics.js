@@ -13,4 +13,19 @@ const handler = nc()
 handler.get(async(req,res)=>{
     await db.connect()
     const studentCount = await Student.countDocuments()
+
+    const mostActiveStudentYear = await Order.aggregate([
+        {
+            $group:{
+                _id: '$year',
+                numberOfOrders: {$sum: 1}
+            }
+        },
+        {$sort: {numberOfOrders: -1}}
+    ])
+
+    await db.disconnect()
+    res.send({studentCount, mostActiveStudentYear})
 })
+
+export default handler
