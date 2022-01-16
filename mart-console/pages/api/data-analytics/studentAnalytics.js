@@ -44,8 +44,22 @@ handler.get(async(req,res)=>{
         {$sort: {numberOfOrders: -1}}
     ])
 
+    const mostPopularCategoryByYear = await Order.aggregate([
+        {$match : {}},
+        {$unwind : "$orderItems" },
+        {$group: {_id: {year: '$year', category: '$orderItems.productCategory'}, totalNumberOfOrder: {$sum: 1}}},
+        {$sort: {totalNumberOfOrder: -1}}
+    ])
+
+    const mostPopularProductByYear = await Order.aggregate([
+        {$match : {}},
+        {$unwind : "$orderItems" },
+        {$group: {_id: {year: '$year', category: '$orderItems.productName'}, totalNumberOfOrder: {$sum: 1}}},
+        {$sort: {totalNumberOfOrder: -1}}
+    ])
+
     await db.disconnect()
-    res.send({studentCount, mostActiveStudentYear, mostActiveStudentBlock, eachStudentExpenditure})
+    res.send({studentCount, mostActiveStudentYear, mostActiveStudentBlock, eachStudentExpenditure, mostPopularCategoryByYear, mostPopularProductByYear})
 })
 
 export default handler
