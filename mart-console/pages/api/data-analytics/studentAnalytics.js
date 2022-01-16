@@ -38,10 +38,20 @@ handler.get(async(req,res)=>{
         {
             $group:{
                 _id: '$name',
-                numberOfOrders: {$sum: '$totalPrice'}
+                totalExpenditure: {$sum: '$totalPrice'}
             }
         },
-        {$sort: {numberOfOrders: -1}}
+        {$sort: {totalExpenditure: -1}}
+    ])
+
+    const expenditureByYear = await Order.aggregate([
+        {
+            $group:{
+                _id: '$year',
+                totalExpenditure: {$sum: '$totalPrice'}
+            }
+        },
+        {$sort: {totalExpenditure: -1}}
     ])
 
     const mostPopularCategoryByYear = await Order.aggregate([
@@ -59,7 +69,7 @@ handler.get(async(req,res)=>{
     ])
 
     await db.disconnect()
-    res.send({studentCount, mostActiveStudentYear, mostActiveStudentBlock, eachStudentExpenditure, mostPopularCategoryByYear, mostPopularProductByYear})
+    res.send({studentCount, mostActiveStudentYear, mostActiveStudentBlock, eachStudentExpenditure, mostPopularCategoryByYear, mostPopularProductByYear, expenditureByYear})
 })
 
 export default handler

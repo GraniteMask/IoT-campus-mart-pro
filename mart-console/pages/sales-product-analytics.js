@@ -223,7 +223,7 @@ function DataAnalytics() {
                                     legend: {display: true, position: 'top'},
                                     title: {
                                         display: true,
-                                        text: 'Cumulative sales of all products in each month',
+                                        text: 'Cumulative sales of all products in each month (in Rs.)',
                                         fontSize: 15
                                     },
                                     // scales: {
