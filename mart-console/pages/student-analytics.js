@@ -37,7 +37,7 @@ function DataAnalytics() {
         const fetchData = async()=>{
             try{
                 dispatch({type: 'FETCH_REQUEST'})
-                const {data} = await axios.get('/api/data-analytics/productSales')
+                const {data} = await axios.get('/api/data-analytics/studentAnalytics')
                 // console.log(data)
                 dispatch({type:'FETCH_SUCCESS', payload:data})
             }catch(err){
