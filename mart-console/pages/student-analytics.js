@@ -38,7 +38,7 @@ function DataAnalytics() {
             try{
                 dispatch({type: 'FETCH_REQUEST'})
                 const {data} = await axios.get('/api/data-analytics/studentAnalytics')
-                // console.log(data)
+                console.log(data)
                 dispatch({type:'FETCH_SUCCESS', payload:data})
             }catch(err){
                 console.log(err)
@@ -50,42 +50,21 @@ function DataAnalytics() {
         
     },[])
 
-
-    //  console.log(productData.salesData.map((x)=> x._id))
-
-    // var usedColor = ['#9966CC']
-    
-    // function getRandomColor() {
-    //     var letters = '0123456789ABCDEF'.split('');
-    //     var color = '#';
-    //     for (var i = 0; i < 6; i++ ) {
-    //         color += letters[Math.floor(Math.random() * 16)];
-    //     }       
-    //     for(var j=0; j<usedColor.length; j++){
-    //         if(usedColor !== color){
-    //             usedColor.push(color)
-    //             return color;
-    //         }
-    //     }
-    // }
-
-    // var fillcolor = getRandomColor()
-    // console.log(fillcolor)
     
 
     return (
         <Layout title='Data Analytics Dashboard'>
              <Grid container spacing={1}>
-                <Grid item md={3} xs={12}>
+                <Grid item md={2} xs={12}>
                     <Card className={classes.section}>
                         <List>
                             <NextLink  href="/sales-product-analytics" passHref>
-                                <ListItem button component="a">
+                                <ListItem selected button component="a">
                                     <ListItemText primary="Sales &amp; Product Analytics"></ListItemText>
                                 </ListItem>
                             </NextLink>
                             <NextLink href="/student-analytics" passHref>
-                                <ListItem selected button component="a">
+                                <ListItem button component="a">
                                     <ListItemText primary="Student Analytics"></ListItemText>
                                 </ListItem>
                             </NextLink>
@@ -97,11 +76,11 @@ function DataAnalytics() {
                         </List>
                     </Card>
                 </Grid>
-                <Grid item md={9} xs={12}>
+                <Grid item md={10} xs={12}>
                     <Card className={classes.section}>
                         <List>
                             <ListItem>
-                                <Typography variant="h1">Student Analytics</Typography>
+                                <Typography variant="h1">Sales &amp; Product Analytics</Typography>
                             </ListItem>
                             <ListItem>
                             {loading ? (<CircularProgress />)
@@ -114,31 +93,11 @@ function DataAnalytics() {
                                         <Card raised style={{background: 'rgba(0, 0, 0, 0.1) no-repeat scroll 16px 16px'}}>
                                             <CardContent >
                                                 <Typography variant="h1" color= "primary">
-                                                    Rs.{productData.ordersPrice}
+                                                    Rs.{productData.studentCount}
                                                 </Typography>
-                                                <Typography>TOTAL SALES (all-time)</Typography>
+                                                <Typography>Total Students</Typography>
                                             </CardContent>
                                             
-                                        </Card>
-                                    </Grid>
-                                    <Grid item md={4}>
-                                        <Card raised style={{background: 'rgba(0, 0, 0, 0.1) no-repeat scroll 16px 16px'}}>
-                                            <CardContent >
-                                                <Typography variant="h1" color= "primary">
-                                                    {productData.productsCount}
-                                                </Typography>
-                                                <Typography>PRODUCTS ONLINE</Typography>
-                                            </CardContent>
-                                        </Card>
-                                    </Grid>
-                                    <Grid item md={4}>
-                                        <Card raised style={{background: 'rgba(0, 0, 0, 0.1) no-repeat scroll 16px 16px'}}>
-                                            <CardContent>
-                                                <Typography variant="h1" color= "primary">
-                                                    {productData.ordersCount}
-                                                </Typography>
-                                                <Typography>TOTAL ORDERS (all-time) </Typography>
-                                            </CardContent>
                                         </Card>
                                     </Grid>
                                 </Grid>
@@ -149,27 +108,33 @@ function DataAnalytics() {
                                     Dashboard:
                                 </Typography>
                             </ListItem>
+                            
                             <ListItem>
-                                <Pie data={{labels: productData.mostPopularProducts.map((x)=> x._id),
-                                    datasets: [
-                                        {
-                                            label: 'Most Popular Products',
-                                            backgroundColor: ['#00008B', '#0a2351', '#00308F',  '#0039a6','#0000FF', '#007FFF', '#2a52be', '#318CE7', '#1F75FE', '#6CB4EE' ],
-                                            data: productData.mostPopularProducts.map((x)=>x.totalNumberOfQtyOrder)
-                                        }
-                                    ]}}
-                                    options={{
-                                        legend: {display: true, position: 'top'},
-                                        title: {
-                                            display: true,
-                                            text: 'Most Popular Products with respective quantity ordered',
-                                            fontSize: 15
-                                        },
-                                    }}
-                                >
-                                </Pie>
+                                {
+                                    productData.mostActiveStudentYear != undefined &&
+                                    (
+                                        <Pie data={{labels: productData.mostActiveStudentYear.map((x)=> x._id),
+                                            datasets: [
+                                                {
+                                                    label: 'Most Popular Products',
+                                                    backgroundColor: ['#00008B', '#0a2351', '#00308F',  '#0039a6','#0000FF', '#007FFF', '#2a52be', '#318CE7', '#1F75FE', '#6CB4EE' ],
+                                                    data: productData.mostActiveStudentYear.map((x)=>x.numberOfOrders)
+                                                }
+                                            ]}}
+                                            options={{
+                                                legend: {display: true, position: 'top'},
+                                                title: {
+                                                    display: true,
+                                                    text: 'Most Popular Products with respective quantity ordered',
+                                                    fontSize: 15
+                                                },
+                                            }}
+                                        >
+                                        </Pie>
+                                    )
+                                }
                             </ListItem>
-                            <ListItem>
+                            {/* <ListItem>
                                 <Doughnut data={{labels: productData.mostPopularCategory.map((x)=> x._id),
                                     datasets: [
                                         {
@@ -223,7 +188,7 @@ function DataAnalytics() {
                                     legend: {display: true, position: 'top'},
                                     title: {
                                         display: true,
-                                        text: 'Cumulative sales of all products in each month',
+                                        text: 'Cumulative sales of all products in each month (in Rs.)',
                                         fontSize: 15
                                     },
                                     // scales: {
@@ -276,7 +241,7 @@ function DataAnalytics() {
                                     }}
                                 >
                                 </Bar>
-                            </ListItem>
+                            </ListItem> */}
                             
                             
                         </List>
