@@ -30,7 +30,7 @@ function reducer(state, action){
 function DataAnalytics() {
 
     const classes = useStyles()
-    const [{loading, error, productData}, dispatch] = useReducer(reducer, {loading: true, productData:{salesData:[], ordersInMonth: [], mostPopularProducts: [], totalSalesOfEachItem: [], mostPopularCategory: [], ordersDaily: []}, error:''}) 
+    const [{loading, error, productData}, dispatch] = useReducer(reducer, {loading: true, productData:{studentCount:[], mostActiveStudentYear:[], mostActiveStudentBlock:[], eachStudentExpenditure:[], mostPopularCategoryByYear:[], mostPopularProductByYear:[], expenditureByYear:[]}, error:''}) 
     
 
     useEffect(()=>{
