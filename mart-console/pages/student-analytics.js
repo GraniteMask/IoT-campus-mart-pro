@@ -239,114 +239,32 @@ function DataAnalytics() {
                                     )
                                 }
                             </ListItem>
-                            {/* <ListItem>
-                                <Doughnut data={{labels: productData.mostPopularCategory.map((x)=> x._id),
-                                    datasets: [
-                                        {
-                                            label: 'Most Popular Category',
-                                            backgroundColor: ['#00008B', '#0a2351', '#00308F',  '#0039a6','#0000FF', '#007FFF', '#2a52be', '#318CE7', '#1F75FE', '#6CB4EE' ],
-                                            data: productData.mostPopularCategory.map((x)=>x.totalNumberOfOrder)
-                                        }
-                                    ]}}
-                                    options={{
-                                        legend: {display: true, position: 'top'},
-                                        title: {
-                                            display: true,
-                                            text: 'Most Popular Category of Products with respective total orders',
-                                            fontSize: 15
-                                        },
-                                    }}
-                                >
-                                </Doughnut>
-                            </ListItem>
                             <ListItem>
-                                <Line data={{labels: productData.ordersDaily.map((x)=> x._id),
-                                    datasets: [
-                                        {
-                                            label: 'Sales on each day',
-                                            backgroundColor: '#6CB4EE',
-                                            data: productData.ordersDaily.map((x)=>x.totalNumbers),
-                                            borderColor: '#0000FF',
-                                        }
-                                    ]}}
-                                    options={{
-                                        legend: {display: true, position: 'top'},
-                                        title: {
-                                            display: true,
-                                            text: 'Sales on each day (in Rs.)',
-                                            fontSize: 15
-                                        },
-                                    }}
-                                >
-                                </Line>
+                                {
+                                    productData.mostPopularCategoryByYear != undefined &&
+                                    (
+                                        <Doughnut data={{labels: productData.expenditureByYear.map((x)=> x._id),
+                                            datasets: [
+                                                {
+                                                    label: 'Most Popular Category',
+                                                    backgroundColor: ['#00008B', '#0a2351', '#00308F',  '#0039a6','#0000FF', '#007FFF', '#2a52be', '#318CE7', '#1F75FE', '#6CB4EE' ],
+                                                    data: productData.expenditureByYear.map((x)=>x.totalExpenditure)
+                                                }
+                                            ]}}
+                                            options={{
+                                                legend: {display: true, position: 'top'},
+                                                title: {
+                                                    display: true,
+                                                    text: 'Most Popular Category of Products with respective total orders',
+                                                    fontSize: 15
+                                                },
+                                            }}
+                                        >
+                                        </Doughnut>
+                                )
+                            }
                             </ListItem>
-                            <ListItem>
-                                <Bar data={{labels: productData.salesData.map((x)=> x._id),
-                                datasets: [
-                                    {
-                                        label: 'Sales',
-                                        backgroundColor: '#6CB4EE',
-                                        data: productData.salesData.map((x)=>x.totalSales)
-                                    }
-                                ]}}
-                                options={{
-                                    legend: {display: true, position: 'top'},
-                                    title: {
-                                        display: true,
-                                        text: 'Cumulative sales of all products in each month (in Rs.)',
-                                        fontSize: 15
-                                    },
-                                    // scales: {
-                                    //     yAxes: [{
-                                    //         ticks: {
-                                    //             beginAtZero: true
-                                    //         }
-                                    //     }]
-                                    // }
-                                }}
-                                >
-                                </Bar>
-                            </ListItem>
-                            <ListItem>
-                                <Pie data={{labels: productData.totalSalesOfEachItem.map((x)=> x._id),
-                                    datasets: [
-                                        {
-                                            label: 'Total Sales of Each Item',
-                                            backgroundColor: ['#00008B', '#0a2351', '#00308F',  '#0039a6','#0000FF', '#007FFF', '#2a52be', '#318CE7', '#1F75FE', '#6CB4EE' ],
-                                            data: productData.totalSalesOfEachItem.map((x)=>x.totalSalesofItem)
-                                        }
-                                    ]}}
-                                    options={{
-                                        legend: {display: true, position: 'top'},
-                                        title: {
-                                            display: true,
-                                            text: 'Total Sales of each product with respective amount (in Rs.)',
-                                            fontSize: 15
-                                        },
-                                    }}
-                                >
-                                </Pie>
-                            </ListItem>
-                            <ListItem>
-                                <Bar data={{labels: productData.ordersInMonth.map((x)=> x._id),
-                                    datasets: [
-                                        {
-                                            label: 'Total Orders (monthly)',
-                                            backgroundColor: '#6CB4EE',
-                                            data: productData.ordersInMonth.map((x)=>x.totalNumbers)
-                                        }
-                                    ]}}
-                                    options={{
-                                        legend: {display: true, position: 'top'},
-                                        title: {
-                                            display: true,
-                                            text: 'Total Orders in each month',
-                                            fontSize: 15
-                                        },
-                                    }}
-                                >
-                                </Bar>
-                            </ListItem> */}
+                            
                             
                             
                         </List>
