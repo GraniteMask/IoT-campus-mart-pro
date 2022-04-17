@@ -80,12 +80,12 @@ function DataAnalytics() {
                     <Card className={classes.section}>
                         <List>
                             <NextLink  href="/sales-product-analytics" passHref>
-                                <ListItem selected button component="a">
+                                <ListItem button component="a">
                                     <ListItemText primary="Sales &amp; Product Analytics"></ListItemText>
                                 </ListItem>
                             </NextLink>
                             <NextLink href="/student-analytics" passHref>
-                                <ListItem button component="a">
+                                <ListItem selected button component="a">
                                     <ListItemText primary="Student Analytics"></ListItemText>
                                 </ListItem>
                             </NextLink>
@@ -101,7 +101,7 @@ function DataAnalytics() {
                     <Card className={classes.section}>
                         <List>
                             <ListItem>
-                                <Typography variant="h1">Sales &amp; Product Analytics</Typography>
+                                <Typography variant="h1">Student Analytics</Typography>
                             </ListItem>
                             <ListItem>
                             {loading ? (<CircularProgress />)

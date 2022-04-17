@@ -76,7 +76,7 @@ function DataAnalytics() {
     return (
         <Layout title='Data Analytics Dashboard'>
              <Grid container spacing={1}>
-                <Grid item md={3} xs={12}>
+                <Grid item md={2} xs={12}>
                     <Card className={classes.section}>
                         <List>
                             <NextLink  href="/sales-product-analytics" passHref>
@@ -97,7 +97,7 @@ function DataAnalytics() {
                         </List>
                     </Card>
                 </Grid>
-                <Grid item md={9} xs={12}>
+                <Grid item md={10} xs={12}>
                     <Card className={classes.section}>
                         <List>
                             <ListItem>
