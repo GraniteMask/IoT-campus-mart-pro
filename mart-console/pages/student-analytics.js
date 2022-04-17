@@ -134,6 +134,31 @@ function DataAnalytics() {
                                     )
                                 }
                             </ListItem>
+                            <ListItem>
+                                {
+                                    productData.mostActiveStudentBlock != undefined &&
+                                    (
+                                        <Pie data={{labels: productData.mostActiveStudentBlock.map((x)=> x._id),
+                                            datasets: [
+                                                {
+                                                    label: 'Most Popular Products',
+                                                    backgroundColor: ['#00008B', '#0a2351', '#00308F',  '#0039a6','#0000FF', '#007FFF', '#2a52be', '#318CE7', '#1F75FE', '#6CB4EE' ],
+                                                    data: productData.mostActiveStudentBlock.map((x)=>x.numberOfOrders)
+                                                }
+                                            ]}}
+                                            options={{
+                                                legend: {display: true, position: 'top'},
+                                                title: {
+                                                    display: true,
+                                                    text: 'Most Popular Products with respective quantity ordered',
+                                                    fontSize: 15
+                                                },
+                                            }}
+                                        >
+                                        </Pie>
+                                    )
+                                }
+                            </ListItem>
                             {/* <ListItem>
                                 <Doughnut data={{labels: productData.mostPopularCategory.map((x)=> x._id),
                                     datasets: [
