@@ -159,6 +159,86 @@ function DataAnalytics() {
                                     )
                                 }
                             </ListItem>
+                            <ListItem>
+                                {
+                                    productData.eachStudentExpenditure != undefined &&
+                                    (
+                                        
+                                         <Bar data={{labels: productData.eachStudentExpenditure.map((x)=> x._id),
+                                            datasets: [
+                                                {
+                                                    label: 'Sales',
+                                                    backgroundColor: '#6CB4EE',
+                                                    data: productData.eachStudentExpenditure.map((x)=>x.totalExpenditure)
+                                                }
+                                            ]}}
+                                            options={{
+                                                legend: {display: true, position: 'top'},
+                                                title: {
+                                                    display: true,
+                                                    text: 'Cumulative sales of all products in each month (in Rs.)',
+                                                    fontSize: 15
+                                                },
+                                            }}
+                                            >
+                                        </Bar>
+                                    )
+                                }
+                            </ListItem>
+                            <ListItem>
+                                {
+                                    productData.mostPopularProductByYear != undefined &&
+                                    (
+                                        
+                                         <Bar data={{labels: productData.mostPopularProductByYear.map((x)=> x._id.category + ` (${x._id.year} year)`),
+                                            datasets: [
+                                                {
+                                                    label: 'Sales',
+                                                    backgroundColor: '#6CB4EE',
+                                                    data: productData.mostPopularProductByYear.map((x)=>x.totalNumberOfOrder)
+                                                }
+                                            ]}}
+                                            options={{
+                                                legend: {display: true, position: 'top'},
+                                                title: {
+                                                    display: true,
+                                                    text: 'Cumulative sales of all products in each month (in Rs.)',
+                                                    fontSize: 15
+                                                },
+                                            }}
+                                            >
+                                        </Bar>
+                                    )
+                                }
+                            </ListItem>
+                            <ListItem>
+                                {
+                                    productData.mostPopularCategoryByYear != undefined &&
+                                    (
+                                        
+                                         <Bar data={{labels: productData.mostPopularCategoryByYear.map((x)=> (x._id.category + ` (${x._id.year} year)`)),
+                                            datasets: 
+                                            [
+                                                {
+                                                    label: "Total Number of Orders",
+                                                    backgroundColor: '#6CB4EE',
+                                                    data: productData.mostPopularCategoryByYear.map((x)=>x.totalNumberOfOrder)
+                                                },
+
+                                            ]}}
+                                            options={{
+                                                legend: {display: true, position: 'top'},
+                                                title: {
+                                                    display: true,
+                                                    text: 'Cumulative sales of all products in each month (in Rs.)',
+                                                    fontSize: 15
+                                                },
+                                            }}
+                                            >
+                                        </Bar>
+                                    )
+                                }
+                            </ListItem>
                             {/* <ListItem>
                                 <Doughnut data={{labels: productData.mostPopularCategory.map((x)=> x._id),
                                     datasets: [
