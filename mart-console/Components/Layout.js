@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react'
 import Head from 'next/head'
 import NextLink from 'next/link'
-import {AppBar, Typography, Toolbar, Container, Link, ThemeProvider, CssBaseline, Switch, Badge, Button, Menu, MenuItem, Box} from '@material-ui/core'
+import {AppBar, Typography, Toolbar, Container, Link, ThemeProvider, CssBaseline,  Badge, Button, Menu, MenuItem, Box} from '@material-ui/core'
 import { createTheme } from '@material-ui/core/styles'
 import useStyles from '../utils/styles'
 import Cookies from 'js-cookie'
