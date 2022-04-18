@@ -239,7 +239,7 @@ function Order({params}) {
                                     orderItems.map(item =>(
                                         item.productBarcode.map(barcode=>(
                                             // console.log(barcode)
-                                            <List>
+                                            <List key={Math.random()}>
                                                 <ListItem><strong>Name: </strong>{item.productName}</ListItem>
                                                 <ListItem>
                                                     <strong>Barcode:</strong>{barcode}
