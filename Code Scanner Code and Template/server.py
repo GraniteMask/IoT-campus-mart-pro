@@ -139,6 +139,7 @@ def submit():
   global productBarcode
   if studentQR !="Not scanned yet" and productBarcode != "Not scanned yet":
     scanned = mongo.db.scanned.insert_one({"StudentId": studentQR, "BookBarcode": productBarcode})
+    # student = mongo.db.order.find({"qrId": studentQR})
     studentQR="Not scanned yet"
     productBarcode="Not scanned yet"
     return render_template('codeScanner.html', productBarcode=productBarcode , studentQR=studentQR, success=success, passwordVerified=passwordVerified)
