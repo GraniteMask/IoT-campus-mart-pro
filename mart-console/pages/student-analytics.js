@@ -87,14 +87,14 @@ function DataAnalytics() {
                             error ? (<Typography className={classes.error}>{error}</Typography>)
                             :
                             (
-                                <Grid container spacing={5}>
+                                <Grid container alignItems="center" justifyContent="center">
                                     <Grid item md={4}>
                                         <Card raised style={{background: 'rgba(0, 0, 0, 0.1) no-repeat scroll 16px 16px'}}>
                                             <CardContent >
                                                 <Typography variant="h1" color= "primary">
                                                     {productData.studentCount}
                                                 </Typography>
-                                                <Typography>Total Students</Typography>
+                                                <Typography>Total Students registered</Typography>
                                             </CardContent>
                                             
                                         </Card>
