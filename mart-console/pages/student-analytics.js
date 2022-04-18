@@ -93,7 +93,7 @@ function DataAnalytics() {
                                         <Card raised style={{background: 'rgba(0, 0, 0, 0.1) no-repeat scroll 16px 16px'}}>
                                             <CardContent >
                                                 <Typography variant="h1" color= "primary">
-                                                    Rs.{productData.studentCount}
+                                                    {productData.studentCount}
                                                 </Typography>
                                                 <Typography>Total Students</Typography>
                                             </CardContent>
@@ -125,7 +125,7 @@ function DataAnalytics() {
                                                 legend: {display: true, position: 'top'},
                                                 title: {
                                                     display: true,
-                                                    text: 'Most Active Student (Year-wise)',
+                                                    text: 'Most Active Students (Year-wise)',
                                                     fontSize: 15
                                                 },
                                             }}
@@ -150,7 +150,7 @@ function DataAnalytics() {
                                                 legend: {display: true, position: 'top'},
                                                 title: {
                                                     display: true,
-                                                    text: 'Most Popular Products with respective quantity ordered',
+                                                    text: 'Most Active Students (Hostel Block Wise)',
                                                     fontSize: 15
                                                 },
                                             }}
