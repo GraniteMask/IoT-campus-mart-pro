@@ -1,13 +1,12 @@
-import React, { useReducer, useRef, useState } from 'react'
-import { Button, List, ListItem, TextField, Typography, Popper, Grow, Paper, ClickAwayListener, MenuList, MenuItem, ListItemText, Card, Grid, CircularProgress, CardContent, CardActions} from '@material-ui/core'
+import React, { useReducer } from 'react'
+import { Button, List, ListItem, Typography, ListItemText, Card, Grid, CircularProgress, CardContent } from '@material-ui/core'
 import dynamic from 'next/dynamic'
 import { useEffect } from 'react'
 import axios from 'axios'
 import Layout from '../components/Layout'
 import useStyles from '../utils/styles'
 import NextLink from 'next/link'
-import { Controller, useForm } from 'react-hook-form'
-import { Bar, Pie, Doughnut, Line } from 'react-chartjs-2';
+import { Bar, Pie, Doughnut } from 'react-chartjs-2';
 
 
 
@@ -176,7 +175,7 @@ function DataAnalytics() {
                                                 legend: {display: true, position: 'top'},
                                                 title: {
                                                     display: true,
-                                                    text: "Student's Expenditure (Each Student Wise)",
+                                                    text: "Student's Expenditure (Each Student Wise in Rs.)",
                                                     fontSize: 15
                                                 },
                                             }}
@@ -230,7 +229,7 @@ function DataAnalytics() {
                                                 legend: {display: true, position: 'top'},
                                                 title: {
                                                     display: true,
-                                                    text: 'Cumulative sales of all products in each month (in Rs.)',
+                                                    text: 'Most Popular Category (By year)',
                                                     fontSize: 15
                                                 },
                                             }}
@@ -241,9 +240,9 @@ function DataAnalytics() {
                             </ListItem>
                             <ListItem>
                                 {
-                                    productData.mostPopularCategoryByYear != undefined &&
+                                    productData.expenditureByYear != undefined &&
                                     (
-                                        <Doughnut data={{labels: productData.expenditureByYear.map((x)=> x._id),
+                                        <Doughnut data={{labels: productData.expenditureByYear.map((x)=> (`${x._id} year`)),
                                             datasets: [
                                                 {
                                                     label: 'Most Popular Category',
@@ -255,7 +254,7 @@ function DataAnalytics() {
                                                 legend: {display: true, position: 'top'},
                                                 title: {
                                                     display: true,
-                                                    text: 'Most Popular Category of Products with respective total orders',
+                                                    text: 'Most Popular Category of Products with respective total orders (in Rs.)',
                                                     fontSize: 15
                                                 },
                                             }}
