@@ -133,12 +133,12 @@ export default function Layout({title, description, children}) {
                         <div>
                             
                             <NextLink href='/sales-product-analytics'>
-                                <Link>
+                                <Link style={{cursor: "pointer"}}>
                                     Data Analytics
                                 </Link>
                             </NextLink>
                             <NextLink href='/cart'>
-                                <Link>
+                                <Link style={{cursor: "pointer"}}>
                                     {cart.cartItems.length > 0 ? <Badge color="secondary" badgeContent={cart.cartItems.length}>Cart</Badge> : ("Cart")}
                                 </Link>
                             </NextLink>
