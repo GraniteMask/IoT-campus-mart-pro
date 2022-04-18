@@ -67,11 +67,6 @@ function DataAnalytics() {
                                     <ListItemText primary="Student Analytics"></ListItemText>
                                 </ListItem>
                             </NextLink>
-                            <NextLink href="/allOrders" passHref>
-                                <ListItem button component="a">
-                                    <ListItemText primary="All Orders"></ListItemText>
-                                </ListItem>
-                            </NextLink>
                         </List>
                     </Card>
                 </Grid>
