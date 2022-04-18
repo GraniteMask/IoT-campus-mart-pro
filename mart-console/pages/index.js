@@ -1,10 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
-import { Card, CardActionArea, Grid, CardMedia, CardContent, Typography, CardActions, Button, Link } from '@material-ui/core'
+import { Card, CardActionArea, Grid, CardContent, Typography, CardActions, Button} from '@material-ui/core'
 import Layout from '../components/Layout'
-import NextLink from 'next/link'
 import db from '../utils/db'
 import Product from '../models/Product'
-import axios from 'axios'
 import { useContext } from 'react'
 import { Store } from '../utils/Store'
 import { useRouter } from 'next/router'
