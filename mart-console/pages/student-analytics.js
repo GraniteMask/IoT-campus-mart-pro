@@ -193,7 +193,7 @@ function DataAnalytics() {
                                          <Bar data={{labels: productData.mostPopularProductByYear.map((x)=> x._id.category + ` (${x._id.year} year)`),
                                             datasets: [
                                                 {
-                                                    label: 'Sales',
+                                                    label: 'Products and Year',
                                                     backgroundColor: '#6CB4EE',
                                                     data: productData.mostPopularProductByYear.map((x)=>x.totalNumberOfOrder)
                                                 }
@@ -202,7 +202,7 @@ function DataAnalytics() {
                                                 legend: {display: true, position: 'top'},
                                                 title: {
                                                     display: true,
-                                                    text: 'Cumulative sales of all products in each month (in Rs.)',
+                                                    text: 'Most Popular products (By year)',
                                                     fontSize: 15
                                                 },
                                             }}
