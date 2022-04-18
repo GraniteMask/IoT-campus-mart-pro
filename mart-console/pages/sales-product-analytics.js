@@ -1,12 +1,11 @@
-import React, { useReducer, useRef, useState } from 'react'
-import { Button, List, ListItem, TextField, Typography, Popper, Grow, Paper, ClickAwayListener, MenuList, MenuItem, ListItemText, Card, Grid, CircularProgress, CardContent, CardActions} from '@material-ui/core'
+import React, { useReducer} from 'react'
+import { Button, List, ListItem, Typography, ListItemText, Card, Grid, CircularProgress, CardContent} from '@material-ui/core'
 import dynamic from 'next/dynamic'
 import { useEffect } from 'react'
 import axios from 'axios'
 import Layout from '../components/Layout'
 import useStyles from '../utils/styles'
 import NextLink from 'next/link'
-import { Controller, useForm } from 'react-hook-form'
 import { Bar, Pie, Doughnut, Line } from 'react-chartjs-2';
 
 

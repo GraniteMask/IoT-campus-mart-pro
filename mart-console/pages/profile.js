@@ -30,9 +30,6 @@ function Profile() {
     const anchorRefBlock = useRef(null);
     const anchorRefYear = useRef(null);
     const anchorRefCourse = useRef(null);
-    const prevOpenBlock = useRef(openBlock);
-    const prevOpenYear = useRef(openYear);
-    const prevOpenCourse = useRef(openCourse);
 
 
     useEffect(()=>{
