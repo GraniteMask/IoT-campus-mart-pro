@@ -113,7 +113,7 @@ function DataAnalytics() {
                                 {
                                     productData.mostActiveStudentYear != undefined &&
                                     (
-                                        <Pie data={{labels: productData.mostActiveStudentYear.map((x)=> x._id),
+                                        <Pie data={{labels: productData.mostActiveStudentYear.map((x)=> (`${x._id} year`)),
                                             datasets: [
                                                 {
                                                     label: 'Student Year',
