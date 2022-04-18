@@ -1,18 +1,15 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useState } from 'react'
 import Head from 'next/head'
 import NextLink from 'next/link'
-import {AppBar, Typography, Toolbar, Container, Link, ThemeProvider, CssBaseline, Switch, Badge, Button, Menu, MenuItem, Box, IconButton, Drawer, Divider, List, ListItem, ListItemText} from '@material-ui/core'
+import {AppBar, Typography, Toolbar, Container, Link, ThemeProvider, CssBaseline, Switch, Badge, Button, Menu, MenuItem, Box} from '@material-ui/core'
 import { createTheme } from '@material-ui/core/styles'
 import useStyles from '../utils/styles'
 import Cookies from 'js-cookie'
 import { Store } from '../utils/Store'
 import { useRouter } from 'next/router'
-import MenuIcon from '@material-ui/icons/Menu'
-import CancelIcon from '@material-ui/icons/Cancel'
 import { useSnackbar } from 'notistack'
-import axios from 'axios'
-import SearchIcon from '@material-ui/icons/Search';
-import { InputBase } from '@material-ui/core'
+
+
 
 
 export default function Layout({title, description, children}) {
@@ -113,23 +110,7 @@ export default function Layout({title, description, children}) {
                         </Box>
 
                         
-                        {/* <div className={classes.searchSection}>
-                            <form onSubmit={submitHandler} className={classes.searchForm}>
-                                <InputBase
-                                name="query"
-                                className={classes.searchInput}
-                                placeholder="Search products"
-                                onChange={queryChangeHandler}
-                                />
-                                <IconButton
-                                type="submit"
-                                className={classes.iconButton}
-                                aria-label="search"
-                                >
-                                <SearchIcon />
-                                </IconButton>
-                            </form>
-                        </div> */}
+                        
                         <div>
                             
                             <NextLink href='/sales-product-analytics'>
